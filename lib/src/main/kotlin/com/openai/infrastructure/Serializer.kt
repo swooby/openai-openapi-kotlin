@@ -75,4 +75,14 @@ object Serializer {
     val moshi: Moshi by lazy {
         moshiBuilder.build()
     }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    inline fun <reified T> deserialize(json: String?): T? {
+        return if (json.isNullOrBlank()) null else moshi.adapter<T>().fromJson(json)
+    }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    inline fun <reified T> serialize(obj: T): String {
+        return moshi.adapter<T>().toJson(obj)
+    }
 }
