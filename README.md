@@ -32,22 +32,29 @@ I prefer to save a snapshot of the specification that was used for the generatio
 ## Generate Whole OpenAI API
 1. `time openapi-generator generate -i openapi.yaml -g kotlin  -o ./lib --skip-validate-spec --additional-properties=artifactId=openai-kotlin-client,artifactVersion=0.0.1,groupId=com.openai,packageName=com.openai`  
 (< 5 seconds on MacBook Pro M4 Pro)
-...
-2. cd ./lib
-3. `chmod +x ./gradlew`
-4. `./gradlew build`  
-(< 20 seconds on MacBook Pro M4 Pro to successfully compile)
+2. `cp lib/build.gradle .`
+3. `mv lib/gradle* lib/settings.gradle .`
+4. `echo -e "\ninclude(\":lib\")" >> settings.gradle`
+5. Edit `build.gradle` to be a project file and `lib/build.gradle` to be a module file.
+6. `chmod +x ./gradlew`
+7. `./gradlew build`  
+(< 20 seconds on MacBook Pro M4 Pro to [eventually; see "Changes"] successfully compile from clean)
 
 All of this is also shown in the `openai-kotlin-client.sh` file.
 
 ## Changes
 At this point, the build will actually fail.  
-I had to make a few changes in order to get it to compile.
+I had to make some manual changes in order to get it to compile successfully:
 1. AudioApi.kt:
    1. change `AudioResponseFormat? = json` to `AudioResponseFormat? = AudioResponseFormat.json`
    2. change `timestampGranularities?.value` to `timestampGranularities`
-2. replace a couple of `data class Foo() {}` with `class Foo`
+2. remove `data` (`data class ...`->`class ...`) in:
+   1. CreateAssistantRequestToolResourcesFileSearch.kt
+   2. CreateThreadRequestToolResourcesFileSearch.kt
 
-I had to make further changes in order to get it to run correctly.  
+This just got it to **COMPILE** successfully!
+
+I had to make further changes in order to get it to **RUN** successfully.  
+
 All of my changes can be seen at:  
 https://github.com/swooby/openai-openapi-kotlin/pull/1/files

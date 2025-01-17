@@ -26,7 +26,7 @@ import com.squareup.moshi.JsonClass
  */
 
 
-data class CreateThreadRequestToolResourcesFileSearch (
+class CreateThreadRequestToolResourcesFileSearch (
 
 ) {
 

@@ -157,7 +157,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun createTranscription(file: java.io.File, model: CreateTranscriptionRequestModel, language: kotlin.String? = null, prompt: kotlin.String? = null, responseFormat: AudioResponseFormat? = json, temperature: java.math.BigDecimal? = java.math.BigDecimal("0"), timestampGranularities: kotlin.collections.List<TimestampGranularitiesCreateTranscription>? = null) : CreateTranscription200Response {
+    fun createTranscription(file: java.io.File, model: CreateTranscriptionRequestModel, language: kotlin.String? = null, prompt: kotlin.String? = null, responseFormat: AudioResponseFormat? = AudioResponseFormat.json, temperature: java.math.BigDecimal? = java.math.BigDecimal("0"), timestampGranularities: kotlin.collections.List<TimestampGranularitiesCreateTranscription>? = null) : CreateTranscription200Response {
         val localVarResponse = createTranscriptionWithHttpInfo(file = file, model = model, language = language, prompt = prompt, responseFormat = responseFormat, temperature = temperature, timestampGranularities = timestampGranularities)
 
         return when (localVarResponse.responseType) {
@@ -219,7 +219,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             "prompt" to PartConfig(body = prompt, headers = mutableMapOf()),
             "response_format" to PartConfig(body = responseFormat, headers = mutableMapOf()),
             "temperature" to PartConfig(body = temperature, headers = mutableMapOf()),
-            "timestamp_granularities[]" to PartConfig(body = timestampGranularities?.value, headers = mutableMapOf()),)
+            "timestamp_granularities[]" to PartConfig(body = timestampGranularities, headers = mutableMapOf()),)
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf("Content-Type" to "multipart/form-data")
         localVariableHeaders["Accept"] = "application/json"
@@ -251,7 +251,7 @@ class AudioApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun createTranslation(file: java.io.File, model: CreateTranscriptionRequestModel, prompt: kotlin.String? = null, responseFormat: AudioResponseFormat? = json, temperature: java.math.BigDecimal? = java.math.BigDecimal("0")) : CreateTranslation200Response {
+    fun createTranslation(file: java.io.File, model: CreateTranscriptionRequestModel, prompt: kotlin.String? = null, responseFormat: AudioResponseFormat? = AudioResponseFormat.json, temperature: java.math.BigDecimal? = java.math.BigDecimal("0")) : CreateTranslation200Response {
         val localVarResponse = createTranslationWithHttpInfo(file = file, model = model, prompt = prompt, responseFormat = responseFormat, temperature = temperature)
 
         return when (localVarResponse.responseType) {
