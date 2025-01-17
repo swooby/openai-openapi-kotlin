@@ -18,7 +18,6 @@ package com.openai.models
 import com.openai.infrastructure.SerializeNull
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Realtime session object configuration.
@@ -47,8 +46,9 @@ data class RealtimeSession (
 
     /* The set of modalities the model can respond with. To disable audio, set this to [\"text\"].  */
     @Json(name = "modalities")
-    val modalities: kotlin.collections.List<RealtimeSession.Modalities>? = null,
+    val modalities: kotlin.collections.List<RealtimeSessionModalities>? = null,
 
+    /* The Realtime model used for this session.  */
     @Json(name = "model")
     val model: RealtimeSessionModel? = null,
 
@@ -58,15 +58,15 @@ data class RealtimeSession (
 
     /* The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`.  */
     @Json(name = "voice")
-    val voice: RealtimeSession.Voice? = null,
+    val voice: RealtimeSessionVoice? = null,
 
     /* The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
     @Json(name = "input_audio_format")
-    val inputAudioFormat: RealtimeSession.InputAudioFormat? = null,
+    val inputAudioFormat: RealtimeSessionInputAudioFormat? = null,
 
     /* The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
     @Json(name = "output_audio_format")
-    val outputAudioFormat: RealtimeSession.OutputAudioFormat? = null,
+    val outputAudioFormat: RealtimeSessionOutputAudioFormat? = null,
 
     @SerializeNull
     @Json(name = "input_audio_transcription")
@@ -78,7 +78,7 @@ data class RealtimeSession (
 
     /* Tools (functions) available to the model. */
     @Json(name = "tools")
-    val tools: kotlin.collections.List<RealtimeResponseCreateParamsToolsInner>? = null,
+    val tools: kotlin.collections.List<RealtimeSessionTools>? = null,
 
     /* How the model chooses tools. Options are `auto`, `none`, `required`, or  specify a function.  */
     @Json(name = "tool_choice")
@@ -92,55 +92,5 @@ data class RealtimeSession (
     val maxResponseOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null
 
 ) {
-
-    /**
-     * The set of modalities the model can respond with. To disable audio, set this to [\"text\"]. 
-     *
-     * Values: text,audio
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Modalities(val value: kotlin.String) {
-        @Json(name = "text") text("text"),
-        @Json(name = "audio") audio("audio");
-    }
-    /**
-     * The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`. 
-     *
-     * Values: alloy,ash,ballad,coral,echo,sage,shimmer,verse
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Voice(val value: kotlin.String) {
-        @Json(name = "alloy") alloy("alloy"),
-        @Json(name = "ash") ash("ash"),
-        @Json(name = "ballad") ballad("ballad"),
-        @Json(name = "coral") coral("coral"),
-        @Json(name = "echo") echo("echo"),
-        @Json(name = "sage") sage("sage"),
-        @Json(name = "shimmer") shimmer("shimmer"),
-        @Json(name = "verse") verse("verse");
-    }
-    /**
-     * The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. 
-     *
-     * Values: pcm16,g711_ulaw,g711_alaw
-     */
-    @JsonClass(generateAdapter = false)
-    enum class InputAudioFormat(val value: kotlin.String) {
-        @Json(name = "pcm16") pcm16("pcm16"),
-        @Json(name = "g711_ulaw") g711_ulaw("g711_ulaw"),
-        @Json(name = "g711_alaw") g711_alaw("g711_alaw");
-    }
-    /**
-     * The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. 
-     *
-     * Values: pcm16,g711_ulaw,g711_alaw
-     */
-    @JsonClass(generateAdapter = false)
-    enum class OutputAudioFormat(val value: kotlin.String) {
-        @Json(name = "pcm16") pcm16("pcm16"),
-        @Json(name = "g711_ulaw") g711_ulaw("g711_ulaw"),
-        @Json(name = "g711_alaw") g711_alaw("g711_alaw");
-    }
-
 }
 

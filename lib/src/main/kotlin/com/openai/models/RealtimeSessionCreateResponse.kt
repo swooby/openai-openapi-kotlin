@@ -18,7 +18,6 @@ package com.openai.models
 import com.openai.infrastructure.SerializeNull
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * A new Realtime session configuration, with an ephermeral key. Default TTL for keys is one minute. 
@@ -45,7 +44,7 @@ data class RealtimeSessionCreateResponse (
 
     /* The set of modalities the model can respond with. To disable audio, set this to [\"text\"].  */
     @Json(name = "modalities")
-    val modalities: kotlin.collections.List<RealtimeSessionCreateResponse.Modalities>? = null,
+    val modalities: kotlin.collections.List<RealtimeSessionModalities>? = null,
 
     /* The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the  desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session.  */
     @Json(name = "instructions")
@@ -53,15 +52,15 @@ data class RealtimeSessionCreateResponse (
 
     /* The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`.  */
     @Json(name = "voice")
-    val voice: RealtimeSessionCreateResponse.Voice? = null,
+    val voice: RealtimeSessionVoice? = null,
 
     /* The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
     @Json(name = "input_audio_format")
-    val inputAudioFormat: kotlin.String? = null,
+    val inputAudioFormat: RealtimeSessionInputAudioFormat? = null,
 
     /* The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
     @Json(name = "output_audio_format")
-    val outputAudioFormat: kotlin.String? = null,
+    val outputAudioFormat: RealtimeSessionOutputAudioFormat? = null,
 
     @SerializeNull
     @Json(name = "input_audio_transcription")
@@ -69,11 +68,11 @@ data class RealtimeSessionCreateResponse (
 
     @SerializeNull
     @Json(name = "turn_detection")
-    val turnDetection: RealtimeSessionCreateResponseTurnDetection? = null,
+    val turnDetection: RealtimeSessionTurnDetection? = null,
 
     /* Tools (functions) available to the model. */
     @Json(name = "tools")
-    val tools: kotlin.collections.List<RealtimeResponseCreateParamsToolsInner>? = null,
+    val tools: kotlin.collections.List<RealtimeSessionTools>? = null,
 
     /* How the model chooses tools. Options are `auto`, `none`, `required`, or  specify a function.  */
     @Json(name = "tool_choice")
@@ -87,33 +86,4 @@ data class RealtimeSessionCreateResponse (
     val maxResponseOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null
 
 ) {
-
-    /**
-     * The set of modalities the model can respond with. To disable audio, set this to [\"text\"]. 
-     *
-     * Values: text,audio
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Modalities(val value: kotlin.String) {
-        @Json(name = "text") text("text"),
-        @Json(name = "audio") audio("audio");
-    }
-    /**
-     * The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`. 
-     *
-     * Values: alloy,ash,ballad,coral,echo,sage,shimmer,verse
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Voice(val value: kotlin.String) {
-        @Json(name = "alloy") alloy("alloy"),
-        @Json(name = "ash") ash("ash"),
-        @Json(name = "ballad") ballad("ballad"),
-        @Json(name = "coral") coral("coral"),
-        @Json(name = "echo") echo("echo"),
-        @Json(name = "sage") sage("sage"),
-        @Json(name = "shimmer") shimmer("shimmer"),
-        @Json(name = "verse") verse("verse");
-    }
-
 }
-
