@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.RealtimeResponseCreateParamsMaxResponseOutputTokens
-import com.openai.models.RealtimeResponseCreateParamsToolsInner
-import com.openai.models.RealtimeSessionCreateRequestTurnDetection
-import com.openai.models.RealtimeSessionInputAudioTranscription
+import com.openai.infrastructure.SerializeNull
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -67,9 +64,11 @@ data class RealtimeSessionCreateRequest (
     @Json(name = "output_audio_format")
     val outputAudioFormat: RealtimeSessionCreateRequest.OutputAudioFormat? = null,
 
+    @SerializeNull
     @Json(name = "input_audio_transcription")
     val inputAudioTranscription: RealtimeSessionInputAudioTranscription? = null,
 
+    @SerializeNull
     @Json(name = "turn_detection")
     val turnDetection: RealtimeSessionCreateRequestTurnDetection? = null,
 
@@ -86,7 +85,7 @@ data class RealtimeSessionCreateRequest (
     val temperature: java.math.BigDecimal? = null,
 
     @Json(name = "max_response_output_tokens")
-    val maxResponseOutputTokens: RealtimeResponseCreateParamsMaxResponseOutputTokens? = null
+    val maxResponseOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null
 
 ) {
 

@@ -15,11 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RealtimeConversationItem
-import com.openai.models.RealtimeResponseCreateParamsConversation
-import com.openai.models.RealtimeResponseCreateParamsMaxResponseOutputTokens
-import com.openai.models.RealtimeResponseCreateParamsToolsInner
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -71,7 +66,7 @@ data class RealtimeResponseCreateParams (
     val temperature: java.math.BigDecimal? = null,
 
     @Json(name = "max_response_output_tokens")
-    val maxResponseOutputTokens: RealtimeResponseCreateParamsMaxResponseOutputTokens? = null,
+    val maxResponseOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null,
 
     @Json(name = "conversation")
     val conversation: RealtimeResponseCreateParamsConversation? = null,
@@ -122,6 +117,15 @@ data class RealtimeResponseCreateParams (
         @Json(name = "pcm16") pcm16("pcm16"),
         @Json(name = "g711_ulaw") g711_ulaw("g711_ulaw"),
         @Json(name = "g711_alaw") g711_alaw("g711_alaw");
+    }
+    /**
+    * Controls which conversation the response is added to. Currently supports `auto` and `none`, with `auto` as the default value. The `auto` value means that the contents of the response will be added to the default conversation. Set this to `none` to create an out-of-band response which  will not add items to default conversation. 
+    *
+    */
+    @JsonClass(generateAdapter = false)
+    enum class RealtimeResponseCreateParamsConversation {
+        auto,
+        none,
     }
 
 }
