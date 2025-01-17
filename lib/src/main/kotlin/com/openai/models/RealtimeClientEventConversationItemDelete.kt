@@ -32,7 +32,7 @@ data class RealtimeClientEventConversationItemDelete (
 
     /* The event type, must be `conversation.item.delete`. */
     @Json(name = "type")
-    val type: RealtimeClientEventConversationItemDelete.Type,
+    val type: RealtimeClientEventConversationItemDelete.Type = RealtimeClientEventConversationItemDelete.Type.conversationPeriodItemPeriodDelete,
 
     /* The ID of the item to delete. */
     @Json(name = "item_id")

@@ -34,7 +34,7 @@ data class RealtimeClientEventConversationItemCreate (
 
     /* The event type, must be `conversation.item.create`. */
     @Json(name = "type")
-    val type: RealtimeClientEventConversationItemCreate.Type,
+    val type: RealtimeClientEventConversationItemCreate.Type = RealtimeClientEventConversationItemCreate.Type.conversationPeriodItemPeriodCreate,
 
     @Json(name = "item")
     val item: RealtimeConversationItem,

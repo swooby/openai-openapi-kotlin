@@ -31,7 +31,7 @@ data class RealtimeClientEventInputAudioBufferClear (
 
     /* The event type, must be `input_audio_buffer.clear`. */
     @Json(name = "type")
-    val type: RealtimeClientEventInputAudioBufferClear.Type,
+    val type: RealtimeClientEventInputAudioBufferClear.Type = RealtimeClientEventInputAudioBufferClear.Type.input_audio_bufferPeriodClear,
 
     /* Optional client-generated ID used to identify this event. */
     @Json(name = "event_id")
