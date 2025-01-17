@@ -12,4 +12,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "openai-kotlin-client"
-include(":lib")
+include("lib")

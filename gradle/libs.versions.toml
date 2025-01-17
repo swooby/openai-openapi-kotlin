@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.23"
+kotlin = "2.0.20"
 kotlintestRunnerJunit5 = "3.4.2"
 moshiKotlin = "1.15.1"
 okhttpBom = "4.12.0"
