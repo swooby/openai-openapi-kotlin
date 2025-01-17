@@ -42,7 +42,7 @@ data class RealtimeServerEventConversationItemCreated (
 
     /* The ID of the preceding item in the Conversation context, allows the  client to understand the order of the conversation.  */
     @Json(name = "previous_item_id")
-    val previousItemId: kotlin.String,
+    val previousItemId: kotlin.String? = null,
 
     @Json(name = "item")
     val item: RealtimeConversationItem

@@ -18,9 +18,6 @@ package com.openai.models
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
-import com.openai.models.RealtimeConversationItem
-import com.openai.models.RealtimeConversationItemContentInner
-
 class RealtimeConversationItemTest : ShouldSpec() {
     init {
         // uncomment below to create an instance of RealtimeConversationItem

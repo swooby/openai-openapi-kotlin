@@ -30,11 +30,11 @@ import com.squareup.moshi.JsonClass
  */
 
 
-data class RealtimeConversationItemContentInner (
+data class RealtimeConversationItemContent (
 
     /* The content type (`input_text`, `input_audio`, `item_reference`, `text`).  */
     @Json(name = "type")
-    val type: RealtimeConversationItemContentInner.Type? = null,
+    val type: RealtimeConversationItemContent.Type? = null,
 
     /* The text content, used for `input_text` and `text` content types.  */
     @Json(name = "text")
@@ -61,6 +61,7 @@ data class RealtimeConversationItemContentInner (
      */
     @JsonClass(generateAdapter = false)
     enum class Type(val value: kotlin.String) {
+        @Json(name = "audio") audio("audio"),
         @Json(name = "input_audio") input_audio("input_audio"),
         @Json(name = "input_text") input_text("input_text"),
         @Json(name = "item_reference") item_reference("item_reference"),

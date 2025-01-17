@@ -18,12 +18,10 @@ package com.openai.models
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
-import com.openai.models.RealtimeConversationItemContentInner
-
-class RealtimeConversationItemContentInnerTest : ShouldSpec() {
+class RealtimeConversationItemContentTest : ShouldSpec() {
     init {
-        // uncomment below to create an instance of RealtimeConversationItemContentInner
-        //val modelInstance = RealtimeConversationItemContentInner()
+        // uncomment below to create an instance of RealtimeConversationItemContent
+        //val modelInstance = RealtimeConversationItemContent()
 
         // to test the property `type` - The content type (`input_text`, `input_audio`, `item_reference`, `text`). 
         should("test type") {

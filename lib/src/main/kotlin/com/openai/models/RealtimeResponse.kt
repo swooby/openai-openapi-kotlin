@@ -84,7 +84,8 @@ data class RealtimeResponse (
         @Json(name = "completed") completed("completed"),
         @Json(name = "cancelled") cancelled("cancelled"),
         @Json(name = "failed") failed("failed"),
-        @Json(name = "incomplete") incomplete("incomplete");
+        @Json(name = "incomplete") incomplete("incomplete"),
+        @Json(name = "in_progress") inProgress("in_progress");
     }
 
 }
