@@ -32,7 +32,7 @@ data class RealtimeClientEventResponseCancel (
 
     /* The event type, must be `response.cancel`. */
     @Json(name = "type")
-    val type: RealtimeClientEventResponseCancel.Type,
+    val type: RealtimeClientEventResponseCancel.Type = RealtimeClientEventResponseCancel.Type.responsePeriodCancel,
 
     /* Optional client-generated ID used to identify this event. */
     @Json(name = "event_id")

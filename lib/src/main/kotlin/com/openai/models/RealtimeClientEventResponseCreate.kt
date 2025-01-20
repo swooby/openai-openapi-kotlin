@@ -33,7 +33,7 @@ data class RealtimeClientEventResponseCreate (
 
     /* The event type, must be `response.create`. */
     @Json(name = "type")
-    val type: RealtimeClientEventResponseCreate.Type,
+    val type: RealtimeClientEventResponseCreate.Type = RealtimeClientEventResponseCreate.Type.responsePeriodCreate,
 
     /* Optional client-generated ID used to identify this event. */
     @Json(name = "event_id")

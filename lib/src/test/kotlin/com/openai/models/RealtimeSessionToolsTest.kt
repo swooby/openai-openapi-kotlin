@@ -15,12 +15,9 @@
 
 package com.openai.models
 
-import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
-import com.openai.models.RealtimeResponseCreateParamsToolsInner
-
-class RealtimeResponseCreateParamsToolsInnerTest : ShouldSpec() {
+class RealtimeSessionToolsTest : ShouldSpec() {
     init {
         // uncomment below to create an instance of RealtimeResponseCreateParamsToolsInner
         //val modelInstance = RealtimeResponseCreateParamsToolsInner()

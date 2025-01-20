@@ -18,7 +18,7 @@ package com.openai.models
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
-import com.openai.models.RealtimeSessionCreateResponseTurnDetection
+import com.openai.models.RealtimeSessionTurnDetection
 
 class RealtimeSessionCreateResponseTurnDetectionTest : ShouldSpec() {
     init {

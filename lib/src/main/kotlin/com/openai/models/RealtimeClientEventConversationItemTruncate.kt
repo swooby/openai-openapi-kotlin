@@ -34,7 +34,7 @@ data class RealtimeClientEventConversationItemTruncate (
 
     /* The event type, must be `conversation.item.truncate`. */
     @Json(name = "type")
-    val type: RealtimeClientEventConversationItemTruncate.Type,
+    val type: RealtimeClientEventConversationItemTruncate.Type = RealtimeClientEventConversationItemTruncate.Type.conversationPeriodItemPeriodTruncate,
 
     /* The ID of the assistant message item to truncate. Only assistant message  items can be truncated.  */
     @Json(name = "item_id")

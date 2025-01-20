@@ -30,9 +30,18 @@ data class RealtimeSessionInputAudioTranscription (
 
     /* The model to use for transcription, `whisper-1` is the only currently  supported model.  */
     @Json(name = "model")
-    val model: kotlin.String? = null
+    val model: Model? = null
 
 ) {
+    /**
+     * The model to use for transcription, `whisper-1` is the only currently  supported model.
+     *
+     * Values: whisper-1
+     */
+    @JsonClass(generateAdapter = false)
+    enum class Model {
+        `whisper-1`
+    }
 
 
 }

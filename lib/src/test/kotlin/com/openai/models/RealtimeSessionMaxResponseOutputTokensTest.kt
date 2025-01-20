@@ -18,12 +18,10 @@ package com.openai.models
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
-import com.openai.models.RealtimeResponseCreateParamsConversation
-
-class RealtimeResponseCreateParamsConversationTest : ShouldSpec() {
+class RealtimeSessionMaxResponseOutputTokensTest : ShouldSpec() {
     init {
-        // uncomment below to create an instance of RealtimeResponseCreateParamsConversation
-        //val modelInstance = RealtimeResponseCreateParamsConversation()
+        // uncomment below to create an instance of RealtimeSessionMaxResponseOutputTokens
+        //val modelInstance = RealtimeSessionMaxResponseOutputTokens()
 
     }
 }
