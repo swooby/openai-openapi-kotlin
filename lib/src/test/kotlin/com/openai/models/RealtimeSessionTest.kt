@@ -18,13 +18,6 @@ package com.openai.models
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
-import com.openai.models.RealtimeSession
-import com.openai.models.RealtimeResponseCreateParamsMaxResponseOutputTokens
-import com.openai.models.RealtimeResponseCreateParamsToolsInner
-import com.openai.models.RealtimeSessionInputAudioTranscription
-import com.openai.models.RealtimeSessionModel
-import com.openai.models.RealtimeSessionTurnDetection
-
 class RealtimeSessionTest : ShouldSpec() {
     init {
         // uncomment below to create an instance of RealtimeSession

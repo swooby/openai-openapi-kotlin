@@ -33,14 +33,16 @@ val EMPTY_REQUEST: RequestBody = ByteArray(0).toRequestBody()
 
 open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClient) {
     companion object {
-        protected const val ContentType: String = "Content-Type"
-        protected const val Accept: String = "Accept"
-        protected const val Authorization: String = "Authorization"
-        protected const val JsonMediaType: String = "application/json"
-        protected const val FormDataMediaType: String = "multipart/form-data"
-        protected const val FormUrlEncMediaType: String = "application/x-www-form-urlencoded"
-        protected const val XmlMediaType: String = "application/xml"
-        protected const val OctetMediaType: String = "application/octet-stream"
+        const val ContentType: String = "Content-Type"
+        const val Accept: String = "Accept"
+        const val Authorization: String = "Authorization"
+        const val JsonMediaType: String = "application/json"
+        const val SdpMediaType: String = "application/sdp"
+        const val TextPlainMediaType: String = "text/plain"
+        const val FormDataMediaType: String = "multipart/form-data"
+        const val FormUrlEncMediaType: String = "application/x-www-form-urlencoded"
+        const val XmlMediaType: String = "application/xml"
+        const val OctetMediaType: String = "application/octet-stream"
 
         val apiKey: MutableMap<String, String> = mutableMapOf()
         val apiKeyPrefix: MutableMap<String, String> = mutableMapOf()
@@ -64,7 +66,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
      * @param byteArray The given file
      * @return The guessed Content-Type
      */
-    protected fun guessContentTypeFromByteArray(byteArray: ByteArray): String {
+    fun guessContentTypeFromByteArray(byteArray: ByteArray): String {
         val contentType = try {
             URLConnection.guessContentTypeFromStream(byteArray.inputStream())
         } catch (io: IOException) {
@@ -79,12 +81,12 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
      * @param file The given file
      * @return The guessed Content-Type
      */
-    protected fun guessContentTypeFromFile(file: File): String {
+    fun guessContentTypeFromFile(file: File): String {
         val contentType = URLConnection.guessContentTypeFromName(file.name)
         return contentType ?: "application/octet-stream"
     }
 
-    protected inline fun <reified T> requestBody(content: T, mediaType: String?): RequestBody =
+    inline fun <reified T> requestBody(content: T, mediaType: String?): RequestBody =
         when {
             content is ByteArray -> content.toRequestBody((mediaType ?: guessContentTypeFromByteArray(content)).toMediaTypeOrNull())
             content is File -> content.asRequestBody((mediaType ?: guessContentTypeFromFile(content)).toMediaTypeOrNull())
@@ -126,18 +128,21 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
                 if (content == null) {
                     EMPTY_REQUEST
                 } else {
-                    Serializer.moshi.adapter(T::class.java).toJson(content)
+                    Serializer.serialize<T>(content)
                         .toRequestBody((mediaType ?: JsonMediaType).toMediaTypeOrNull())
                 }
+            mediaType.startsWith("application/") && mediaType.endsWith("sdp") ->
+                content?.toString()?.toByteArray()?.toRequestBody(mediaType.toMediaTypeOrNull())
+                    ?: EMPTY_REQUEST
             mediaType == XmlMediaType -> throw UnsupportedOperationException("xml not currently supported.")
             mediaType == OctetMediaType && content is ByteArray ->
                 content.toRequestBody(OctetMediaType.toMediaTypeOrNull())
             // TODO: this should be extended with other serializers
-            else -> throw UnsupportedOperationException("requestBody currently only supports JSON body, byte body and File body.")
+            else -> throw UnsupportedOperationException("requestBody currently only supports JSON body, SDP body, byte body, and File body.")
         }
 
     @OptIn(ExperimentalStdlibApi::class)
-    protected inline fun <reified T: Any?> responseBody(response: Response, mediaType: String? = JsonMediaType): T? {
+    inline fun <reified T: Any?> responseBody(response: Response, mediaType: String? = JsonMediaType): T? {
         val body = response.body
         if(body == null) {
             return null
@@ -201,14 +206,15 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
                 if (bodyContent.isEmpty()) {
                     return null
                 }
-                Serializer.moshi.adapter<T>().fromJson(bodyContent)
+                Serializer.deserialize<T>(bodyContent)
             }
+            mediaType.startsWith("text/") && mediaType.endsWith("plain") -> body.string() as T
             mediaType == OctetMediaType -> body.bytes() as? T
-            else ->  throw UnsupportedOperationException("responseBody currently only supports JSON body.")
+            else ->  throw UnsupportedOperationException("responseBody currently only supports JSON body, byte body, and text body.")
         }
     }
 
-    protected fun <T> updateAuthParams(requestConfig: RequestConfig<T>) {
+    fun <T> updateAuthParams(requestConfig: RequestConfig<T>) {
         if (requestConfig.headers[Authorization].isNullOrEmpty()) {
             accessToken?.let { accessToken ->
                 requestConfig.headers[Authorization] = "Bearer $accessToken"
@@ -216,7 +222,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
         }
     }
 
-    protected inline fun <reified I, reified T: Any?> request(requestConfig: RequestConfig<I>): ApiResponse<T?> {
+    inline fun <reified I, reified T: Any?> request(requestConfig: RequestConfig<I>): ApiResponse<T?> {
         val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
         // take authMethod from operation
@@ -302,7 +308,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
         }
     }
 
-    protected fun parameterToString(value: Any?): String = when (value) {
+    fun parameterToString(value: Any?): String = when (value) {
         null -> ""
         is Array<*> -> toMultiValue(value, "csv").toString()
         is Iterable<*> -> toMultiValue(value, "csv").toString()

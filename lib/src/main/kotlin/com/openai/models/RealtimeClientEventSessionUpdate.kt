@@ -33,7 +33,7 @@ data class RealtimeClientEventSessionUpdate (
 
     /* The event type, must be `session.update`. */
     @Json(name = "type")
-    val type: RealtimeClientEventSessionUpdate.Type,
+    val type: RealtimeClientEventSessionUpdate.Type = RealtimeClientEventSessionUpdate.Type.sessionPeriodUpdate,
 
     @Json(name = "session")
     val session: RealtimeSessionCreateRequest,

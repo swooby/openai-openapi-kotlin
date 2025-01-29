@@ -29,11 +29,11 @@ import com.squareup.moshi.JsonClass
  */
 
 
-data class RealtimeResponseCreateParamsToolsInner (
+data class RealtimeSessionTools (
 
     /* The type of the tool, i.e. `function`. */
     @Json(name = "type")
-    val type: RealtimeResponseCreateParamsToolsInner.Type? = null,
+    val type: RealtimeSessionTools.Type? = null,
 
     /* The name of the function. */
     @Json(name = "name")
