@@ -16,9 +16,6 @@
 package com.openai.models
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
 /**
  * Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance. 
  *

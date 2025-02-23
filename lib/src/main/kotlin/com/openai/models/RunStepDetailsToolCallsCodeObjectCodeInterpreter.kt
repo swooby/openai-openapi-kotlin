@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDetailsToolCallsCodeObjectCodeInterpreterOutputsInner
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The Code Interpreter tool call definition.

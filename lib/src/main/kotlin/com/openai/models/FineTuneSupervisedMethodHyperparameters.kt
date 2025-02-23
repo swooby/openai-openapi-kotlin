@@ -15,12 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.FineTuneDPOMethodHyperparametersBatchSize
-import com.openai.models.FineTuneDPOMethodHyperparametersLearningRateMultiplier
-import com.openai.models.FineTuneDPOMethodHyperparametersNEpochs
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The hyperparameters used for the fine-tuning job.

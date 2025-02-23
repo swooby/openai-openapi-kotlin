@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.RealtimeResponseUsageInputTokenDetails
-import com.openai.models.RealtimeResponseUsageOutputTokenDetails
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Usage statistics for the Response, this will correspond to billing. A  Realtime API session will maintain a conversation context and append new  Items to the Conversation, thus output from previous turns (text and  audio tokens) will become the input for later turns. 

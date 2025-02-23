@@ -15,15 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.AssistantObjectToolsInner
-import com.openai.models.AssistantsApiResponseFormatOption
-import com.openai.models.AssistantsApiToolChoiceOption
-import com.openai.models.RunCompletionUsage
-import com.openai.models.RunObjectIncompleteDetails
-import com.openai.models.RunObjectLastError
-import com.openai.models.RunObjectRequiredAction
-import com.openai.models.TruncationObject
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -47,7 +38,7 @@ import com.squareup.moshi.JsonClass
  * @param model The model that the [assistant](/docs/api-reference/assistants) used for this run.
  * @param instructions The instructions that the [assistant](/docs/api-reference/assistants) used for this run.
  * @param tools The list of tools that the [assistant](/docs/api-reference/assistants) used for this run.
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
  * @param usage 
  * @param maxPromptTokens The maximum number of prompt tokens specified to have been used over the course of the run. 
  * @param maxCompletionTokens The maximum number of completion tokens specified to have been used over the course of the run. 
@@ -127,9 +118,9 @@ data class RunObject (
     @Json(name = "tools")
     val tools: kotlin.collections.List<AssistantObjectToolsInner> = arrayListOf(),
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any?,
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>?,
 
     @Json(name = "usage")
     val usage: RunCompletionUsage?,
@@ -143,17 +134,17 @@ data class RunObject (
     val maxCompletionTokens: kotlin.Int?,
 
     @Json(name = "truncation_strategy")
-    val truncationStrategy: TruncationObject,
+    val truncationStrategy: CreateRunRequestTruncationStrategy,
 
     @Json(name = "tool_choice")
-    val toolChoice: AssistantsApiToolChoiceOption,
+    val toolChoice: CreateRunRequestToolChoice,
 
     /* Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use. */
     @Json(name = "parallel_tool_calls")
     val parallelToolCalls: kotlin.Boolean = true,
 
     @Json(name = "response_format")
-    val responseFormat: AssistantsApiResponseFormatOption,
+    val responseFormat: AssistantObjectResponseFormat,
 
     /* The sampling temperature used for this run. If not set, defaults to 1. */
     @Json(name = "temperature")

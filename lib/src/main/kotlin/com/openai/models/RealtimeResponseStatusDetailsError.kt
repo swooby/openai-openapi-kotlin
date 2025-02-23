@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * A description of the error that caused the response to fail,  populated when the `status` is `failed`. 

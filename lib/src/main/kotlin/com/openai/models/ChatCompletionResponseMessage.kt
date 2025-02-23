@@ -15,10 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionMessageToolCall
-import com.openai.models.ChatCompletionResponseMessageAudio
-import com.openai.models.ChatCompletionResponseMessageFunctionCall
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

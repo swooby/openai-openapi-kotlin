@@ -15,16 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.AssistantsApiResponseFormatOption
-import com.openai.models.AssistantsApiToolChoiceOption
-import com.openai.models.CreateRunRequestModel
-import com.openai.models.CreateThreadAndRunRequestToolResources
-import com.openai.models.CreateThreadAndRunRequestToolsInner
-import com.openai.models.CreateThreadRequest
-import com.openai.models.TruncationObject
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 
@@ -35,7 +26,7 @@ import com.squareup.moshi.JsonClass
  * @param instructions Override the default system message of the assistant. This is useful for modifying the behavior on a per-run basis.
  * @param tools Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
  * @param toolResources 
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
  * @param temperature What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. 
  * @param topP An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.  We generally recommend altering this or temperature but not both. 
  * @param stream If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message. 
@@ -58,7 +49,7 @@ data class CreateThreadAndRunRequest (
     val thread: CreateThreadRequest? = null,
 
     @Json(name = "model")
-    val model: CreateRunRequestModel? = null,
+    val model: CreateThreadAndRunRequestModel? = null,
 
     /* Override the default system message of the assistant. This is useful for modifying the behavior on a per-run basis. */
     @Json(name = "instructions")
@@ -71,9 +62,9 @@ data class CreateThreadAndRunRequest (
     @Json(name = "tool_resources")
     val toolResources: CreateThreadAndRunRequestToolResources? = null,
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any? = null,
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 
     /* What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.  */
     @Json(name = "temperature")
@@ -96,17 +87,17 @@ data class CreateThreadAndRunRequest (
     val maxCompletionTokens: kotlin.Int? = null,
 
     @Json(name = "truncation_strategy")
-    val truncationStrategy: TruncationObject? = null,
+    val truncationStrategy: CreateRunRequestTruncationStrategy? = null,
 
     @Json(name = "tool_choice")
-    val toolChoice: AssistantsApiToolChoiceOption? = null,
+    val toolChoice: CreateRunRequestToolChoice? = null,
 
     /* Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use. */
     @Json(name = "parallel_tool_calls")
     val parallelToolCalls: kotlin.Boolean? = true,
 
     @Json(name = "response_format")
-    val responseFormat: AssistantsApiResponseFormatOption? = null
+    val responseFormat: AssistantObjectResponseFormat? = null
 
 ) {
 

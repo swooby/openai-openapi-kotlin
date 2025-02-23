@@ -16,9 +16,6 @@
 package com.openai.models
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
 /**
  * The model to use for image generation. Only `dall-e-2` is supported at this time.
  *

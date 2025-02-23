@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Data about a previous audio response from the model.  [Learn more](/docs/guides/audio). 

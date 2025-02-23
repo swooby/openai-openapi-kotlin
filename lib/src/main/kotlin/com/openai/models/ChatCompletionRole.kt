@@ -22,11 +22,14 @@ import com.squareup.moshi.JsonClass
 /**
  * The role of the author of a message
  *
- * Values: system,user,assistant,tool,function
+ * Values: developer,system,user,assistant,tool,function
  */
 
 @JsonClass(generateAdapter = false)
 enum class ChatCompletionRole(val value: kotlin.String) {
+
+    @Json(name = "developer")
+    developer("developer"),
 
     @Json(name = "system")
     system("system"),

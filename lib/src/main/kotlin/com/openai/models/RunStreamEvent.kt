@@ -15,18 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RunObject
-import com.openai.models.RunStreamEventOneOf
-import com.openai.models.RunStreamEventOneOf1
-import com.openai.models.RunStreamEventOneOf2
-import com.openai.models.RunStreamEventOneOf3
-import com.openai.models.RunStreamEventOneOf4
-import com.openai.models.RunStreamEventOneOf5
-import com.openai.models.RunStreamEventOneOf6
-import com.openai.models.RunStreamEventOneOf7
-import com.openai.models.RunStreamEventOneOf8
-import com.openai.models.RunStreamEventOneOf9
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

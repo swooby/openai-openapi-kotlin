@@ -15,12 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.CreateFineTuningJobRequestHyperparametersBatchSize
-import com.openai.models.CreateFineTuningJobRequestHyperparametersLearningRateMultiplier
-import com.openai.models.CreateFineTuningJobRequestHyperparametersNEpochs
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The hyperparameters used for the fine-tuning job. This value will only be returned when running `supervised` jobs.

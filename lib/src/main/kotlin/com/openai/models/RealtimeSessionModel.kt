@@ -10,26 +10,22 @@
     "ArrayInDataClass",
     "EnumEntryName",
     "RemoveRedundantQualifierName",
-    "UnusedImport",
-    "unused",
+    "UnusedImport"
 )
 
 package com.openai.models
 
-import com.squareup.moshi.JsonClass
 
 /**
  * The Realtime model used for this session. 
  *
- * https://platform.openai.com/docs/models#gpt-4o-realtime
- *
- * Values: gpt-4o-realtime-preview, gpt-4o-realtime-preview-2024-10-01, gpt-4o-realtime-preview-2024-12-17, gpt-4o-mini-realtime-preview, gpt-4o-mini-realtime-preview-2024-12-17
  */
-@JsonClass(generateAdapter = false)
-enum class RealtimeSessionModel {
-    `gpt-4o-realtime-preview`,
-    `gpt-4o-realtime-preview-2024-10-01`,
-    `gpt-4o-realtime-preview-2024-12-17`,
-    `gpt-4o-mini-realtime-preview`,
-    `gpt-4o-mini-realtime-preview-2024-12-17`,
+
+
+class RealtimeSessionModel (
+
+) {
+
+
 }
+

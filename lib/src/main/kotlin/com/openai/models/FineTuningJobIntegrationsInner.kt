@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.CreateFineTuningJobRequestIntegrationsInnerWandb
-import com.openai.models.FineTuningIntegration
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

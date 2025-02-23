@@ -21,14 +21,14 @@
 | **model** | **kotlin.String** | The model that the [assistant](/docs/api-reference/assistants) used for this run. |  |
 | **instructions** | **kotlin.String** | The instructions that the [assistant](/docs/api-reference/assistants) used for this run. |  |
 | **tools** | [**kotlin.collections.List&lt;AssistantObjectToolsInner&gt;**](AssistantObjectToolsInner.md) | The list of tools that the [assistant](/docs/api-reference/assistants) used for this run. |  |
-| **metadata** | [**kotlin.Any**](.md) | Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  |  |
+| **metadata** | **kotlin.collections.Map&lt;kotlin.String, kotlin.String&gt;** | Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  |  |
 | **usage** | [**RunCompletionUsage**](RunCompletionUsage.md) |  |  |
 | **maxPromptTokens** | **kotlin.Int** | The maximum number of prompt tokens specified to have been used over the course of the run.  |  |
 | **maxCompletionTokens** | **kotlin.Int** | The maximum number of completion tokens specified to have been used over the course of the run.  |  |
-| **truncationStrategy** | [**TruncationObject**](TruncationObject.md) |  |  |
-| **toolChoice** | [**AssistantsApiToolChoiceOption**](AssistantsApiToolChoiceOption.md) |  |  |
+| **truncationStrategy** | [**CreateRunRequestTruncationStrategy**](CreateRunRequestTruncationStrategy.md) |  |  |
+| **toolChoice** | [**CreateRunRequestToolChoice**](CreateRunRequestToolChoice.md) |  |  |
 | **parallelToolCalls** | **kotlin.Boolean** | Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use. |  |
-| **responseFormat** | [**AssistantsApiResponseFormatOption**](AssistantsApiResponseFormatOption.md) |  |  |
+| **responseFormat** | [**AssistantObjectResponseFormat**](AssistantObjectResponseFormat.md) |  |  |
 | **temperature** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | The sampling temperature used for this run. If not set, defaults to 1. |  [optional] |
 | **topP** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | The nucleus sampling value used for this run. If not set, defaults to 1. |  [optional] |
 

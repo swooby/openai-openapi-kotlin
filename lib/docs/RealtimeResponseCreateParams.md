@@ -13,8 +13,8 @@
 | **temperature** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8.  |  [optional] |
 | **maxResponseOutputTokens** | [**RealtimeResponseCreateParamsMaxResponseOutputTokens**](RealtimeResponseCreateParamsMaxResponseOutputTokens.md) |  |  [optional] |
 | **conversation** | [**RealtimeResponseCreateParamsConversation**](RealtimeResponseCreateParamsConversation.md) |  |  [optional] |
-| **metadata** | [**kotlin.Any**](.md) | Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  |  [optional] |
-| **input** | [**kotlin.collections.List&lt;RealtimeConversationItem&gt;**](RealtimeConversationItem.md) | Input items to include in the prompt for the model. Creates a new context for this response, without including the default conversation. Can include references to items from the default conversation.  |  [optional] |
+| **metadata** | **kotlin.collections.Map&lt;kotlin.String, kotlin.String&gt;** | Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  |  [optional] |
+| **input** | [**kotlin.collections.List&lt;RealtimeConversationItemWithReference&gt;**](RealtimeConversationItemWithReference.md) | Input items to include in the prompt for the model. Using this field creates a new context for this Response instead of using the default conversation. An empty array &#x60;[]&#x60; will clear the context for this Response. Note that this can include references to items from the default conversation.  |  [optional] |
 
 
 <a id="kotlin.collections.List<Modalities>"></a>

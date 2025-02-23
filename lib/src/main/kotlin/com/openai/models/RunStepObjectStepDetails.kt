@@ -15,11 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDetailsMessageCreationObject
-import com.openai.models.RunStepDetailsMessageCreationObjectMessageCreation
-import com.openai.models.RunStepDetailsToolCallsObject
-import com.openai.models.RunStepDetailsToolCallsObjectToolCallsInner
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

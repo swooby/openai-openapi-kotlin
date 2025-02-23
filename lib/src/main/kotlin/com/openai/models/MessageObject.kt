@@ -15,10 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.CreateMessageRequestAttachmentsInner
-import com.openai.models.MessageObjectContentInner
-import com.openai.models.MessageObjectIncompleteDetails
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -38,7 +34,7 @@ import com.squareup.moshi.JsonClass
  * @param assistantId If applicable, the ID of the [assistant](/docs/api-reference/assistants) that authored this message.
  * @param runId The ID of the [run](/docs/api-reference/runs) associated with the creation of this message. Value is `null` when messages are created manually using the create message or create thread endpoints.
  * @param attachments A list of files attached to the message, and the tools they were added to.
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
  */
 
 
@@ -95,9 +91,9 @@ data class MessageObject (
     @Json(name = "attachments")
     val attachments: kotlin.collections.List<CreateMessageRequestAttachmentsInner>?,
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any?
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>?
 
 ) {
 

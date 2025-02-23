@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.CreateModerationRequestInput
-import com.openai.models.CreateModerationRequestModel
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 

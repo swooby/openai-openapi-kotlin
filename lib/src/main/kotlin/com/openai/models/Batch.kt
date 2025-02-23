@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.BatchErrors
-import com.openai.models.BatchRequestCounts
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -43,7 +40,7 @@ import com.squareup.moshi.JsonClass
  * @param cancellingAt The Unix timestamp (in seconds) for when the batch started cancelling.
  * @param cancelledAt The Unix timestamp (in seconds) for when the batch was cancelled.
  * @param requestCounts 
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
  */
 
 
@@ -122,9 +119,9 @@ data class Batch (
     @Json(name = "request_counts")
     val requestCounts: BatchRequestCounts? = null,
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any? = null
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null
 
 ) {
 

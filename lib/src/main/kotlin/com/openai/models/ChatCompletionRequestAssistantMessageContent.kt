@@ -15,11 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionRequestAssistantMessageContentPart
-
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
 /**
  * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified. 
  *

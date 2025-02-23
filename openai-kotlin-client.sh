@@ -1,7 +1,7 @@
 # https://openapi-generator.tech/docs/generators/kotlin/
 
 time \
-openapi-generator generate -i openapi.yaml -g kotlin  -o ./lib --skip-validate-spec \
+openapi-generator generate -i openapi-20250212.yaml -g kotlin  -o ./lib --skip-validate-spec \
 --additional-properties=artifactId=openai-kotlin-client,artifactVersion=0.0.1,groupId=com.openai,packageName=com.openai
 
 cd ./lib

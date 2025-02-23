@@ -15,13 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.CreateFineTuningJobRequestHyperparameters
-import com.openai.models.CreateFineTuningJobRequestIntegrationsInner
-import com.openai.models.CreateFineTuningJobRequestModel
-import com.openai.models.FineTuneMethod
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 

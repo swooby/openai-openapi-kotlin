@@ -15,8 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.OpenAIFile
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -70,7 +68,7 @@ data class Upload (
     val `object`: Upload.`Object`? = null,
 
     @Json(name = "file")
-    val file: OpenAIFile? = null
+    val file: UploadFile? = null
 
 ) {
 

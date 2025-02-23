@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * A list of the categories, and whether they are flagged or not.
@@ -58,11 +57,11 @@ data class CreateModerationResponseResultsInnerCategories (
 
     /* Content that includes instructions or advice that facilitate the planning or execution of wrongdoing, or that gives advice or instruction on how to commit illicit acts. For example, \"how to shoplift\" would fit this category. */
     @Json(name = "illicit")
-    val illicit: kotlin.Boolean,
+    val illicit: kotlin.Boolean?,
 
     /* Content that includes instructions or advice that facilitate the planning or execution of wrongdoing that also includes violence, or that gives advice or instruction on the procurement of any weapon. */
     @Json(name = "illicit/violent")
-    val illicitViolent: kotlin.Boolean,
+    val illicitViolent: kotlin.Boolean?,
 
     /* Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting, and eating disorders. */
     @Json(name = "self-harm")

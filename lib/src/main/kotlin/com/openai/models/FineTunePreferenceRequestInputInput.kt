@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionTool
-import com.openai.models.FineTuneChatRequestInputMessagesInner
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 

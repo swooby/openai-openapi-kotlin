@@ -23,7 +23,7 @@ import com.squareup.moshi.JsonClass
  * The aggregated code interpreter sessions usage details of the specific time bucket.
  *
  * @param `object` 
- * @param sessions The number of code interpreter sessions.
+ * @param numSessions The number of code interpreter sessions.
  * @param projectId When `group_by=project_id`, this field provides the project ID of the grouped usage result.
  */
 
@@ -34,8 +34,8 @@ data class UsageCodeInterpreterSessionsResult (
     val `object`: UsageCodeInterpreterSessionsResult.`Object`,
 
     /* The number of code interpreter sessions. */
-    @Json(name = "sessions")
-    val sessions: kotlin.Int,
+    @Json(name = "num_sessions")
+    val numSessions: kotlin.Int? = null,
 
     /* When `group_by=project_id`, this field provides the project ID of the grouped usage result. */
     @Json(name = "project_id")

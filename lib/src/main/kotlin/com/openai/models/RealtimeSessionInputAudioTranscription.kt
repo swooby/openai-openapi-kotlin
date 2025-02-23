@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Configuration for input audio transcription, defaults to off and can be  set to `null` to turn off once on. Input audio transcription is not native  to the model, since the model consumes audio directly. Transcription runs  asynchronously through Whisper and should be treated as rough guidance  rather than the representation understood by the model. 
@@ -30,18 +29,9 @@ data class RealtimeSessionInputAudioTranscription (
 
     /* The model to use for transcription, `whisper-1` is the only currently  supported model.  */
     @Json(name = "model")
-    val model: Model? = null
+    val model: kotlin.String? = null
 
 ) {
-    /**
-     * The model to use for transcription, `whisper-1` is the only currently  supported model.
-     *
-     * Values: whisper-1
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Model {
-        `whisper-1`
-    }
 
 
 }

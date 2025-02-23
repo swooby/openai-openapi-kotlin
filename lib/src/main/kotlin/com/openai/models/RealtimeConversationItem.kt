@@ -58,7 +58,7 @@ data class RealtimeConversationItem (
 
     /* The content of the message, applicable for `message` items.  - Message items of role `system` support only `input_text` content - Message items of role `user` support `input_text` and `input_audio`    content - Message items of role `assistant` support `text` content.  */
     @Json(name = "content")
-    val content: kotlin.collections.List<RealtimeConversationItemContent>? = null,
+    val content: kotlin.collections.List<RealtimeConversationItemContentInner>? = null,
 
     /* The ID of the function call (for `function_call` and  `function_call_output` items). If passed on a `function_call_output`  item, the server will check that a `function_call` item with the same  ID exists in the conversation history.  */
     @Json(name = "call_id")
@@ -106,8 +106,8 @@ data class RealtimeConversationItem (
     @JsonClass(generateAdapter = false)
     enum class Status(val value: kotlin.String) {
         @Json(name = "completed") completed("completed"),
-        @Json(name = "incomplete") incomplete("incomplete"),
-        @Json(name = "in_progress") inProgress("in_progress");
+        @Json(name = "in_progress") in_progress("in_progress"),
+        @Json(name = "incomplete") incomplete("incomplete");
     }
     /**
      * The role of the message sender (`user`, `assistant`, `system`), only  applicable for `message` items. 

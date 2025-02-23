@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.CompletionUsage
-import com.openai.models.CreateChatCompletionFunctionResponseChoicesInner
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

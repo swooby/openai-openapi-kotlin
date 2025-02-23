@@ -16,9 +16,6 @@
 package com.openai.models
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
 /**
  * Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. 
  *

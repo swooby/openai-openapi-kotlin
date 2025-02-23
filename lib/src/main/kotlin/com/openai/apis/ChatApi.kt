@@ -21,6 +21,7 @@ import okhttp3.HttpUrl
 
 import com.openai.models.CreateChatCompletionRequest
 import com.openai.models.CreateChatCompletionResponse
+import com.openai.models.CreateChatCompletionStreamResponse
 
 import com.squareup.moshi.Json
 

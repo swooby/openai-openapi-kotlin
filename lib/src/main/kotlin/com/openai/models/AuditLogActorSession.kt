@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.AuditLogActorUser
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The session in which the audit logged action was performed.

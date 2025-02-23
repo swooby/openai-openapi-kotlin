@@ -12,7 +12,6 @@
 | **characters** | **kotlin.Int** | The number of characters processed. |  |
 | **seconds** | **kotlin.Int** | The number of seconds processed. |  |
 | **usageBytes** | **kotlin.Int** | The vector stores usage in bytes. |  |
-| **sessions** | **kotlin.Int** | The number of code interpreter sessions. |  |
 | **inputCachedTokens** | **kotlin.Int** | The aggregated number of text input tokens that has been cached from previous requests. For customers subscribe to scale tier, this includes scale tier tokens. |  [optional] |
 | **inputAudioTokens** | **kotlin.Int** | The aggregated number of audio input tokens used, including cached tokens. |  [optional] |
 | **outputAudioTokens** | **kotlin.Int** | The aggregated number of audio output tokens used. |  [optional] |
@@ -23,6 +22,7 @@
 | **batch** | **kotlin.Boolean** | When &#x60;group_by&#x3D;batch&#x60;, this field tells whether the grouped usage result is batch or not. |  [optional] |
 | **source** | **kotlin.String** | When &#x60;group_by&#x3D;source&#x60;, this field provides the source of the grouped usage result, possible values are &#x60;image.generation&#x60;, &#x60;image.edit&#x60;, &#x60;image.variation&#x60;. |  [optional] |
 | **propertySize** | **kotlin.String** | When &#x60;group_by&#x3D;size&#x60;, this field provides the image size of the grouped usage result. |  [optional] |
+| **numSessions** | **kotlin.Int** | The number of code interpreter sessions. |  [optional] |
 | **amount** | [**CostsResultAmount**](CostsResultAmount.md) |  |  [optional] |
 | **lineItem** | **kotlin.String** | When &#x60;group_by&#x3D;line_item&#x60;, this field provides the line item of the grouped costs result. |  [optional] |
 

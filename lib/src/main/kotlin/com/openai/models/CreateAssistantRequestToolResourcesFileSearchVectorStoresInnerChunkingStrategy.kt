@@ -15,10 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.AutoChunkingStrategy
-import com.openai.models.StaticChunkingStrategy
-import com.openai.models.StaticChunkingStrategyStatic
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

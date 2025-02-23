@@ -15,8 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreter
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

@@ -15,13 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.MessageObject
-import com.openai.models.MessageStreamEventOneOf
-import com.openai.models.MessageStreamEventOneOf1
-import com.openai.models.MessageStreamEventOneOf2
-import com.openai.models.MessageStreamEventOneOf3
-import com.openai.models.MessageStreamEventOneOf4
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

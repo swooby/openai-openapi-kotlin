@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.AuditLogActorApiKey
-import com.openai.models.AuditLogActorSession
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

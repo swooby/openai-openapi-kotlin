@@ -15,7 +15,7 @@
 ## Enum: role
 | Name | Value |
 | ---- | ----- |
-| role | system, user, assistant, tool |
+| role | developer, system, user, assistant, tool |
 
 
 

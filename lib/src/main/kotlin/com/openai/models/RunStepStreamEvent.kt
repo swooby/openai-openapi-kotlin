@@ -15,15 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepObject
-import com.openai.models.RunStepStreamEventOneOf
-import com.openai.models.RunStepStreamEventOneOf1
-import com.openai.models.RunStepStreamEventOneOf2
-import com.openai.models.RunStepStreamEventOneOf3
-import com.openai.models.RunStepStreamEventOneOf4
-import com.openai.models.RunStepStreamEventOneOf5
-import com.openai.models.RunStepStreamEventOneOf6
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

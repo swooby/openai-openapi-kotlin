@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Breakdown of tokens used in the prompt.
@@ -31,11 +30,11 @@ data class CompletionUsagePromptTokensDetails (
 
     /* Audio input tokens present in the prompt. */
     @Json(name = "audio_tokens")
-    val audioTokens: kotlin.Int? = null,
+    val audioTokens: kotlin.Int? = 0,
 
     /* Cached tokens present in the prompt. */
     @Json(name = "cached_tokens")
-    val cachedTokens: kotlin.Int? = null
+    val cachedTokens: kotlin.Int? = 0
 
 ) {
 

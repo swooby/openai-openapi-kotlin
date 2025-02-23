@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.VectorStoreExpirationAfter
-import com.openai.models.VectorStoreObjectFileCounts
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -32,7 +29,7 @@ import com.squareup.moshi.JsonClass
  * @param fileCounts 
  * @param status The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use.
  * @param lastActiveAt The Unix timestamp (in seconds) for when the vector store was last active.
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
  * @param expiresAfter 
  * @param expiresAt The Unix timestamp (in seconds) for when the vector store will expire.
  */
@@ -71,9 +68,9 @@ data class VectorStoreObject (
     @Json(name = "last_active_at")
     val lastActiveAt: kotlin.Int?,
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any?,
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>?,
 
     @Json(name = "expires_after")
     val expiresAfter: VectorStoreExpirationAfter? = null,

@@ -15,17 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.CostsResult
-import com.openai.models.CostsResultAmount
-import com.openai.models.UsageAudioSpeechesResult
-import com.openai.models.UsageAudioTranscriptionsResult
-import com.openai.models.UsageCodeInterpreterSessionsResult
-import com.openai.models.UsageCompletionsResult
-import com.openai.models.UsageEmbeddingsResult
-import com.openai.models.UsageImagesResult
-import com.openai.models.UsageModerationsResult
-import com.openai.models.UsageVectorStoresResult
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -40,7 +29,6 @@ import com.squareup.moshi.JsonClass
  * @param characters The number of characters processed.
  * @param seconds The number of seconds processed.
  * @param usageBytes The vector stores usage in bytes.
- * @param sessions The number of code interpreter sessions.
  * @param inputCachedTokens The aggregated number of text input tokens that has been cached from previous requests. For customers subscribe to scale tier, this includes scale tier tokens.
  * @param inputAudioTokens The aggregated number of audio input tokens used, including cached tokens.
  * @param outputAudioTokens The aggregated number of audio output tokens used.
@@ -51,6 +39,7 @@ import com.squareup.moshi.JsonClass
  * @param batch When `group_by=batch`, this field tells whether the grouped usage result is batch or not.
  * @param source When `group_by=source`, this field provides the source of the grouped usage result, possible values are `image.generation`, `image.edit`, `image.variation`.
  * @param propertySize When `group_by=size`, this field provides the image size of the grouped usage result.
+ * @param numSessions The number of code interpreter sessions.
  * @param amount 
  * @param lineItem When `group_by=line_item`, this field provides the line item of the grouped costs result.
  */
@@ -88,10 +77,6 @@ data class UsageTimeBucketResultInner (
     /* The vector stores usage in bytes. */
     @Json(name = "usage_bytes")
     val usageBytes: kotlin.Int,
-
-    /* The number of code interpreter sessions. */
-    @Json(name = "sessions")
-    val sessions: kotlin.Int,
 
     /* The aggregated number of text input tokens that has been cached from previous requests. For customers subscribe to scale tier, this includes scale tier tokens. */
     @Json(name = "input_cached_tokens")
@@ -132,6 +117,10 @@ data class UsageTimeBucketResultInner (
     /* When `group_by=size`, this field provides the image size of the grouped usage result. */
     @Json(name = "size")
     val propertySize: kotlin.String? = null,
+
+    /* The number of code interpreter sessions. */
+    @Json(name = "num_sessions")
+    val numSessions: kotlin.Int? = null,
 
     @Json(name = "amount")
     val amount: CostsResultAmount? = null,

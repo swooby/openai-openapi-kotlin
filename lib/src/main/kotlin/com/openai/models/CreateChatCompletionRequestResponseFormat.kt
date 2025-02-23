@@ -15,11 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ResponseFormatJsonObject
-import com.openai.models.ResponseFormatJsonSchema
-import com.openai.models.ResponseFormatJsonSchemaJsonSchema
-import com.openai.models.ResponseFormatText
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

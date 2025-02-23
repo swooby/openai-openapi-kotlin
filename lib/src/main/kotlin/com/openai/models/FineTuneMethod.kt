@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.FineTuneDPOMethod
-import com.openai.models.FineTuneSupervisedMethod
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

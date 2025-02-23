@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.BatchRequestOutputError
-import com.openai.models.BatchRequestOutputResponse
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The per-line object of the batch output and error files

@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.TranscriptionSegment
-import com.openai.models.TranscriptionWord
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Represents a verbose json transcription response returned by model, based on the provided input.
@@ -40,7 +36,7 @@ data class CreateTranscriptionResponseVerboseJson (
 
     /* The duration of the input audio. */
     @Json(name = "duration")
-    val duration: kotlin.String,
+    val duration: java.math.BigDecimal,
 
     /* The transcribed text. */
     @Json(name = "text")

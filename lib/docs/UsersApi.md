@@ -58,7 +58,7 @@ Configure ApiKeyAuth:
 
 <a id="listUsers"></a>
 # **listUsers**
-> UserListResponse listUsers(limit, after)
+> UserListResponse listUsers(limit, after, emails)
 
 Lists all of the users in the organization.
 
@@ -71,8 +71,9 @@ Lists all of the users in the organization.
 val apiInstance = UsersApi()
 val limit : kotlin.Int = 56 // kotlin.Int | A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. 
 val after : kotlin.String = after_example // kotlin.String | A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. 
+val emails : kotlin.collections.List<kotlin.String> =  // kotlin.collections.List<kotlin.String> | Filter by the email address of users.
 try {
-    val result : UserListResponse = apiInstance.listUsers(limit, after)
+    val result : UserListResponse = apiInstance.listUsers(limit, after, emails)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling UsersApi#listUsers")
@@ -85,9 +86,10 @@ try {
 
 ### Parameters
 | **limit** | **kotlin.Int**| A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.  | [optional] [default to 20] |
+| **after** | **kotlin.String**| A cursor for use in pagination. &#x60;after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after&#x3D;obj_foo in order to fetch the next page of the list.  | [optional] |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **after** | **kotlin.String**| A cursor for use in pagination. &#x60;after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after&#x3D;obj_foo in order to fetch the next page of the list.  | [optional] |
+| **emails** | [**kotlin.collections.List&lt;kotlin.String&gt;**](kotlin.String.md)| Filter by the email address of users. | [optional] |
 
 ### Return type
 

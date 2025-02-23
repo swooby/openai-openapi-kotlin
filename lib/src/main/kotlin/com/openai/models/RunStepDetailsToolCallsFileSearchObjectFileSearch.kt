@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDetailsToolCallsFileSearchRankingOptionsObject
-import com.openai.models.RunStepDetailsToolCallsFileSearchResultObject
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * For now, this is always going to be an empty object.

@@ -15,10 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.CreateModerationRequestInputOneOfInnerOneOf
-import com.openai.models.CreateModerationRequestInputOneOfInnerOneOf1
-import com.openai.models.CreateModerationRequestInputOneOfInnerOneOfImageUrl
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

@@ -15,8 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RealtimeConversationItem
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -26,7 +24,7 @@ import com.squareup.moshi.JsonClass
  * @param type The event type, must be `conversation.item.create`.
  * @param item 
  * @param eventId Optional client-generated ID used to identify this event.
- * @param previousItemId The ID of the preceding item after which the new item will be inserted.  If not set, the new item will be appended to the end of the conversation.  If set, it allows an item to be inserted mid-conversation. If the ID  cannot be found, an error will be returned and the item will not be added. 
+ * @param previousItemId The ID of the preceding item after which the new item will be inserted.  If not set, the new item will be appended to the end of the conversation. If set to `root`, the new item will be added to the beginning of the conversation. If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added. 
  */
 
 
@@ -43,7 +41,7 @@ data class RealtimeClientEventConversationItemCreate (
     @Json(name = "event_id")
     val eventId: kotlin.String? = null,
 
-    /* The ID of the preceding item after which the new item will be inserted.  If not set, the new item will be appended to the end of the conversation.  If set, it allows an item to be inserted mid-conversation. If the ID  cannot be found, an error will be returned and the item will not be added.  */
+    /* The ID of the preceding item after which the new item will be inserted.  If not set, the new item will be appended to the end of the conversation. If set to `root`, the new item will be added to the beginning of the conversation. If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added.  */
     @Json(name = "previous_item_id")
     val previousItemId: kotlin.String? = null
 
