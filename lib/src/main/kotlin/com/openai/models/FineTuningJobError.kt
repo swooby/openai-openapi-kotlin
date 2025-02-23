@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * For fine-tuning jobs that have `failed`, this will contain more information on the cause of the failure.

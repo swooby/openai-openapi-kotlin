@@ -15,13 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.CreateTranscriptionResponseJson
-import com.openai.models.CreateTranscriptionResponseVerboseJson
-import com.openai.models.TranscriptionSegment
-import com.openai.models.TranscriptionWord
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 
@@ -46,7 +40,7 @@ data class CreateTranscription200Response (
 
     /* The duration of the input audio. */
     @Json(name = "duration")
-    val duration: kotlin.String,
+    val duration: java.math.BigDecimal,
 
     /* Extracted words and their corresponding timestamps. */
     @Json(name = "words")

@@ -18,16 +18,17 @@ package com.openai.models
 import com.openai.infrastructure.SerializeNull
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Realtime session object configuration.
  *
- * @param model The Realtime model used for this session. 
  * @param modalities The set of modalities the model can respond with. To disable audio, set this to [\"text\"]. 
+ * @param model The Realtime model used for this session. 
  * @param instructions The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the  desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session. 
  * @param voice The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`. 
- * @param inputAudioFormat The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. 
- * @param outputAudioFormat The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. 
+ * @param inputAudioFormat The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate,  single channel (mono), and little-endian byte order. 
+ * @param outputAudioFormat The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, output audio is sampled at a rate of 24kHz. 
  * @param inputAudioTranscription 
  * @param turnDetection 
  * @param tools Tools (functions) available to the model.
@@ -41,11 +42,11 @@ data class RealtimeSessionCreateRequest (
 
     /* The set of modalities the model can respond with. To disable audio, set this to [\"text\"].  */
     @Json(name = "modalities")
-    val modalities: kotlin.collections.List<RealtimeSessionModalities>? = null,
+    val modalities: kotlin.collections.List<RealtimeSessionCreateRequest.Modalities>? = null,
 
     /* The Realtime model used for this session.  */
     @Json(name = "model")
-    val model: RealtimeSessionModel,
+    val model: RealtimeSessionCreateRequest.Model? = null,
 
     /* The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the  desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session.  */
     @Json(name = "instructions")
@@ -53,27 +54,27 @@ data class RealtimeSessionCreateRequest (
 
     /* The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`.  */
     @Json(name = "voice")
-    val voice: RealtimeSessionVoice? = null,
+    val voice: RealtimeSessionCreateRequest.Voice? = null,
 
-    /* The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
+    /* The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate,  single channel (mono), and little-endian byte order.  */
     @Json(name = "input_audio_format")
-    val inputAudioFormat: RealtimeSessionInputAudioFormat? = null,
+    val inputAudioFormat: RealtimeSessionCreateRequest.InputAudioFormat? = null,
 
-    /* The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
+    /* The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, output audio is sampled at a rate of 24kHz.  */
     @Json(name = "output_audio_format")
-    val outputAudioFormat: RealtimeSessionOutputAudioFormat? = null,
+    val outputAudioFormat: RealtimeSessionCreateRequest.OutputAudioFormat? = null,
 
     @SerializeNull
     @Json(name = "input_audio_transcription")
-    val inputAudioTranscription: RealtimeSessionInputAudioTranscription? = null,
+    val inputAudioTranscription: RealtimeSessionCreateRequestInputAudioTranscription? = null,
 
     @SerializeNull
     @Json(name = "turn_detection")
-    val turnDetection: RealtimeSessionTurnDetection? = null,
+    val turnDetection: RealtimeSessionCreateRequestTurnDetection? = null,
 
     /* Tools (functions) available to the model. */
     @Json(name = "tools")
-    val tools: kotlin.collections.List<RealtimeSessionTools>? = null,
+    val tools: kotlin.collections.List<RealtimeResponseCreateParamsToolsInner>? = null,
 
     /* How the model chooses tools. Options are `auto`, `none`, `required`, or  specify a function.  */
     @Json(name = "tool_choice")
@@ -87,5 +88,68 @@ data class RealtimeSessionCreateRequest (
     val maxResponseOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null
 
 ) {
+
+    /**
+     * The set of modalities the model can respond with. To disable audio, set this to [\"text\"]. 
+     *
+     * Values: text,audio
+     */
+    @JsonClass(generateAdapter = false)
+    enum class Modalities(val value: kotlin.String) {
+        @Json(name = "text") text("text"),
+        @Json(name = "audio") audio("audio");
+    }
+    /**
+     * The Realtime model used for this session. 
+     *
+     * Values: realtimeMinusPreview,realtimeMinusPreviewMinus2024Minus10Minus01,realtimeMinusPreviewMinus2024Minus12Minus17,miniMinusRealtimeMinusPreview,miniMinusRealtimeMinusPreviewMinus2024Minus12Minus17
+     */
+    @JsonClass(generateAdapter = false)
+    enum class Model(val value: kotlin.String) {
+        @Json(name = "gpt-4o-realtime-preview") realtimeMinusPreview("gpt-4o-realtime-preview"),
+        @Json(name = "gpt-4o-realtime-preview-2024-10-01") realtimeMinusPreviewMinus2024Minus10Minus01("gpt-4o-realtime-preview-2024-10-01"),
+        @Json(name = "gpt-4o-realtime-preview-2024-12-17") realtimeMinusPreviewMinus2024Minus12Minus17("gpt-4o-realtime-preview-2024-12-17"),
+        @Json(name = "gpt-4o-mini-realtime-preview") miniMinusRealtimeMinusPreview("gpt-4o-mini-realtime-preview"),
+        @Json(name = "gpt-4o-mini-realtime-preview-2024-12-17") miniMinusRealtimeMinusPreviewMinus2024Minus12Minus17("gpt-4o-mini-realtime-preview-2024-12-17");
+    }
+    /**
+     * The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`. 
+     *
+     * Values: alloy,ash,ballad,coral,echo,sage,shimmer,verse
+     */
+    @JsonClass(generateAdapter = false)
+    enum class Voice(val value: kotlin.String) {
+        @Json(name = "alloy") alloy("alloy"),
+        @Json(name = "ash") ash("ash"),
+        @Json(name = "ballad") ballad("ballad"),
+        @Json(name = "coral") coral("coral"),
+        @Json(name = "echo") echo("echo"),
+        @Json(name = "sage") sage("sage"),
+        @Json(name = "shimmer") shimmer("shimmer"),
+        @Json(name = "verse") verse("verse");
+    }
+    /**
+     * The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate,  single channel (mono), and little-endian byte order. 
+     *
+     * Values: pcm16,g711_ulaw,g711_alaw
+     */
+    @JsonClass(generateAdapter = false)
+    enum class InputAudioFormat(val value: kotlin.String) {
+        @Json(name = "pcm16") pcm16("pcm16"),
+        @Json(name = "g711_ulaw") g711_ulaw("g711_ulaw"),
+        @Json(name = "g711_alaw") g711_alaw("g711_alaw");
+    }
+    /**
+     * The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, output audio is sampled at a rate of 24kHz. 
+     *
+     * Values: pcm16,g711_ulaw,g711_alaw
+     */
+    @JsonClass(generateAdapter = false)
+    enum class OutputAudioFormat(val value: kotlin.String) {
+        @Json(name = "pcm16") pcm16("pcm16"),
+        @Json(name = "g711_ulaw") g711_ulaw("g711_ulaw"),
+        @Json(name = "g711_alaw") g711_alaw("g711_alaw");
+    }
+
 }
 

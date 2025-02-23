@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.FineTunePreferenceRequestInputInput
-import com.openai.models.FineTunePreferenceRequestInputPreferredCompletionInner
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The per-line training example of a fine-tuning input file for chat models using the dpo method.

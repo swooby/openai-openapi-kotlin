@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.AuditLogApiKeyUpdatedChangesRequested
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The details for events with this `type`.

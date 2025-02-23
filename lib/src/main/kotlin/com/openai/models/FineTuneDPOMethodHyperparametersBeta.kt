@@ -16,9 +16,6 @@
 package com.openai.models
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
 /**
  * The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model. 
  *

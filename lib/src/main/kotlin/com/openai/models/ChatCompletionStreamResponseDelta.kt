@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionMessageToolCallChunk
-import com.openai.models.ChatCompletionStreamResponseDeltaFunctionCall
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -58,10 +55,11 @@ data class ChatCompletionStreamResponseDelta (
     /**
      * The role of the author of this message.
      *
-     * Values: system,user,assistant,tool
+     * Values: developer,system,user,assistant,tool
      */
     @JsonClass(generateAdapter = false)
     enum class Role(val value: kotlin.String) {
+        @Json(name = "developer") developer("developer"),
         @Json(name = "system") system("system"),
         @Json(name = "user") user("user"),
         @Json(name = "assistant") assistant("assistant"),

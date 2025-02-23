@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Represents a transcription response returned by model, based on the provided input.

@@ -15,11 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.MessageDeltaContentTextAnnotationsFileCitationObject
-import com.openai.models.MessageDeltaContentTextAnnotationsFileCitationObjectFileCitation
-import com.openai.models.MessageDeltaContentTextAnnotationsFilePathObject
-import com.openai.models.MessageDeltaContentTextAnnotationsFilePathObjectFilePath
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

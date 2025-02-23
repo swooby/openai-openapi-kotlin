@@ -15,12 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDeltaStepDetailsToolCallsCodeObject
-import com.openai.models.RunStepDeltaStepDetailsToolCallsCodeObjectCodeInterpreter
-import com.openai.models.RunStepDeltaStepDetailsToolCallsFileSearchObject
-import com.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObject
-import com.openai.models.RunStepDeltaStepDetailsToolCallsFunctionObjectFunction
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

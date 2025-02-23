@@ -15,8 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ProjectApiKey
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

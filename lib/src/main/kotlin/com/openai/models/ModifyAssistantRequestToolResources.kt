@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.ModifyAssistantRequestToolResourcesCodeInterpreter
-import com.openai.models.ModifyAssistantRequestToolResourcesFileSearch
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs. 

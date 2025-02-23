@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.TranscriptionSegment
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 
@@ -38,7 +35,7 @@ data class CreateTranslationResponseVerboseJson (
 
     /* The duration of the input audio. */
     @Json(name = "duration")
-    val duration: kotlin.String,
+    val duration: java.math.BigDecimal,
 
     /* The translated text. */
     @Json(name = "text")

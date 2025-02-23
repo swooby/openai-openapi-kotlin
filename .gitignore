@@ -1,7 +1,8 @@
 
 .gradle/
 .idea/
-lib/build/
+.openapi-generator/
+build/
 
 .DS_Store
 local.properties

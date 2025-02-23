@@ -15,10 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDetailsToolCallsCodeOutputImageObject
-import com.openai.models.RunStepDetailsToolCallsCodeOutputImageObjectImage
-import com.openai.models.RunStepDetailsToolCallsCodeOutputLogsObject
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

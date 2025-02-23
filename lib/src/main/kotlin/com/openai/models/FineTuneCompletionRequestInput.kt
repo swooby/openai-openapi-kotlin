@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The per-line training example of a fine-tuning input file for completions models

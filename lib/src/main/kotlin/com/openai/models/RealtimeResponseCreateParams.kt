@@ -30,8 +30,8 @@ import com.squareup.moshi.JsonClass
  * @param temperature Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. 
  * @param maxResponseOutputTokens 
  * @param conversation 
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
- * @param input Input items to include in the prompt for the model. Creates a new context for this response, without including the default conversation. Can include references to items from the default conversation. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
+ * @param input Input items to include in the prompt for the model. Using this field creates a new context for this Response instead of using the default conversation. An empty array `[]` will clear the context for this Response. Note that this can include references to items from the default conversation. 
  */
 
 
@@ -39,7 +39,7 @@ data class RealtimeResponseCreateParams (
 
     /* The set of modalities the model can respond with. To disable audio, set this to [\"text\"].  */
     @Json(name = "modalities")
-    val modalities: kotlin.collections.List<RealtimeSessionModalities>? = null,
+    val modalities: kotlin.collections.List<RealtimeResponseCreateParams.Modalities>? = null,
 
     /* The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the  desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session.  */
     @Json(name = "instructions")
@@ -47,15 +47,15 @@ data class RealtimeResponseCreateParams (
 
     /* The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`.  */
     @Json(name = "voice")
-    val voice: RealtimeSessionVoice? = null,
+    val voice: RealtimeResponseCreateParams.Voice? = null,
 
     /* The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
     @Json(name = "output_audio_format")
-    val outputAudioFormat: RealtimeSessionOutputAudioFormat? = null,
+    val outputAudioFormat: RealtimeResponseCreateParams.OutputAudioFormat? = null,
 
     /* Tools (functions) available to the model. */
     @Json(name = "tools")
-    val tools: kotlin.collections.List<RealtimeSessionTools>? = null,
+    val tools: kotlin.collections.List<RealtimeResponseCreateParamsToolsInner>? = null,
 
     /* How the model chooses tools. Options are `auto`, `none`, `required`, or  specify a function, like `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}`.  */
     @Json(name = "tool_choice")
@@ -71,23 +71,53 @@ data class RealtimeResponseCreateParams (
     @Json(name = "conversation")
     val conversation: RealtimeResponseCreateParamsConversation? = null,
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any? = null,
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 
-    /* Input items to include in the prompt for the model. Creates a new context for this response, without including the default conversation. Can include references to items from the default conversation.  */
+    /* Input items to include in the prompt for the model. Using this field creates a new context for this Response instead of using the default conversation. An empty array `[]` will clear the context for this Response. Note that this can include references to items from the default conversation.  */
     @Json(name = "input")
-    val input: kotlin.collections.List<RealtimeConversationItem>? = null
+    val input: kotlin.collections.List<RealtimeConversationItemWithReference>? = null
 
 ) {
+
     /**
-     * Controls which conversation the response is added to. Currently supports `auto` and `none`, with `auto` as the default value. The `auto` value means that the contents of the response will be added to the default conversation. Set this to `none` to create an out-of-band response which  will not add items to default conversation.
+     * The set of modalities the model can respond with. To disable audio, set this to [\"text\"]. 
      *
+     * Values: text,audio
      */
     @JsonClass(generateAdapter = false)
-    enum class RealtimeResponseCreateParamsConversation {
-        auto,
-        none;
+    enum class Modalities(val value: kotlin.String) {
+        @Json(name = "text") text("text"),
+        @Json(name = "audio") audio("audio");
     }
+    /**
+     * The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`. 
+     *
+     * Values: alloy,ash,ballad,coral,echo,sage,shimmer,verse
+     */
+    @JsonClass(generateAdapter = false)
+    enum class Voice(val value: kotlin.String) {
+        @Json(name = "alloy") alloy("alloy"),
+        @Json(name = "ash") ash("ash"),
+        @Json(name = "ballad") ballad("ballad"),
+        @Json(name = "coral") coral("coral"),
+        @Json(name = "echo") echo("echo"),
+        @Json(name = "sage") sage("sage"),
+        @Json(name = "shimmer") shimmer("shimmer"),
+        @Json(name = "verse") verse("verse");
+    }
+    /**
+     * The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. 
+     *
+     * Values: pcm16,g711_ulaw,g711_alaw
+     */
+    @JsonClass(generateAdapter = false)
+    enum class OutputAudioFormat(val value: kotlin.String) {
+        @Json(name = "pcm16") pcm16("pcm16"),
+        @Json(name = "g711_ulaw") g711_ulaw("g711_ulaw"),
+        @Json(name = "g711_alaw") g711_alaw("g711_alaw");
+    }
+
 }
 

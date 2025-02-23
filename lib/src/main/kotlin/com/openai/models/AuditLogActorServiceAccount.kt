@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The service account that performed the audit logged action.

@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.AssistantsNamedToolChoiceFunction
-import com.openai.models.ChatCompletionNamedToolChoice
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

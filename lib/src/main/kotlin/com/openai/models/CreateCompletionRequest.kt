@@ -15,13 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionStreamOptions
-import com.openai.models.CreateCompletionRequestModel
-import com.openai.models.CreateCompletionRequestPrompt
-import com.openai.models.CreateCompletionRequestStop
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 
@@ -89,7 +83,7 @@ data class CreateCompletionRequest (
 
     /* If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.  Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.  */
     @Json(name = "seed")
-    val seed: kotlin.Int? = null,
+    val seed: kotlin.Long? = null,
 
     @Json(name = "stop")
     val stop: CreateCompletionRequestStop? = null,

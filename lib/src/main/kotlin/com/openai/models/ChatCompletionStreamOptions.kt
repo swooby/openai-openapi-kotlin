@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Options for streaming response. Only set this when you set `stream: true`. 

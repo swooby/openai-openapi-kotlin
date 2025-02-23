@@ -15,16 +15,13 @@
 
 package com.openai.models
 
-import com.openai.models.ModifyThreadRequestToolResources
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 
  *
  * @param toolResources 
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
  */
 
 
@@ -33,9 +30,9 @@ data class ModifyThreadRequest (
     @Json(name = "tool_resources")
     val toolResources: ModifyThreadRequestToolResources? = null,
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any? = null
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null
 
 ) {
 

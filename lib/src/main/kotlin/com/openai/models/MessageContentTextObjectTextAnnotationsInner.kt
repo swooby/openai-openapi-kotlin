@@ -15,11 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.MessageContentTextAnnotationsFileCitationObject
-import com.openai.models.MessageContentTextAnnotationsFileCitationObjectFileCitation
-import com.openai.models.MessageContentTextAnnotationsFilePathObject
-import com.openai.models.MessageContentTextAnnotationsFilePathObjectFilePath
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

@@ -15,8 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.FineTuningJobEvent
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -25,6 +23,7 @@ import com.squareup.moshi.JsonClass
  *
  * @param `data` 
  * @param `object` 
+ * @param hasMore 
  */
 
 
@@ -34,7 +33,10 @@ data class ListFineTuningJobEventsResponse (
     val `data`: kotlin.collections.List<FineTuningJobEvent>,
 
     @Json(name = "object")
-    val `object`: ListFineTuningJobEventsResponse.`Object`
+    val `object`: ListFineTuningJobEventsResponse.`Object`,
+
+    @Json(name = "has_more")
+    val hasMore: kotlin.Boolean
 
 ) {
 

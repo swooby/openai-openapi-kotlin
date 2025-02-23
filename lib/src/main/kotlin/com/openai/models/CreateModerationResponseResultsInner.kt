@@ -15,12 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.CreateModerationResponseResultsInnerCategories
-import com.openai.models.CreateModerationResponseResultsInnerCategoryAppliedInputTypes
-import com.openai.models.CreateModerationResponseResultsInnerCategoryScores
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 

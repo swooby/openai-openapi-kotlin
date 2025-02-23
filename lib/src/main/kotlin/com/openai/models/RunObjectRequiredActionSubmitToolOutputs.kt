@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.RunToolCallObject
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Details on the tool outputs needed for this run to continue.

@@ -124,6 +124,7 @@ class UsersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * 
      * @param limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.  (optional, default to 20)
      * @param after A cursor for use in pagination. &#x60;after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after&#x3D;obj_foo in order to fetch the next page of the list.  (optional)
+     * @param emails Filter by the email address of users. (optional)
      * @return UserListResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -133,8 +134,8 @@ class UsersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun listUsers(limit: kotlin.Int? = 20, after: kotlin.String? = null) : UserListResponse {
-        val localVarResponse = listUsersWithHttpInfo(limit = limit, after = after)
+    fun listUsers(limit: kotlin.Int? = 20, after: kotlin.String? = null, emails: kotlin.collections.List<kotlin.String>? = null) : UserListResponse {
+        val localVarResponse = listUsersWithHttpInfo(limit = limit, after = after, emails = emails)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UserListResponse
@@ -156,14 +157,15 @@ class UsersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * 
      * @param limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.  (optional, default to 20)
      * @param after A cursor for use in pagination. &#x60;after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after&#x3D;obj_foo in order to fetch the next page of the list.  (optional)
+     * @param emails Filter by the email address of users. (optional)
      * @return ApiResponse<UserListResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun listUsersWithHttpInfo(limit: kotlin.Int?, after: kotlin.String?) : ApiResponse<UserListResponse?> {
-        val localVariableConfig = listUsersRequestConfig(limit = limit, after = after)
+    fun listUsersWithHttpInfo(limit: kotlin.Int?, after: kotlin.String?, emails: kotlin.collections.List<kotlin.String>?) : ApiResponse<UserListResponse?> {
+        val localVariableConfig = listUsersRequestConfig(limit = limit, after = after, emails = emails)
 
         return request<Unit, UserListResponse>(
             localVariableConfig
@@ -175,9 +177,10 @@ class UsersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      *
      * @param limit A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.  (optional, default to 20)
      * @param after A cursor for use in pagination. &#x60;after&#x60; is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after&#x3D;obj_foo in order to fetch the next page of the list.  (optional)
+     * @param emails Filter by the email address of users. (optional)
      * @return RequestConfig
      */
-    fun listUsersRequestConfig(limit: kotlin.Int?, after: kotlin.String?) : RequestConfig<Unit> {
+    fun listUsersRequestConfig(limit: kotlin.Int?, after: kotlin.String?, emails: kotlin.collections.List<kotlin.String>?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -186,6 +189,9 @@ class UsersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
                 }
                 if (after != null) {
                     put("after", listOf(after.toString()))
+                }
+                if (emails != null) {
+                    put("emails", toMultiValue(emails.toList(), "multi"))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

@@ -15,30 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.AuditLogActor
-import com.openai.models.AuditLogApiKeyCreated
-import com.openai.models.AuditLogApiKeyDeleted
-import com.openai.models.AuditLogApiKeyUpdated
-import com.openai.models.AuditLogEventType
-import com.openai.models.AuditLogInviteAccepted
-import com.openai.models.AuditLogInviteSent
-import com.openai.models.AuditLogLoginFailed
-import com.openai.models.AuditLogOrganizationUpdated
-import com.openai.models.AuditLogProject
-import com.openai.models.AuditLogProjectArchived
-import com.openai.models.AuditLogProjectCreated
-import com.openai.models.AuditLogProjectUpdated
-import com.openai.models.AuditLogRateLimitDeleted
-import com.openai.models.AuditLogRateLimitUpdated
-import com.openai.models.AuditLogServiceAccountCreated
-import com.openai.models.AuditLogServiceAccountDeleted
-import com.openai.models.AuditLogServiceAccountUpdated
-import com.openai.models.AuditLogUserAdded
-import com.openai.models.AuditLogUserDeleted
-import com.openai.models.AuditLogUserUpdated
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * A log of a user action or configuration change within this organization.

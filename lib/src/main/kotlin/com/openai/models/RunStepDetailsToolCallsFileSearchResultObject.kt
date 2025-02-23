@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDetailsToolCallsFileSearchResultObjectContentInner
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * A result instance of the file search.

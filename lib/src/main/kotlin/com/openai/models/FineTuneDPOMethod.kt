@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.FineTuneDPOMethodHyperparameters
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Configuration for the DPO fine-tuning method.

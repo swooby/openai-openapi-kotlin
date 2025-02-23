@@ -15,26 +15,19 @@
 
 package com.openai.models
 
-import com.openai.models.AssistantObjectToolsInner
-import com.openai.models.AssistantsApiResponseFormatOption
-import com.openai.models.AssistantsApiToolChoiceOption
-import com.openai.models.CreateMessageRequest
-import com.openai.models.CreateRunRequestModel
-import com.openai.models.TruncationObject
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * 
  *
  * @param assistantId The ID of the [assistant](/docs/api-reference/assistants) to use to execute this run.
  * @param model 
+ * @param reasoningEffort 
  * @param instructions Overrides the [instructions](/docs/api-reference/assistants/createAssistant) of the assistant. This is useful for modifying the behavior on a per-run basis.
  * @param additionalInstructions Appends additional instructions at the end of the instructions for the run. This is useful for modifying the behavior on a per-run basis without overriding other instructions.
  * @param additionalMessages Adds additional messages to the thread before creating the run.
  * @param tools Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
- * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. 
+ * @param metadata Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters. 
  * @param temperature What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. 
  * @param topP An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.  We generally recommend altering this or temperature but not both. 
  * @param stream If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message. 
@@ -56,6 +49,9 @@ data class CreateRunRequest (
     @Json(name = "model")
     val model: CreateRunRequestModel? = null,
 
+    @Json(name = "reasoning_effort")
+    val reasoningEffort: ReasoningEffort? = ReasoningEffort.medium,
+
     /* Overrides the [instructions](/docs/api-reference/assistants/createAssistant) of the assistant. This is useful for modifying the behavior on a per-run basis. */
     @Json(name = "instructions")
     val instructions: kotlin.String? = null,
@@ -72,9 +68,9 @@ data class CreateRunRequest (
     @Json(name = "tools")
     val tools: kotlin.collections.List<AssistantObjectToolsInner>? = null,
 
-    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.  */
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
     @Json(name = "metadata")
-    val metadata: kotlin.Any? = null,
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 
     /* What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.  */
     @Json(name = "temperature")
@@ -97,17 +93,17 @@ data class CreateRunRequest (
     val maxCompletionTokens: kotlin.Int? = null,
 
     @Json(name = "truncation_strategy")
-    val truncationStrategy: TruncationObject? = null,
+    val truncationStrategy: CreateRunRequestTruncationStrategy? = null,
 
     @Json(name = "tool_choice")
-    val toolChoice: AssistantsApiToolChoiceOption? = null,
+    val toolChoice: CreateRunRequestToolChoice? = null,
 
     /* Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use. */
     @Json(name = "parallel_tool_calls")
     val parallelToolCalls: kotlin.Boolean? = true,
 
     @Json(name = "response_format")
-    val responseFormat: AssistantsApiResponseFormatOption? = null
+    val responseFormat: AssistantObjectResponseFormat? = null
 
 ) {
 

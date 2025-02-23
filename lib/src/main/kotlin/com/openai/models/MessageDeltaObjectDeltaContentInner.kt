@@ -15,14 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.MessageDeltaContentImageFileObject
-import com.openai.models.MessageDeltaContentImageFileObjectImageFile
-import com.openai.models.MessageDeltaContentImageUrlObject
-import com.openai.models.MessageDeltaContentImageUrlObjectImageUrl
-import com.openai.models.MessageDeltaContentRefusalObject
-import com.openai.models.MessageDeltaContentTextObject
-import com.openai.models.MessageDeltaContentTextObjectText
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

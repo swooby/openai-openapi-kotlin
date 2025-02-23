@@ -15,11 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionRequestToolMessageContentPart
-
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
 /**
  * The contents of the tool message.
  *

@@ -6,6 +6,7 @@
 | ------------ | ------------- | ------------- | ------------- |
 | **&#x60;data&#x60;** | [**kotlin.collections.List&lt;FineTuningJobEvent&gt;**](FineTuningJobEvent.md) |  |  |
 | **&#x60;object&#x60;** | [**inline**](#&#x60;Object&#x60;) |  |  |
+| **hasMore** | **kotlin.Boolean** |  |  |
 
 
 <a id="`Object`"></a>

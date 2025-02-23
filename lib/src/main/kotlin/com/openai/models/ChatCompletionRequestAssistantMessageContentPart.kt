@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionRequestMessageContentPartRefusal
-import com.openai.models.ChatCompletionRequestMessageContentPartText
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

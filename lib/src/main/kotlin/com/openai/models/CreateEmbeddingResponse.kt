@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.CreateEmbeddingResponseUsage
-import com.openai.models.Embedding
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

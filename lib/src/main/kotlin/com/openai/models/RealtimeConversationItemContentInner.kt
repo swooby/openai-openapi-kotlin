@@ -30,11 +30,11 @@ import com.squareup.moshi.JsonClass
  */
 
 
-data class RealtimeConversationItemContent (
+data class RealtimeConversationItemContentInner (
 
     /* The content type (`input_text`, `input_audio`, `item_reference`, `text`).  */
     @Json(name = "type")
-    val type: RealtimeConversationItemContent.Type? = null,
+    val type: RealtimeConversationItemContentInner.Type? = null,
 
     /* The text content, used for `input_text` and `text` content types.  */
     @Json(name = "text")

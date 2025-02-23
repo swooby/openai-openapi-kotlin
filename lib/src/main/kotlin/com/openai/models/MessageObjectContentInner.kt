@@ -15,14 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.MessageContentImageFileObject
-import com.openai.models.MessageContentImageFileObjectImageFile
-import com.openai.models.MessageContentImageUrlObject
-import com.openai.models.MessageContentImageUrlObjectImageUrl
-import com.openai.models.MessageContentRefusalObject
-import com.openai.models.MessageContentTextObject
-import com.openai.models.MessageContentTextObjectText
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

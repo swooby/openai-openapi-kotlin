@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.FileSearchRankingOptions
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Overrides for the file search tool.

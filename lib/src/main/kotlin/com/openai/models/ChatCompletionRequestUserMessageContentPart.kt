@@ -15,12 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionRequestMessageContentPartAudio
-import com.openai.models.ChatCompletionRequestMessageContentPartAudioInputAudio
-import com.openai.models.ChatCompletionRequestMessageContentPartImage
-import com.openai.models.ChatCompletionRequestMessageContentPartImageImageUrl
-import com.openai.models.ChatCompletionRequestMessageContentPartText
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

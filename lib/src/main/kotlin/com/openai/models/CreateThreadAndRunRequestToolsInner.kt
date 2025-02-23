@@ -15,12 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.AssistantToolsCode
-import com.openai.models.AssistantToolsFileSearch
-import com.openai.models.AssistantToolsFileSearchFileSearch
-import com.openai.models.AssistantToolsFunction
-import com.openai.models.FunctionObject
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

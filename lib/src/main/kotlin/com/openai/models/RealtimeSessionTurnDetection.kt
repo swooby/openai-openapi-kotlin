@@ -10,8 +10,7 @@
     "ArrayInDataClass",
     "EnumEntryName",
     "RemoveRedundantQualifierName",
-    "UnusedImport",
-    "unused",
+    "UnusedImport"
 )
 
 package com.openai.models
@@ -27,7 +26,6 @@ import com.squareup.moshi.JsonClass
  * @param threshold Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A  higher threshold will require louder audio to activate the model, and  thus might perform better in noisy environments. 
  * @param prefixPaddingMs Amount of audio to include before the VAD detected speech (in  milliseconds). Defaults to 300ms. 
  * @param silenceDurationMs Duration of silence to detect speech stop (in milliseconds). Defaults  to 500ms. With shorter values the model will respond more quickly,  but may jump in on short pauses from the user. 
- * @param createResponse Whether or not to automatically generate a response when VAD is enabled. `true` by default. 
  */
 
 
@@ -47,21 +45,18 @@ data class RealtimeSessionTurnDetection (
 
     /* Duration of silence to detect speech stop (in milliseconds). Defaults  to 500ms. With shorter values the model will respond more quickly,  but may jump in on short pauses from the user.  */
     @Json(name = "silence_duration_ms")
-    val silenceDurationMs: kotlin.Int? = null,
-
-    /* Whether or not to automatically generate a response when VAD is enabled. `true` by default.  */
-    @Json(name = "create_response")
-    val createResponse: kotlin.Boolean? = true
+    val silenceDurationMs: kotlin.Int? = null
 
 ) {
+
     /**
-     * Type of turn detection, only `server_vad` is currently supported.
+     * Type of turn detection, only `server_vad` is currently supported. 
      *
      * Values: server_vad
      */
     @JsonClass(generateAdapter = false)
-    enum class Type {
-        server_vad
+    enum class Type(val value: kotlin.String) {
+        @Json(name = "server_vad") server_vad("server_vad");
     }
 
 }

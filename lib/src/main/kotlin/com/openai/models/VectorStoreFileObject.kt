@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.VectorStoreFileObjectChunkingStrategy
-import com.openai.models.VectorStoreFileObjectLastError
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

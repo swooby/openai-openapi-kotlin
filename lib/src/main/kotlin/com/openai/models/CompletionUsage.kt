@@ -15,11 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.CompletionUsageCompletionTokensDetails
-import com.openai.models.CompletionUsagePromptTokensDetails
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Usage statistics for the completion request.
@@ -36,15 +32,15 @@ data class CompletionUsage (
 
     /* Number of tokens in the generated completion. */
     @Json(name = "completion_tokens")
-    val completionTokens: kotlin.Int,
+    val completionTokens: kotlin.Int = 0,
 
     /* Number of tokens in the prompt. */
     @Json(name = "prompt_tokens")
-    val promptTokens: kotlin.Int,
+    val promptTokens: kotlin.Int = 0,
 
     /* Total number of tokens used in the request (prompt + completion). */
     @Json(name = "total_tokens")
-    val totalTokens: kotlin.Int,
+    val totalTokens: kotlin.Int = 0,
 
     @Json(name = "completion_tokens_details")
     val completionTokensDetails: CompletionUsageCompletionTokensDetails? = null,

@@ -15,10 +15,7 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDeltaObjectDeltaStepDetails
-
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The delta containing the fields that have changed on the run step.

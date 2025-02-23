@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.

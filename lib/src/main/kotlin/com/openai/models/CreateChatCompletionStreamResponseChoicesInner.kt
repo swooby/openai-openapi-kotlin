@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ChatCompletionStreamResponseDelta
-import com.openai.models.CreateChatCompletionResponseChoicesInnerLogprobs
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

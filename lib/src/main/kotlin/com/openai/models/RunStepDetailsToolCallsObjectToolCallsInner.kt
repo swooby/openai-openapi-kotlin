@@ -15,13 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.RunStepDetailsToolCallsCodeObject
-import com.openai.models.RunStepDetailsToolCallsCodeObjectCodeInterpreter
-import com.openai.models.RunStepDetailsToolCallsFileSearchObject
-import com.openai.models.RunStepDetailsToolCallsFileSearchObjectFileSearch
-import com.openai.models.RunStepDetailsToolCallsFunctionObject
-import com.openai.models.RunStepDetailsToolCallsFunctionObjectFunction
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

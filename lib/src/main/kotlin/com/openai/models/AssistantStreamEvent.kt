@@ -15,13 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.DoneEvent
-import com.openai.models.ErrorEvent
-import com.openai.models.MessageStreamEvent
-import com.openai.models.RunStepStreamEvent
-import com.openai.models.RunStreamEvent
-import com.openai.models.ThreadStreamEvent
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

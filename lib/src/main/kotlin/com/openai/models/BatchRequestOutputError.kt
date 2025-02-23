@@ -17,7 +17,6 @@ package com.openai.models
 
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * For requests that failed with a non-HTTP error, this will contain more information on the cause of the failure.

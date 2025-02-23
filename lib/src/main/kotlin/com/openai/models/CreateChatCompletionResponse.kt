@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.CompletionUsage
-import com.openai.models.CreateChatCompletionResponseChoicesInner
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -29,7 +26,7 @@ import com.squareup.moshi.JsonClass
  * @param created The Unix timestamp (in seconds) of when the chat completion was created.
  * @param model The model used for the chat completion.
  * @param `object` The object type, which is always `chat.completion`.
- * @param serviceTier The service tier used for processing the request. This field is only included if the `service_tier` parameter is specified in the request.
+ * @param serviceTier The service tier used for processing the request.
  * @param systemFingerprint This fingerprint represents the backend configuration that the model runs with.  Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism. 
  * @param usage 
  */
@@ -57,7 +54,7 @@ data class CreateChatCompletionResponse (
     @Json(name = "object")
     val `object`: CreateChatCompletionResponse.`Object`,
 
-    /* The service tier used for processing the request. This field is only included if the `service_tier` parameter is specified in the request. */
+    /* The service tier used for processing the request. */
     @Json(name = "service_tier")
     val serviceTier: CreateChatCompletionResponse.ServiceTier? = null,
 
@@ -80,7 +77,7 @@ data class CreateChatCompletionResponse (
         @Json(name = "chat.completion") chatPeriodCompletion("chat.completion");
     }
     /**
-     * The service tier used for processing the request. This field is only included if the `service_tier` parameter is specified in the request.
+     * The service tier used for processing the request.
      *
      * Values: scale,default
      */

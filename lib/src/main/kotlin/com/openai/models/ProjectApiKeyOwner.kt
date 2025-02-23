@@ -15,9 +15,6 @@
 
 package com.openai.models
 
-import com.openai.models.ProjectServiceAccount
-import com.openai.models.ProjectUser
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
