@@ -6,13 +6,14 @@ import java.math.BigDecimal
 
 /**
  * This Adapter was obviously added because...
+ *
  * ```
  * Platform class java.math.BigDecimal requires explicit JsonAdapter to be registered
  * ```
  *
  * However, the original `fun toJson(value: BigDecimal): String` implementation
- * returns a number as a string that gets serialized with quotes,
- * which OpenAI complains about:
+ * returns a number as a string that gets serialized with quotes, which OpenAI
+ * complains about:
  * ```
  * --> POST https://api.openai.com/v1/realtime/sessions
  * Content-Length: 720

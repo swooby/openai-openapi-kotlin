@@ -1,12 +1,10 @@
 package com.openai.infrastructure
 
 /**
- * Defines a config object for a given request.
- * NOTE: This object doesn't include 'body' because it
- *       allows for caching of the constructed object
- *       for many request definitions.
- * NOTE: Headers is a Map<String,String> because rfc2616 defines
- *       multi-valued headers as csv-only.
+ * Defines a config object for a given request. NOTE: This object doesn't
+ * include 'body' because it allows for caching of the constructed object for
+ * many request definitions. NOTE: Headers is a Map<String,String> because
+ * rfc2616 defines multi-valued headers as csv-only.
  */
 data class RequestConfig<T>(
     val method: RequestMethod,
@@ -15,5 +13,5 @@ data class RequestConfig<T>(
     val params: MutableMap<String, Any> = mutableMapOf(),
     val query: MutableMap<String, List<String>> = mutableMapOf(),
     val requiresAuthentication: Boolean,
-    val body: T? = null
+    val body: T? = null,
 )

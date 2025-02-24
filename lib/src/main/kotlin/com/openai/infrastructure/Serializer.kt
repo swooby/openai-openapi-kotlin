@@ -12,7 +12,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.Type
 
 //
-//region SerializeNull https://stackoverflow.com/a/71877976/252308
+// region SerializeNull https://stackoverflow.com/a/71877976/252308
 //
 
 @Retention(AnnotationRetention.RUNTIME)
@@ -20,17 +20,28 @@ import java.lang.reflect.Type
 annotation class SerializeNull {
     companion object {
         class Factory : JsonAdapter.Factory {
-            override fun create(type: Type, annotations: MutableSet<out Annotation>, moshi: Moshi): JsonAdapter<*>? {
-                val nextAnnotations = Types.nextAnnotations(annotations, SerializeNull::class.java)
+            override fun create(
+                type: Type,
+                annotations: MutableSet<out Annotation>,
+                moshi: Moshi,
+            ): JsonAdapter<*>? {
+                val nextAnnotations =
+                    Types.nextAnnotations(
+                        annotations,
+                        SerializeNull::class.java,
+                    )
                 return if (nextAnnotations == null) {
                     null
                 } else {
-                    NullIfNullJsonAdapter<Any>(moshi.nextAdapter(this, type, nextAnnotations))
+                    NullIfNullJsonAdapter<Any>(
+                        moshi.nextAdapter(this, type, nextAnnotations)
+                    )
                 }
             }
         }
 
-        class NullIfNullJsonAdapter<T>(private val delegate: JsonAdapter<T>) : JsonAdapter<T>() {
+        class NullIfNullJsonAdapter<T>(private val delegate: JsonAdapter<T>) :
+            JsonAdapter<T>() {
             override fun fromJson(reader: JsonReader): T? {
                 return delegate.fromJson(reader)
             }
@@ -53,32 +64,31 @@ annotation class SerializeNull {
 }
 
 //
-//endregion
+// endregion
 //
 
 object Serializer {
     @JvmStatic
-    val moshiBuilder: Moshi.Builder = Moshi.Builder()
-        .add(SerializeNull.Companion.Factory())
-        .add(OffsetDateTimeAdapter())
-        .add(LocalDateTimeAdapter())
-        .add(LocalDateAdapter())
-        .add(UUIDAdapter())
-        .add(ByteArrayAdapter())
-        .add(URIAdapter())
-        .add(RealtimeSessionMaxResponseOutputTokensAdapter())
-        .add(KotlinJsonAdapterFactory())
-        .add(BigDecimalAdapter())
-        .add(BigIntegerAdapter())
+    val moshiBuilder: Moshi.Builder =
+        Moshi.Builder()
+            .add(SerializeNull.Companion.Factory())
+            .add(OffsetDateTimeAdapter())
+            .add(LocalDateTimeAdapter())
+            .add(LocalDateAdapter())
+            .add(UUIDAdapter())
+            .add(ByteArrayAdapter())
+            .add(URIAdapter())
+            .add(RealtimeSessionMaxResponseOutputTokensAdapter())
+            .add(KotlinJsonAdapterFactory())
+            .add(BigDecimalAdapter())
+            .add(BigIntegerAdapter())
 
-    @JvmStatic
-    val moshi: Moshi by lazy {
-        moshiBuilder.build()
-    }
+    @JvmStatic val moshi: Moshi by lazy { moshiBuilder.build() }
 
     @OptIn(ExperimentalStdlibApi::class)
     inline fun <reified T> deserialize(json: String?): T? {
-        return if (json.isNullOrBlank()) null else moshi.adapter<T>().fromJson(json)
+        return if (json.isNullOrBlank()) null
+        else moshi.adapter<T>().fromJson(json)
     }
 
     @OptIn(ExperimentalStdlibApi::class)

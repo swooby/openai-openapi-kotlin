@@ -62,39 +62,38 @@ https://github.com/swooby/openai-openapi-kotlin/pull/1/files
 ## Updates
 When a new spec comes out:
 1. Make sure to start from a fresh/stashed checkout.
-2. `curl -o openapi-YYYYMMDD.yaml https://raw.githubusercontent.com/openai/openai-openapi/refs/heads/master/openapi.yaml`
-3. `openapi-generator generate -i openapi-YYYYMMDD.yaml -g kotlin -o ./lib --skip-validate-spec --additional-properties=artifactId=openai-kotlin-client,artifactVersion=0.0.1,groupId=com.openai,packageName=com.openai`
-4. `mv lib/build.gradle lib/build.gradle.kts`
-5. `rm -f ./gradle && mv lib/gradle* .`
-6. `mv lib/settings.gradle ./settings.gradle.kts`
-7. Review each changed file, especially ones that show as modified in:  
+2. `rm -r ./lib/src`
+3. `curl -o openapi-YYYYMMDD.yaml https://raw.githubusercontent.com/openai/openai-openapi/refs/heads/master/openapi.yaml`
+4. `openapi-generator generate -i openapi-YYYYMMDD.yaml -g kotlin -o ./lib --skip-validate-spec --additional-properties=artifactId=openai-kotlin-client,artifactVersion=0.0.1,groupId=com.openai,packageName=com.openai`
+5. Fix generated gradle files:
+   1. `mv lib/build.gradle lib/build.gradle.kts`
+   2. `rm -f ./gradle && mv lib/gradle* .`
+   3. `mv lib/settings.gradle ./settings.gradle.kts`
+   4. Compare/Review with the settings.gradle and build.gradle files.
+       1. `gradle*`: probably discard all changes
+       2. `settings.gradle.kts`: probably discard all changes
+       3. `lib/build.gradle.kts`: probably discard all changes
+   5. While you are here, update any dependencies in `gradle/libs.versions.toml`
+6. Consistently format all generated code with `./gradlew spotlessApply`
+7. Fix generated code compiler errors:  
+   TODO: Open an OpenAPI or OpenAI bug on these... 
+   1. `apis/AudioApi`
+      1. add/keep `AudioResponseFormat.json`
+      2. add/keep `timestampGranularities?.value`
+   2. `models/CreateAssistantRequestToolResourcesFileSearch`: keep non-data class  
+      (compiler error to have data class with no constructor parameters)
+   3. `models/CreateThreadRequestToolResourcesFileSearch`: keep non-data class  
+      (compiler error to have data class with no constructor parameters)
+8. Review each changed file, especially ones that show as modified in:  
    https://github.com/swooby/openai-openapi-kotlin/pull/1/files
-   1. First review with the settings.gradle and build.gradle files.
-      1. `gradle*`: probably discard all changes
-      2. `settings.gradle.kts`: probably discard all changes
-      3. `lib/build.gradle.kts`: probably discard all changes
-      4. While you are here, update any dependencies in `gradle/libs.versions.toml`
-   2. `docs`: probably keep all changes
-   3. `test`: probably keep all changes except...
-      1. probably delete `RealtimeResponseCreateParamsMaxResponseOutputTokensTest`
-      2. probably delete `RealtimeResponseMaxOutputTokensTest`
-      3. delete `RealtimeSessionModelTest`
-   4. `infrastructure`:
-      1. `AudioApi.kt`: probably discard all changes
-      2. `ApiClient.kt`: probably discard all changes
-      3. `BigDecimalAdapter.kt`: probably discard all changes
-      4. `BigIntegerAdapter.kt`: probably discard all changes
-      5. `Serializer.kt`: probably discard all changes
-   5. `models`:
-      1. Fix compiler errors:
-         1. `CreateAssistantRequestToolResourcesFileSearch`: keep non-data class  
-             (compiler error to have data class with no constructor parameters)
-         2. `CreateThreadRequestToolResourcesFileSearch`: keep non-data class  
-             (compiler error to have data class with no constructor parameters)
-      2. optimize imports.    
-         NOTE: This will not complete successfully until all code compiles successfully.  
-         See the preceding `Create*RequestToolResourcesFileSearch` compiler errors.
-      3. `Realtime*` files:  
+   1. `apis` & `docs`: probably keep all changes
+   2. `infrastructure`:
+      1. `ApiClient.kt`: probably discard all changes
+      2. `BigDecimalAdapter.kt`: probably discard all changes
+      3. `BigIntegerAdapter.kt`: probably discard all changes
+      4. `Serializer.kt`: probably discard all changes
+   3. `models`: probably keep all changes except...
+      1. `Realtime*` files:  
          (This can get a little complicated...)
          1. `RealtimeClientEvent*`: Keep all `type: RealtimeClientEvent*.Type = RealtimeClientEvent*.Type....` one-line assignments  
             These help a lot to simplify sending client events. 
@@ -137,5 +136,11 @@ When a new spec comes out:
              2. change/keep `type` to nested `Type` 
          15. `RealtimeSessionCreateResponse`
              1. change/keep `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+         16. restore/reset/keep `RealtimeSessionMaxResponseOutputTokens` 
          16. delete `RealtimeSessionModel`  
              This empty class would cause a runtime deserialization exception.
+   4. `test`: probably keep all changes except...
+      1. revert `RealtimeResponseCreateParamsMaxResponseOutputTokensTest`  
+         detected as a rename from `RealtimeSessionMaxResponseOutputTokensTest`
+      2. delete `RealtimeResponseMaxOutputTokensTest`
+      3. delete `RealtimeSessionModelTest`
