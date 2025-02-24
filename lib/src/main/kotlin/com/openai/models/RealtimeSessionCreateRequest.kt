@@ -100,17 +100,19 @@ data class RealtimeSessionCreateRequest (
         @Json(name = "audio") audio("audio");
     }
     /**
-     * The Realtime model used for this session. 
+     * The Realtime model used for this session.
      *
-     * Values: realtimeMinusPreview,realtimeMinusPreviewMinus2024Minus10Minus01,realtimeMinusPreviewMinus2024Minus12Minus17,miniMinusRealtimeMinusPreview,miniMinusRealtimeMinusPreviewMinus2024Minus12Minus17
+     * https://platform.openai.com/docs/models#gpt-4o-realtime
+     *
+     * Values: gpt-4o-realtime-preview, gpt-4o-realtime-preview-2024-10-01, gpt-4o-realtime-preview-2024-12-17, gpt-4o-mini-realtime-preview, gpt-4o-mini-realtime-preview-2024-12-17
      */
     @JsonClass(generateAdapter = false)
-    enum class Model(val value: kotlin.String) {
-        @Json(name = "gpt-4o-realtime-preview") gptMinus4oMinusRealtimeMinusPreview("gpt-4o-realtime-preview"),
-        @Json(name = "gpt-4o-realtime-preview-2024-10-01") gptMinus4oMinusRealtimeMinusPreviewMinus2024Minus10Minus01("gpt-4o-realtime-preview-2024-10-01"),
-        @Json(name = "gpt-4o-realtime-preview-2024-12-17") gptMinus4oMinusRealtimeMinusPreviewMinus2024Minus12Minus17("gpt-4o-realtime-preview-2024-12-17"),
-        @Json(name = "gpt-4o-mini-realtime-preview") gptMinus4oMinusMiniMinusRealtimeMinusPreview("gpt-4o-mini-realtime-preview"),
-        @Json(name = "gpt-4o-mini-realtime-preview-2024-12-17") gptMinus4oMinusMiniMinusRealtimeMinusPreviewMinus2024Minus12Minus17("gpt-4o-mini-realtime-preview-2024-12-17");
+    enum class Model {
+        `gpt-4o-realtime-preview`,
+        `gpt-4o-realtime-preview-2024-10-01`,
+        `gpt-4o-realtime-preview-2024-12-17`,
+        `gpt-4o-mini-realtime-preview`,
+        `gpt-4o-mini-realtime-preview-2024-12-17`,
     }
     /**
      * The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`. 

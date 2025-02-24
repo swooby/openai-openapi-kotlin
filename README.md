@@ -64,11 +64,10 @@ When a new spec comes out:
 1. Make sure to start from a fresh/stashed checkout.
 2. `curl -o openapi-YYYYMMDD.yaml https://raw.githubusercontent.com/openai/openai-openapi/refs/heads/master/openapi.yaml`
 3. `openapi-generator generate -i openapi-YYYYMMDD.yaml -g kotlin -o ./lib --skip-validate-spec --additional-properties=artifactId=openai-kotlin-client,artifactVersion=0.0.1,groupId=com.openai,packageName=com.openai`
-4. optimize imports of `models`; NOTE: This will fail on any file that has a compiler error!
-5. `mv lib/build.gradle lib/build.gradle.kts`
-6. `rm -f ./gradle && mv lib/gradle* .`
-7. `mv lib/settings.gradle ./settings.gradle.kts`
-8. Review each changed file, especially ones that show as modified in:  
+4. `mv lib/build.gradle lib/build.gradle.kts`
+5. `rm -f ./gradle && mv lib/gradle* .`
+6. `mv lib/settings.gradle ./settings.gradle.kts`
+7. Review each changed file, especially ones that show as modified in:  
    https://github.com/swooby/openai-openapi-kotlin/pull/1/files
    1. First review with the settings.gradle and build.gradle files.
       1. `gradle*`: probably discard all changes
@@ -79,6 +78,7 @@ When a new spec comes out:
    3. `test`: probably keep all changes except...
       1. probably delete `RealtimeResponseCreateParamsMaxResponseOutputTokensTest`
       2. probably delete `RealtimeResponseMaxOutputTokensTest`
+      3. delete `RealtimeSessionModelTest`
    4. `infrastructure`:
       1. `AudioApi.kt`: probably discard all changes
       2. `ApiClient.kt`: probably discard all changes
@@ -86,39 +86,56 @@ When a new spec comes out:
       4. `BigIntegerAdapter.kt`: probably discard all changes
       5. `Serializer.kt`: probably discard all changes
    5. `models`:
-      1. `CreateAssistantRequestToolResourcesFileSearch`: keep non-data class (syntax error for data class to have no constructor parameters)
-      2. `CreateThreadRequestToolResourcesFileSearch`: keep non-data class (syntax error for data class to have no constructor parameters)
+      1. Fix compiler errors:
+         1. `CreateAssistantRequestToolResourcesFileSearch`: keep non-data class  
+             (compiler error to have data class with no constructor parameters)
+         2. `CreateThreadRequestToolResourcesFileSearch`: keep non-data class  
+             (compiler error to have data class with no constructor parameters)
+      2. optimize imports.    
+         NOTE: This will not complete successfully until all code compiles successfully.  
+         See the preceding `Create*RequestToolResourcesFileSearch` compiler errors.
       3. `Realtime*` files:  
          (This can get a little complicated...)
-         1. `RealtimeClientEvent*`: Keep all `type: RealtimeClientEvent*.Type = RealtimeClientEvent*.Type....` one-line assignments 
+         1. `RealtimeClientEvent*`: Keep all `type: RealtimeClientEvent*.Type = RealtimeClientEvent*.Type....` one-line assignments  
+            These help a lot to simplify sending client events. 
          2. `RealtimeConversationItem`
-            1. add/keep `in_progress` to nested `Status`; undocumented value comes from the server
+            1. add/keep `in_progress` in nested `Status`; undocumented value comes from the server
          3. `RealtimeConversationItemContentInner`
-            1. add/keep `audio` to nested `Type`; undocumented value comes from the server
+            1. add/keep `audio` in nested `Type`; undocumented value comes from the server
          4. `RealtimeResponse`
-            1. change `maxOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
-            2. add/keep `in_progress` to nested `Status`; undocumented value comes from the server
+            1. change/keep `maxOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+            2. add/keep `in_progress` in nested `Status`; undocumented value comes from the server
          5. `RealtimeResponseCreateParams`
-            1. change `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+            1. change/keep `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
          6. `RealtimeResponseCreateParamsConversation`
             1. add/keep `enum class ... auto, none ...`
-         7. move `RealtimeResponseCreateParamsMaxResponseOutputTokens` to common `RealtimeSessionMaxResponseOutputTokens`
+         7. move `RealtimeResponseCreateParamsMaxResponseOutputTokens` to common `RealtimeSessionMaxResponseOutputTokens`  
+            This empty class would cause a runtime deserialization exception.
          8. move `RealtimeResponseMaxOutputTokens` to common `RealtimeSessionMaxResponseOutputTokens`
+            This empty class would cause a runtime deserialization exception.
          9. `RealtimeServerEventConversationItemCreated`
-            1. add/keep nullable `previousItemId`
+            1. add/keep nullable `previousItemId`; null value comes from the server
          10. `RealtimeServerEventInputAudioBufferCommitted`:
-             1. add/keep nullable `previousItemId`
+             1. add/keep nullable `previousItemId`; null value comes from the server
          11. `RealtimeSession`
-             1. add/keep `@SerializeNull` REALLY?!?!?!?
-             2. change `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+             1. `model`
+                1. add/keep javadoc
+                2. change/keep type to `kotlin.String?` 
+             2. change/keep `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
          12. `RealtimeSessionCreateRequest`
              1. add/keep `@SerializeNull`
-             2. change `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+             2. change/keep `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+             3. nested `enum class Model`
+                1. change/keep javadoc
+                2. change/keep `gpt-4o-realtime-preview ...` simplification;  
+                   The generated names leave out `gpt-4o-`.
          13. `RealtimeSessionCreateRequestInputAudioTranscription`
              1. add/keep nested `enum class Model whisper-1 ...`
-             2. change `model` to nested `Model`
+             2. change/keep `model` to nested `Model`
          14. `RealtimeSessionCreateRequestTurnDetection`
              1. add/keep nested `enum class Type server_vad ...`
-             2. change `type` to nested `Type` 
+             2. change/keep `type` to nested `Type` 
          15. `RealtimeSessionCreateResponse`
-             1. change `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+             1. change/keep `maxResponseOutputTokens` to type `RealtimeSessionMaxResponseOutputTokens`
+         16. delete `RealtimeSessionModel`  
+             This empty class would cause a runtime deserialization exception.

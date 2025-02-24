@@ -49,7 +49,7 @@ data class RealtimeSession (
 
     /* The Realtime model used for this session.  */
     @Json(name = "model")
-    val model: RealtimeSessionModel? = null,
+    val model: kotlin.String? = null,
 
     /* The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the  desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session.  */
     @Json(name = "instructions")
