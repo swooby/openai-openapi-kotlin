@@ -136,7 +136,7 @@ data class RunObject(
     @Json(name = "parallel_tool_calls")
     val parallelToolCalls: kotlin.Boolean = true,
     @Json(name = "response_format")
-    val responseFormat: AssistantObjectResponseFormat,
+    val responseFormat: AssistantsApiResponseFormatOption,
 
     /* The sampling temperature used for this run. If not set, defaults to 1. */
     @Json(name = "temperature") val temperature: java.math.BigDecimal? = null,

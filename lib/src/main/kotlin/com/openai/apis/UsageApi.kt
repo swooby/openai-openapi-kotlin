@@ -77,7 +77,8 @@ class UsageApi(
     }
 
     /**
-     * Get audio speeches usage details for the organization.
+     * GET /organization/usage/audio_speeches Get audio speeches usage details
+     * for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -174,7 +175,8 @@ class UsageApi(
     }
 
     /**
-     * Get audio speeches usage details for the organization.
+     * GET /organization/usage/audio_speeches Get audio speeches usage details
+     * for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -361,7 +363,8 @@ class UsageApi(
     }
 
     /**
-     * Get audio transcriptions usage details for the organization.
+     * GET /organization/usage/audio_transcriptions Get audio transcriptions
+     * usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -459,7 +462,8 @@ class UsageApi(
     }
 
     /**
-     * Get audio transcriptions usage details for the organization.
+     * GET /organization/usage/audio_transcriptions Get audio transcriptions
+     * usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -645,7 +649,8 @@ class UsageApi(
     }
 
     /**
-     * Get code interpreter sessions usage details for the organization.
+     * GET /organization/usage/code_interpreter_sessions Get code interpreter
+     * sessions usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -732,7 +737,8 @@ class UsageApi(
     }
 
     /**
-     * Get code interpreter sessions usage details for the organization.
+     * GET /organization/usage/code_interpreter_sessions Get code interpreter
+     * sessions usage details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -890,7 +896,8 @@ class UsageApi(
     }
 
     /**
-     * Get completions usage details for the organization.
+     * GET /organization/usage/completions Get completions usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -992,7 +999,8 @@ class UsageApi(
     }
 
     /**
-     * Get completions usage details for the organization.
+     * GET /organization/usage/completions Get completions usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -1187,7 +1195,7 @@ class UsageApi(
     }
 
     /**
-     * Get costs details for the organization.
+     * GET /organization/costs Get costs details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -1271,7 +1279,7 @@ class UsageApi(
     }
 
     /**
-     * Get costs details for the organization.
+     * GET /organization/costs Get costs details for the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -1425,7 +1433,8 @@ class UsageApi(
     }
 
     /**
-     * Get embeddings usage details for the organization.
+     * GET /organization/usage/embeddings Get embeddings usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -1522,7 +1531,8 @@ class UsageApi(
     }
 
     /**
-     * Get embeddings usage details for the organization.
+     * GET /organization/usage/embeddings Get embeddings usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -1692,9 +1702,10 @@ class UsageApi(
 
     /** enum for parameter sources */
     enum class SourcesUsageImages(val value: kotlin.String) {
-        @Json(name = "image.generation") generation("image.generation"),
-        @Json(name = "image.edit") edit("image.edit"),
-        @Json(name = "image.variation") variation("image.variation");
+        @Json(name = "image.generation")
+        imagePeriodGeneration("image.generation"),
+        @Json(name = "image.edit") imagePeriodEdit("image.edit"),
+        @Json(name = "image.variation") imagePeriodVariation("image.variation");
 
         /**
          * Override [toString()] to avoid using the enum variable name as the
@@ -1747,7 +1758,8 @@ class UsageApi(
     }
 
     /**
-     * Get images usage details for the organization.
+     * GET /organization/usage/images Get images usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -1854,7 +1866,8 @@ class UsageApi(
     }
 
     /**
-     * Get images usage details for the organization.
+     * GET /organization/usage/images Get images usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -2067,7 +2080,8 @@ class UsageApi(
     }
 
     /**
-     * Get moderations usage details for the organization.
+     * GET /organization/usage/moderations Get moderations usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -2164,7 +2178,8 @@ class UsageApi(
     }
 
     /**
-     * Get moderations usage details for the organization.
+     * GET /organization/usage/moderations Get moderations usage details for the
+     * organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -2348,7 +2363,8 @@ class UsageApi(
     }
 
     /**
-     * Get vector stores usage details for the organization.
+     * GET /organization/usage/vector_stores Get vector stores usage details for
+     * the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.
@@ -2434,7 +2450,8 @@ class UsageApi(
     }
 
     /**
-     * Get vector stores usage details for the organization.
+     * GET /organization/usage/vector_stores Get vector stores usage details for
+     * the organization.
      *
      * @param startTime Start time (Unix seconds) of the query time range,
      *   inclusive.

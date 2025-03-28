@@ -12,7 +12,7 @@
 | **metadata** | **kotlin.collections.Map&lt;kotlin.String, kotlin.String&gt;** | Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  |  [optional] |
 | **usage** | [**RealtimeResponseUsage**](RealtimeResponseUsage.md) |  |  [optional] |
 | **conversationId** | **kotlin.String** | Which conversation the response is added to, determined by the &#x60;conversation&#x60; field in the &#x60;response.create&#x60; event. If &#x60;auto&#x60;, the response will be added to the default conversation and the value of &#x60;conversation_id&#x60; will be an id like &#x60;conv_1234&#x60;. If &#x60;none&#x60;, the response will not be added to any conversation and the value of &#x60;conversation_id&#x60; will be &#x60;null&#x60;. If responses are being triggered by server VAD, the response will be added to the default conversation, thus the &#x60;conversation_id&#x60; will be an id like &#x60;conv_1234&#x60;.  |  [optional] |
-| **voice** | [**inline**](#Voice) | The voice the model used to respond. Current voice options are &#x60;alloy&#x60;, &#x60;ash&#x60;, &#x60;ballad&#x60;, &#x60;coral&#x60;, &#x60;echo&#x60; &#x60;sage&#x60;,  &#x60;shimmer&#x60; and &#x60;verse&#x60;.  |  [optional] |
+| **voice** | [**VoiceIdsShared**](VoiceIdsShared.md) |  |  [optional] |
 | **modalities** | [**inline**](#kotlin.collections.List&lt;Modalities&gt;) | The set of modalities the model used to respond. If there are multiple modalities, the model will pick one, for example if &#x60;modalities&#x60; is &#x60;[\&quot;text\&quot;, \&quot;audio\&quot;]&#x60;, the model could be responding in either text or audio.  |  [optional] |
 | **outputAudioFormat** | [**inline**](#OutputAudioFormat) | The format of output audio. Options are &#x60;pcm16&#x60;, &#x60;g711_ulaw&#x60;, or &#x60;g711_alaw&#x60;.  |  [optional] |
 | **temperature** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8.  |  [optional] |
@@ -31,13 +31,6 @@
 | Name | Value |
 | ---- | ----- |
 | status | completed, cancelled, failed, incomplete |
-
-
-<a id="Voice"></a>
-## Enum: voice
-| Name | Value |
-| ---- | ----- |
-| voice | alloy, ash, ballad, coral, echo, sage, shimmer, verse |
 
 
 <a id="kotlin.collections.List<Modalities>"></a>

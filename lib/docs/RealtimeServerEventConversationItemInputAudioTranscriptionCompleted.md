@@ -9,6 +9,7 @@
 | **itemId** | **kotlin.String** | The ID of the user message item containing the audio. |  |
 | **contentIndex** | **kotlin.Int** | The index of the content part containing the audio. |  |
 | **transcript** | **kotlin.String** | The transcribed text. |  |
+| **logprobs** | [**kotlin.collections.List&lt;LogProbProperties&gt;**](LogProbProperties.md) | The log probabilities of the transcription. |  [optional] |
 
 
 <a id="Type"></a>

@@ -55,6 +55,14 @@ class AudioApiTest : ShouldSpec() {
             // probability](https://en.wikipedia.org/wiki/Log_probability) to
             // automatically increase the temperature until certain thresholds
             // are hit.
+            // val include : kotlin.collections.List<TranscriptionInclude> =  //
+            // kotlin.collections.List<TranscriptionInclude> | Additional
+            // information to include in the transcription response.  `logprobs`
+            // will return the log probabilities of the tokens in the  response
+            // to understand the model's confidence in the transcription.
+            // `logprobs` only works with response_format set to `json` and only
+            // with  the models `gpt-4o-transcribe` and
+            // `gpt-4o-mini-transcribe`.
             // val timestampGranularities :
             // kotlin.collections.List<kotlin.String> =  //
             // kotlin.collections.List<kotlin.String> | The timestamp
@@ -64,9 +72,14 @@ class AudioApiTest : ShouldSpec() {
             // `word`, or `segment`. Note: There is no additional latency for
             // segment timestamps, but generating word timestamps incurs
             // additional latency.
+            // val stream : kotlin.Boolean = true // kotlin.Boolean | If set to
+            // true, the model response data will be streamed to the client as
+            // it is generated using [server-sent
+            // events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).  See the [Streaming section of the Speech-to-Text guide](/docs/guides/speech-to-text?lang=curl#streaming-transcriptions) for more information.  Note: Streaming is not supported for the `whisper-1` model and will be ignored.
             // val result : CreateTranscription200Response =
             // apiInstance.createTranscription(file, model, language, prompt,
-            // responseFormat, temperature, timestampGranularities)
+            // responseFormat, temperature, include, timestampGranularities,
+            // stream)
             // result shouldBe ("TODO")
         }
 
@@ -76,15 +89,16 @@ class AudioApiTest : ShouldSpec() {
             // val file : java.io.File = BINARY_DATA_HERE // java.io.File | The
             // audio file object (not file name) translate, in one of these
             // formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
-            // val model : CreateTranscriptionRequestModel =  //
-            // CreateTranscriptionRequestModel |
+            // val model : CreateTranslationRequestModel =  //
+            // CreateTranslationRequestModel |
             // val prompt : kotlin.String = prompt_example // kotlin.String | An
             // optional text to guide the model's style or continue a previous
             // audio segment. The
             // [prompt](/docs/guides/speech-to-text#prompting) should be in
             // English.
-            // val responseFormat : AudioResponseFormat =  //
-            // AudioResponseFormat |
+            // val responseFormat : kotlin.String = responseFormat_example //
+            // kotlin.String | The format of the output, in one of these
+            // options: `json`, `text`, `srt`, `verbose_json`, or `vtt`.
             // val temperature : java.math.BigDecimal = 8.14 //
             // java.math.BigDecimal | The sampling temperature, between 0 and 1.
             // Higher values like 0.8 will make the output more random, while

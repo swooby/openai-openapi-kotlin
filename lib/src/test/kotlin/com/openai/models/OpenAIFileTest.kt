@@ -66,6 +66,13 @@ class OpenAIFileTest : ShouldSpec() {
             // modelInstance.status shouldBe ("TODO")
         }
 
+        // to test the property `expiresAt` - The Unix timestamp (in seconds)
+        // for when the file will expire.
+        should("test expiresAt") {
+            // uncomment below to test the property
+            // modelInstance.expiresAt shouldBe ("TODO")
+        }
+
         // to test the property `statusDetails` - Deprecated. For details on why
         // a fine-tuning training file failed validation, see the `error` field
         // on `fine_tuning.job`.

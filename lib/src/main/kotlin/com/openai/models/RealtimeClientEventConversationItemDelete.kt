@@ -28,9 +28,11 @@ data class RealtimeClientEventConversationItemDelete(
 
     /* The event type, must be `conversation.item.delete`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventConversationItemDelete.Type =
         RealtimeClientEventConversationItemDelete.Type
             .conversationPeriodItemPeriodDelete,
+    // openai-openapi-kotlin changes end
 
     /* The ID of the item to delete. */
     @Json(name = "item_id") val itemId: kotlin.String,

@@ -12,7 +12,6 @@
 package com.openai.models
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * The ranking options for the file search. If not specified, the file search
@@ -22,28 +21,11 @@ import com.squareup.moshi.JsonClass
  *
  * @param scoreThreshold The score threshold for the file search. All values
  *   must be a floating point number between 0 and 1.
- * @param ranker The ranker to use for the file search. If not specified will
- *   use the `auto` ranker.
+ * @param ranker
  */
 data class FileSearchRankingOptions(
 
     /* The score threshold for the file search. All values must be a floating point number between 0 and 1. */
     @Json(name = "score_threshold") val scoreThreshold: java.math.BigDecimal,
-
-    /* The ranker to use for the file search. If not specified will use the `auto` ranker. */
-    @Json(name = "ranker") val ranker: FileSearchRankingOptions.Ranker? = null,
-) {
-
-    /**
-     * The ranker to use for the file search. If not specified will use the
-     * `auto` ranker.
-     *
-     * Values: auto,default_2024_08_21
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Ranker(val value: kotlin.String) {
-        @Json(name = "auto") auto("auto"),
-        @Json(name = "default_2024_08_21")
-        default_2024_08_21("default_2024_08_21"),
-    }
-}
+    @Json(name = "ranker") val ranker: FileSearchRanker? = null,
+) {}

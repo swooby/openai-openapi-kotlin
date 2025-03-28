@@ -44,7 +44,7 @@ class ImagesApi(
     }
 
     /**
-     * Creates an image given a prompt.
+     * POST /images/generations Creates an image given a prompt.
      *
      * @param createImageRequest
      * @return ImagesResponse
@@ -98,7 +98,7 @@ class ImagesApi(
     }
 
     /**
-     * Creates an image given a prompt.
+     * POST /images/generations Creates an image given a prompt.
      *
      * @param createImageRequest
      * @return ApiResponse<ImagesResponse?>
@@ -175,7 +175,8 @@ class ImagesApi(
     }
 
     /**
-     * Creates an edited or extended image given an original image and a prompt.
+     * POST /images/edits Creates an edited or extended image given an original
+     * image and a prompt.
      *
      * @param image The image to edit. Must be a valid PNG file, less than 4MB,
      *   and square. If mask is not provided, image must have transparency,
@@ -271,7 +272,8 @@ class ImagesApi(
     }
 
     /**
-     * Creates an edited or extended image given an original image and a prompt.
+     * POST /images/edits Creates an edited or extended image given an original
+     * image and a prompt.
      *
      * @param image The image to edit. Must be a valid PNG file, less than 4MB,
      *   and square. If mask is not provided, image must have transparency,
@@ -432,7 +434,7 @@ class ImagesApi(
     }
 
     /**
-     * Creates a variation of a given image.
+     * POST /images/variations Creates a variation of a given image.
      *
      * @param image The image to use as the basis for the variation(s). Must be
      *   a valid PNG file, less than 4MB, and square.
@@ -518,7 +520,7 @@ class ImagesApi(
     }
 
     /**
-     * Creates a variation of a given image.
+     * POST /images/variations Creates a variation of a given image.
      *
      * @param image The image to use as the basis for the variation(s). Must be
      *   a valid PNG file, less than 4MB, and square.

@@ -51,7 +51,9 @@ data class RealtimeConversationItemContentInner(
      */
     @JsonClass(generateAdapter = false)
     enum class Type(val value: kotlin.String) {
+        // openai-openapi-kotlin changes begin
         @Json(name = "audio") audio("audio"),
+        // openai-openapi-kotlin changes end
         @Json(name = "input_audio") input_audio("input_audio"),
         @Json(name = "input_text") input_text("input_text"),
         @Json(name = "item_reference") item_reference("item_reference"),

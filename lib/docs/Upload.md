@@ -10,7 +10,7 @@
 | **bytes** | **kotlin.Int** | The intended number of bytes to be uploaded. |  |
 | **purpose** | **kotlin.String** | The intended purpose of the file. [Please refer here](/docs/api-reference/files/object#files/object-purpose) for acceptable values. |  |
 | **status** | [**inline**](#Status) | The status of the Upload. |  |
-| **expiresAt** | **kotlin.Int** | The Unix timestamp (in seconds) for when the Upload was created. |  |
+| **expiresAt** | **kotlin.Int** | The Unix timestamp (in seconds) for when the Upload will expire. |  |
 | **&#x60;object&#x60;** | [**inline**](#&#x60;Object&#x60;) | The object type, which is always \&quot;upload\&quot;. |  [optional] |
 | **file** | [**UploadFile**](UploadFile.md) |  |  [optional] |
 

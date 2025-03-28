@@ -24,6 +24,8 @@ import com.openai.infrastructure.ServerException
 import com.openai.infrastructure.Success
 import com.openai.models.RealtimeSessionCreateRequest
 import com.openai.models.RealtimeSessionCreateResponse
+import com.openai.models.RealtimeTranscriptionSessionCreateRequest
+import com.openai.models.RealtimeTranscriptionSessionCreateResponse
 import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
@@ -41,12 +43,12 @@ class RealtimeApi(
     }
 
     /**
-     * Create an ephemeral API token for use in client-side applications with
-     * the Realtime API. Can be configured with the same session parameters as
-     * the &#x60;session.update&#x60; client event. It responds with a session
-     * object, plus a &#x60;client_secret&#x60; key which contains a usable
-     * ephemeral API token that can be used to authenticate browser clients for
-     * the Realtime API.
+     * POST /realtime/sessions Create an ephemeral API token for use in
+     * client-side applications with the Realtime API. Can be configured with
+     * the same session parameters as the &#x60;session.update&#x60; client
+     * event. It responds with a session object, plus a
+     * &#x60;client_secret&#x60; key which contains a usable ephemeral API token
+     * that can be used to authenticate browser clients for the Realtime API.
      *
      * @param realtimeSessionCreateRequest Create an ephemeral API key with the
      *   given session configuration.
@@ -106,12 +108,12 @@ class RealtimeApi(
     }
 
     /**
-     * Create an ephemeral API token for use in client-side applications with
-     * the Realtime API. Can be configured with the same session parameters as
-     * the &#x60;session.update&#x60; client event. It responds with a session
-     * object, plus a &#x60;client_secret&#x60; key which contains a usable
-     * ephemeral API token that can be used to authenticate browser clients for
-     * the Realtime API.
+     * POST /realtime/sessions Create an ephemeral API token for use in
+     * client-side applications with the Realtime API. Can be configured with
+     * the same session parameters as the &#x60;session.update&#x60; client
+     * event. It responds with a session object, plus a
+     * &#x60;client_secret&#x60; key which contains a usable ephemeral API token
+     * that can be used to authenticate browser clients for the Realtime API.
      *
      * @param realtimeSessionCreateRequest Create an ephemeral API key with the
      *   given session configuration.
@@ -156,6 +158,137 @@ class RealtimeApi(
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/realtime/sessions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * POST /realtime/transcription_sessions Create an ephemeral API token for
+     * use in client-side applications with the Realtime API specifically for
+     * realtime transcriptions. Can be configured with the same session
+     * parameters as the &#x60;transcription_session.update&#x60; client event.
+     * It responds with a session object, plus a &#x60;client_secret&#x60; key
+     * which contains a usable ephemeral API token that can be used to
+     * authenticate browser clients for the Realtime API.
+     *
+     * @param realtimeTranscriptionSessionCreateRequest Create an ephemeral API
+     *   key with the given session configuration.
+     * @return RealtimeTranscriptionSessionCreateResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun createRealtimeTranscriptionSession(
+        realtimeTranscriptionSessionCreateRequest:
+            RealtimeTranscriptionSessionCreateRequest
+    ): RealtimeTranscriptionSessionCreateResponse {
+        val localVarResponse =
+            createRealtimeTranscriptionSessionWithHttpInfo(
+                realtimeTranscriptionSessionCreateRequest =
+                    realtimeTranscriptionSessionCreateRequest
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as RealtimeTranscriptionSessionCreateResponse
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * POST /realtime/transcription_sessions Create an ephemeral API token for
+     * use in client-side applications with the Realtime API specifically for
+     * realtime transcriptions. Can be configured with the same session
+     * parameters as the &#x60;transcription_session.update&#x60; client event.
+     * It responds with a session object, plus a &#x60;client_secret&#x60; key
+     * which contains a usable ephemeral API token that can be used to
+     * authenticate browser clients for the Realtime API.
+     *
+     * @param realtimeTranscriptionSessionCreateRequest Create an ephemeral API
+     *   key with the given session configuration.
+     * @return ApiResponse<RealtimeTranscriptionSessionCreateResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun createRealtimeTranscriptionSessionWithHttpInfo(
+        realtimeTranscriptionSessionCreateRequest:
+            RealtimeTranscriptionSessionCreateRequest
+    ): ApiResponse<RealtimeTranscriptionSessionCreateResponse?> {
+        val localVariableConfig =
+            createRealtimeTranscriptionSessionRequestConfig(
+                realtimeTranscriptionSessionCreateRequest =
+                    realtimeTranscriptionSessionCreateRequest
+            )
+
+        return request<
+            RealtimeTranscriptionSessionCreateRequest,
+            RealtimeTranscriptionSessionCreateResponse,
+        >(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation
+     * createRealtimeTranscriptionSession
+     *
+     * @param realtimeTranscriptionSessionCreateRequest Create an ephemeral API
+     *   key with the given session configuration.
+     * @return RequestConfig
+     */
+    fun createRealtimeTranscriptionSessionRequestConfig(
+        realtimeTranscriptionSessionCreateRequest:
+            RealtimeTranscriptionSessionCreateRequest
+    ): RequestConfig<RealtimeTranscriptionSessionCreateRequest> {
+        val localVariableBody = realtimeTranscriptionSessionCreateRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/realtime/transcription_sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

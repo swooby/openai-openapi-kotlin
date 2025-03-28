@@ -15,19 +15,21 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * @param type The type of response format being defined: `json_schema`
+ * JSON Schema response format. Used to generate structured JSON responses.
+ * Learn more about [Structured Outputs](/docs/guides/structured-outputs).
+ *
+ * @param type The type of response format being defined. Always `json_schema`.
  * @param jsonSchema
  */
 data class ResponseFormatJsonSchema(
 
-    /* The type of response format being defined: `json_schema` */
+    /* The type of response format being defined. Always `json_schema`. */
     @Json(name = "type") val type: ResponseFormatJsonSchema.Type,
-    @Json(name = "json_schema")
-    val jsonSchema: ResponseFormatJsonSchemaJsonSchema,
+    @Json(name = "json_schema") val jsonSchema: JSONSchema,
 ) {
 
     /**
-     * The type of response format being defined: `json_schema`
+     * The type of response format being defined. Always `json_schema`.
      *
      * Values: json_schema
      */

@@ -42,5 +42,11 @@ class ChatCompletionRequestUserMessageContentPartTest : ShouldSpec() {
             // uncomment below to test the property
             // modelInstance.inputAudio shouldBe ("TODO")
         }
+
+        // to test the property `file`
+        should("test file") {
+            // uncomment below to test the property
+            // modelInstance.file shouldBe ("TODO")
+        }
     }
 }

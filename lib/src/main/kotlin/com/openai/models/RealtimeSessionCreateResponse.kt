@@ -31,10 +31,7 @@ import com.squareup.moshi.JsonClass
  *   to the model on the desired behavior. Note that the server sets default
  *   instructions which will be used if this field is not set and are visible in
  *   the `session.created` event at the start of the session.
- * @param voice The voice the model uses to respond. Voice cannot be changed
- *   during the session once the model has responded with audio at least once.
- *   Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,
- *   `shimmer` and `verse`.
+ * @param voice
  * @param inputAudioFormat The format of input audio. Options are `pcm16`,
  *   `g711_ulaw`, or `g711_alaw`.
  * @param outputAudioFormat The format of output audio. Options are `pcm16`,
@@ -60,10 +57,7 @@ data class RealtimeSessionCreateResponse(
 
     /* The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the  desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session.  */
     @Json(name = "instructions") val instructions: kotlin.String? = null,
-
-    /* The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`.  */
-    @Json(name = "voice")
-    val voice: RealtimeSessionCreateResponse.Voice? = null,
+    @Json(name = "voice") val voice: VoiceIdsShared? = null,
 
     /* The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.  */
     @Json(name = "input_audio_format")
@@ -73,7 +67,9 @@ data class RealtimeSessionCreateResponse(
     @Json(name = "output_audio_format")
     val outputAudioFormat: kotlin.String? = null,
     @Json(name = "input_audio_transcription")
-    val inputAudioTranscription: RealtimeSessionInputAudioTranscription? = null,
+    val inputAudioTranscription:
+        RealtimeSessionCreateResponseInputAudioTranscription? =
+        null,
     @Json(name = "turn_detection")
     val turnDetection: RealtimeSessionCreateResponseTurnDetection? = null,
 
@@ -89,7 +85,9 @@ data class RealtimeSessionCreateResponse(
     /* Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8.  */
     @Json(name = "temperature") val temperature: java.math.BigDecimal? = null,
     @Json(name = "max_response_output_tokens")
-    val maxResponseOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null,
+    val maxResponseOutputTokens:
+        RealtimeResponseCreateParamsMaxResponseOutputTokens? =
+        null,
 ) {
 
     /**
@@ -102,25 +100,5 @@ data class RealtimeSessionCreateResponse(
     enum class Modalities(val value: kotlin.String) {
         @Json(name = "text") text("text"),
         @Json(name = "audio") audio("audio"),
-    }
-
-    /**
-     * The voice the model uses to respond. Voice cannot be changed during the
-     * session once the model has responded with audio at least once. Current
-     * voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,
-     * `shimmer` and `verse`.
-     *
-     * Values: alloy,ash,ballad,coral,echo,sage,shimmer,verse
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Voice(val value: kotlin.String) {
-        @Json(name = "alloy") alloy("alloy"),
-        @Json(name = "ash") ash("ash"),
-        @Json(name = "ballad") ballad("ballad"),
-        @Json(name = "coral") coral("coral"),
-        @Json(name = "echo") echo("echo"),
-        @Json(name = "sage") sage("sage"),
-        @Json(name = "shimmer") shimmer("shimmer"),
-        @Json(name = "verse") verse("verse"),
     }
 }

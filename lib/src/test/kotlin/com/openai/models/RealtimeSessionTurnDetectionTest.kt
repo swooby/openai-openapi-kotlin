@@ -18,36 +18,61 @@ class RealtimeSessionTurnDetectionTest : ShouldSpec() {
         // uncomment below to create an instance of RealtimeSessionTurnDetection
         // val modelInstance = RealtimeSessionTurnDetection()
 
-        // to test the property `type` - Type of turn detection, only
-        // `server_vad` is currently supported.
+        // to test the property `type` - Type of turn detection.
         should("test type") {
             // uncomment below to test the property
             // modelInstance.type shouldBe ("TODO")
         }
 
-        // to test the property `threshold` - Activation threshold for VAD (0.0
-        // to 1.0), this defaults to 0.5. A  higher threshold will require
-        // louder audio to activate the model, and  thus might perform better in
-        // noisy environments.
+        // to test the property `eagerness` - Used only for `semantic_vad` mode.
+        // The eagerness of the model to respond. `low` will wait longer for the
+        // user to continue speaking, `high` will respond more quickly. `auto`
+        // is the default and is equivalent to `medium`.
+        should("test eagerness") {
+            // uncomment below to test the property
+            // modelInstance.eagerness shouldBe ("TODO")
+        }
+
+        // to test the property `threshold` - Used only for `server_vad` mode.
+        // Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A
+        // higher threshold will require louder audio to activate the model, and
+        //  thus might perform better in noisy environments.
         should("test threshold") {
             // uncomment below to test the property
             // modelInstance.threshold shouldBe ("TODO")
         }
 
-        // to test the property `prefixPaddingMs` - Amount of audio to include
-        // before the VAD detected speech (in  milliseconds). Defaults to 300ms.
+        // to test the property `prefixPaddingMs` - Used only for `server_vad`
+        // mode. Amount of audio to include before the VAD detected speech (in
+        // milliseconds). Defaults to 300ms.
         should("test prefixPaddingMs") {
             // uncomment below to test the property
             // modelInstance.prefixPaddingMs shouldBe ("TODO")
         }
 
-        // to test the property `silenceDurationMs` - Duration of silence to
-        // detect speech stop (in milliseconds). Defaults  to 500ms. With
-        // shorter values the model will respond more quickly,  but may jump in
-        // on short pauses from the user.
+        // to test the property `silenceDurationMs` - Used only for `server_vad`
+        // mode. Duration of silence to detect speech stop (in milliseconds).
+        // Defaults  to 500ms. With shorter values the model will respond more
+        // quickly,  but may jump in on short pauses from the user.
         should("test silenceDurationMs") {
             // uncomment below to test the property
             // modelInstance.silenceDurationMs shouldBe ("TODO")
+        }
+
+        // to test the property `createResponse` - Whether or not to
+        // automatically generate a response when a VAD stop event occurs.
+        should("test createResponse") {
+            // uncomment below to test the property
+            // modelInstance.createResponse shouldBe ("TODO")
+        }
+
+        // to test the property `interruptResponse` - Whether or not to
+        // automatically interrupt any ongoing response with output to the
+        // default conversation (i.e. `conversation` of `auto`) when a VAD start
+        // event occurs.
+        should("test interruptResponse") {
+            // uncomment below to test the property
+            // modelInstance.interruptResponse shouldBe ("TODO")
         }
     }
 }

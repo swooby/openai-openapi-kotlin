@@ -15,7 +15,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * **o1 and o3-mini models only** Constrains effort on reasoning for
+ * **o-series models only** Constrains effort on reasoning for
  * [reasoning models](https://platform.openai.com/docs/guides/reasoning).
  * Currently supported values are `low`, `medium`, and `high`. Reducing
  * reasoning effort can result in faster responses and fewer tokens used on

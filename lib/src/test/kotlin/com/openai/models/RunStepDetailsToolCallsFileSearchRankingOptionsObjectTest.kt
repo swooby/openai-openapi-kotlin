@@ -20,7 +20,7 @@ class RunStepDetailsToolCallsFileSearchRankingOptionsObjectTest : ShouldSpec() {
         // val modelInstance =
         // RunStepDetailsToolCallsFileSearchRankingOptionsObject()
 
-        // to test the property `ranker` - The ranker used for the file search.
+        // to test the property `ranker`
         should("test ranker") {
             // uncomment below to test the property
             // modelInstance.ranker shouldBe ("TODO")

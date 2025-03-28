@@ -41,7 +41,8 @@ class CompletionsApi(
     }
 
     /**
-     * Creates a completion for the provided prompt and parameters.
+     * POST /completions Creates a completion for the provided prompt and
+     * parameters.
      *
      * @param createCompletionRequest
      * @return CreateCompletionResponse
@@ -100,7 +101,8 @@ class CompletionsApi(
     }
 
     /**
-     * Creates a completion for the provided prompt and parameters.
+     * POST /completions Creates a completion for the provided prompt and
+     * parameters.
      *
      * @param createCompletionRequest
      * @return ApiResponse<CreateCompletionResponse?>

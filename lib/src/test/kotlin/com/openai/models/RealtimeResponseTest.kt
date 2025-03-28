@@ -82,9 +82,7 @@ class RealtimeResponseTest : ShouldSpec() {
             // modelInstance.conversationId shouldBe ("TODO")
         }
 
-        // to test the property `voice` - The voice the model used to respond.
-        // Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo`
-        // `sage`,  `shimmer` and `verse`.
+        // to test the property `voice`
         should("test voice") {
             // uncomment below to test the property
             // modelInstance.voice shouldBe ("TODO")

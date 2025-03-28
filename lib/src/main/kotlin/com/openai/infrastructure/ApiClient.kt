@@ -1,6 +1,5 @@
 package com.openai.infrastructure
 
-import com.squareup.moshi.adapter
 import java.io.File
 import java.io.IOException
 import java.net.URLConnection
@@ -13,6 +12,8 @@ import java.util.Locale
 import java.util.regex.Pattern
 import okhttp3.Call
 import okhttp3.FormBody
+import okhttp3.Headers
+import okhttp3.Headers.Builder
 import okhttp3.Headers.Companion.toHeaders
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -31,17 +32,19 @@ open class ApiClient(
     val client: Call.Factory = defaultClient,
 ) {
     companion object {
+        // openai-openapi-kotlin changes begin
         const val ContentType: String = "Content-Type"
         const val Accept: String = "Accept"
         const val Authorization: String = "Authorization"
         const val JsonMediaType: String = "application/json"
         const val SdpMediaType: String = "application/sdp"
-        const val TextPlainMediaType: String = "text/plain"
         const val FormDataMediaType: String = "multipart/form-data"
         const val FormUrlEncMediaType: String =
             "application/x-www-form-urlencoded"
         const val XmlMediaType: String = "application/xml"
         const val OctetMediaType: String = "application/octet-stream"
+        const val TextMediaType: String = "text/plain"
+        // openai-openapi-kotlin changes end
 
         val apiKey: MutableMap<String, String> = mutableMapOf()
         val apiKeyPrefix: MutableMap<String, String> = mutableMapOf()
@@ -62,7 +65,9 @@ open class ApiClient(
      * @param byteArray The given file
      * @return The guessed Content-Type
      */
+    // openai-openapi-kotlin changes begin
     fun guessContentTypeFromByteArray(byteArray: ByteArray): String {
+        // openai-openapi-kotlin changes end
         val contentType =
             try {
                 URLConnection.guessContentTypeFromStream(
@@ -81,12 +86,71 @@ open class ApiClient(
      * @param file The given file
      * @return The guessed Content-Type
      */
+    // openai-openapi-kotlin changes begin
     fun guessContentTypeFromFile(file: File): String {
+        // openai-openapi-kotlin changes end
         val contentType = URLConnection.guessContentTypeFromName(file.name)
         return contentType ?: "application/octet-stream"
     }
 
+    /**
+     * Adds a File to a MultipartBody.Builder Defined a helper in the
+     * requestBody method to not duplicate code It will be used when the content
+     * is a FormDataMediaType and the body of the PartConfig is a File
+     *
+     * @param name The field name to add in the request
+     * @param headers The headers that are in the PartConfig
+     * @param file The file that will be added as the field value
+     * @return The method returns Unit but the new Part is added to the Builder
+     *   that the extension function is applying on
+     * @see requestBody
+     */
+    // openai-openapi-kotlin changes begin
+    fun MultipartBody.Builder.addPartToMultiPart(
+        // openai-openapi-kotlin changes end
+        name: String,
+        headers: Map<String, String>,
+        file: File,
+    ) {
+        val partHeaders =
+            headers.toMutableMap() +
+                ("Content-Disposition" to
+                    "form-data; name=\"$name\"; filename=\"${file.name}\"")
+        val fileMediaType = guessContentTypeFromFile(file).toMediaTypeOrNull()
+        addPart(partHeaders.toHeaders(), file.asRequestBody(fileMediaType))
+    }
+
+    /**
+     * Adds any type to a MultipartBody.Builder Defined a helper in the
+     * requestBody method to not duplicate code It will be used when the content
+     * is a FormDataMediaType and the body of the PartConfig is not a File.
+     *
+     * @param name The field name to add in the request
+     * @param headers The headers that are in the PartConfig
+     * @param obj The field name to add in the request
+     * @return The method returns Unit but the new Part is added to the Builder
+     *   that the extension function is applying on
+     * @see requestBody
+     */
+    // openai-openapi-kotlin changes begin
+    fun <T> MultipartBody.Builder.addPartToMultiPart(
+        // openai-openapi-kotlin changes end
+        name: String,
+        headers: Map<String, String>,
+        obj: T?,
+    ) {
+        val partHeaders =
+            headers.toMutableMap() +
+                ("Content-Disposition" to "form-data; name=\"$name\"")
+        addPart(
+            partHeaders.toHeaders(),
+            parameterToString(obj).toRequestBody(null),
+        )
+    }
+
+    // openai-openapi-kotlin changes begin
     inline fun <reified T> requestBody(
+        // openai-openapi-kotlin changes end
         content: T,
         mediaType: String?,
     ): RequestBody =
@@ -109,28 +173,36 @@ open class ApiClient(
                         @Suppress("UNCHECKED_CAST")
                         (content as Map<String, PartConfig<*>>).forEach {
                             (name, part) ->
-                            if (part.body is File) {
-                                val partHeaders =
-                                    part.headers.toMutableMap() +
-                                        ("Content-Disposition" to
-                                            "form-data; name=\"$name\"; filename=\"${part.body.name}\"")
-                                val fileMediaType =
-                                    guessContentTypeFromFile(part.body)
-                                        .toMediaTypeOrNull()
-                                addPart(
-                                    partHeaders.toHeaders(),
-                                    part.body.asRequestBody(fileMediaType),
-                                )
-                            } else {
-                                val partHeaders =
-                                    part.headers.toMutableMap() +
-                                        ("Content-Disposition" to
-                                            "form-data; name=\"$name\"")
-                                addPart(
-                                    partHeaders.toHeaders(),
-                                    parameterToString(part.body)
-                                        .toRequestBody(null),
-                                )
+                            when (part.body) {
+                                is File ->
+                                    addPartToMultiPart(
+                                        name,
+                                        part.headers,
+                                        part.body,
+                                    )
+                                is List<*> -> {
+                                    part.body.forEach {
+                                        if (it is File) {
+                                            addPartToMultiPart(
+                                                name,
+                                                part.headers,
+                                                it,
+                                            )
+                                        } else {
+                                            addPartToMultiPart(
+                                                name,
+                                                part.headers,
+                                                it,
+                                            )
+                                        }
+                                    }
+                                }
+                                else ->
+                                    addPartToMultiPart(
+                                        name,
+                                        part.headers,
+                                        part.body,
+                                    )
                             }
                         }
                     }
@@ -148,37 +220,50 @@ open class ApiClient(
                     .build()
             }
             mediaType == null ||
-                mediaType.startsWith("application/") &&
-                    mediaType.endsWith("json") ->
+                // openai-openapi-kotlin changes begin
+                mediaType == JsonMediaType ->
+                // openai-openapi-kotlin changes end
                 if (content == null) {
                     EMPTY_REQUEST
                 } else {
+                    // openai-openapi-kotlin changes begin
                     Serializer.serialize<T>(content)
+                        // openai-openapi-kotlin changes end
                         .toRequestBody(
                             (mediaType ?: JsonMediaType).toMediaTypeOrNull()
                         )
                 }
-            mediaType.startsWith("application/") && mediaType.endsWith("sdp") ->
+            // openai-openapi-kotlin changes begin
+            mediaType == SdpMediaType ->
                 content
                     ?.toString()
+                    // The following `?.toByteArray()` line prevents:
+                    // `This API method only accepts 'application/sdp' requests,
+                    // but you specified the header 'Content-Type:
+                    // application/sdp; charset=utf-8'`
                     ?.toByteArray()
                     ?.toRequestBody(mediaType.toMediaTypeOrNull())
                     ?: EMPTY_REQUEST
+            // openai-openapi-kotlin changes end
             mediaType == XmlMediaType ->
                 throw UnsupportedOperationException(
                     "xml not currently supported."
                 )
-            mediaType == OctetMediaType && content is ByteArray ->
-                content.toRequestBody(OctetMediaType.toMediaTypeOrNull())
+            mediaType == TextMediaType && content is String ->
+                content.toRequestBody(TextMediaType.toMediaTypeOrNull())
             // TODO: this should be extended with other serializers
             else ->
                 throw UnsupportedOperationException(
-                    "requestBody currently only supports JSON body, SDP body, byte body, and File body."
+                    // openai-openapi-kotlin changes begin
+                    "requestBody currently only supports JSON body, SDP body, text body, byte body and File body."
+                    // openai-openapi-kotlin changes end
                 )
         }
 
     @OptIn(ExperimentalStdlibApi::class)
+    // openai-openapi-kotlin changes begin
     inline fun <reified T : Any?> responseBody(
+        // openai-openapi-kotlin changes end
         response: Response,
         mediaType: String? = JsonMediaType,
     ): T? {
@@ -233,7 +318,7 @@ open class ApiClient(
             }
 
             // Attention: if you are developing an android app that supports API
-            // Level 25 and bellow, please check flag
+            // Level 25 and below, please check flag
             // supportAndroidApiLevel25AndBelow in
             // https://openapi-generator.tech/docs/generators/kotlin#config-options
             val tempFile =
@@ -249,25 +334,29 @@ open class ApiClient(
 
         return when {
             mediaType == null ||
-                (mediaType.startsWith("application/") &&
-                    mediaType.endsWith("json")) -> {
+                // openai-openapi-kotlin changes begin
+                mediaType == JsonMediaType -> {
+                // openai-openapi-kotlin changes end
                 val bodyContent = body.string()
                 if (bodyContent.isEmpty()) {
                     return null
                 }
+                // openai-openapi-kotlin changes begin
                 Serializer.deserialize<T>(bodyContent)
+                // openai-openapi-kotlin changes end
             }
-            mediaType.startsWith("text/") && mediaType.endsWith("plain") ->
-                body.string() as T
             mediaType == OctetMediaType -> body.bytes() as? T
+            mediaType == TextMediaType -> body.string() as? T
             else ->
                 throw UnsupportedOperationException(
-                    "responseBody currently only supports JSON body, byte body, and text body."
+                    "responseBody currently only supports JSON body, text body and byte body."
                 )
         }
     }
 
+    // openai-openapi-kotlin changes begin
     fun <T> updateAuthParams(requestConfig: RequestConfig<T>) {
+        // openai-openapi-kotlin changes end
         if (requestConfig.headers[Authorization].isNullOrEmpty()) {
             accessToken?.let { accessToken ->
                 requestConfig.headers[Authorization] = "Bearer $accessToken"
@@ -275,7 +364,9 @@ open class ApiClient(
         }
     }
 
+    // openai-openapi-kotlin changes begin
     inline fun <reified I, reified T : Any?> request(
+        // openai-openapi-kotlin changes end
         requestConfig: RequestConfig<I>
     ): ApiResponse<T?> {
         val httpUrl =
@@ -353,9 +444,11 @@ open class ApiClient(
                         Request.Builder().url(url).method("OPTIONS", null)
                 }
                 .apply {
+                    val headersBuilder = Headers.Builder()
                     headers.forEach { header ->
-                        addHeader(header.key, header.value)
+                        headersBuilder.add(header.key, header.value)
                     }
+                    this.headers(headersBuilder.build())
                 }
                 .build()
 
@@ -398,7 +491,9 @@ open class ApiClient(
         }
     }
 
+    // openai-openapi-kotlin changes begin
     fun parameterToString(value: Any?): String =
+        // openai-openapi-kotlin changes end
         when (value) {
             null -> ""
             is Array<*> -> toMultiValue(value, "csv").toString()
@@ -420,9 +515,9 @@ open class ApiClient(
         formatter. It also easily allows to provide a simple way to define a custom date format pattern
         inside a gson/moshi adapter.
         */
-        return Serializer.moshi
-            .adapter(T::class.java)
-            .toJson(value)
+        // openai-openapi-kotlin changes begin
+        return Serializer.serialize<T>(value)
+            // openai-openapi-kotlin changes end
             .replace("\"", "")
     }
 }

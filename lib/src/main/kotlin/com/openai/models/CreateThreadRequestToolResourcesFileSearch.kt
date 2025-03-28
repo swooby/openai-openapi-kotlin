@@ -12,4 +12,6 @@
 package com.openai.models
 
 /**  */
+// openai-openapi-kotlin change begin
 class CreateThreadRequestToolResourcesFileSearch() {}
+// openai-openapi-kotlin change end

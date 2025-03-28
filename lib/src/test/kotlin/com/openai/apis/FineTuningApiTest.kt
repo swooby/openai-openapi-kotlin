@@ -28,6 +28,22 @@ class FineTuningApiTest : ShouldSpec() {
             // result shouldBe ("TODO")
         }
 
+        // to test createFineTuningCheckpointPermission
+        should("test createFineTuningCheckpointPermission") {
+            // uncomment below to test createFineTuningCheckpointPermission
+            // val permissionId : kotlin.String =
+            // ft:gpt-4o-mini-2024-07-18:org:weather:B7R9VjQd // kotlin.String |
+            // The ID of the fine-tuned model checkpoint to create a permission
+            // for.
+            // val createFineTuningCheckpointPermissionRequest :
+            // CreateFineTuningCheckpointPermissionRequest =  //
+            // CreateFineTuningCheckpointPermissionRequest |
+            // val result : ListFineTuningCheckpointPermissionResponse =
+            // apiInstance.createFineTuningCheckpointPermission(permissionId,
+            // createFineTuningCheckpointPermissionRequest)
+            // result shouldBe ("TODO")
+        }
+
         // to test createFineTuningJob
         should("test createFineTuningJob") {
             // uncomment below to test createFineTuningJob
@@ -35,6 +51,38 @@ class FineTuningApiTest : ShouldSpec() {
             // CreateFineTuningJobRequest |
             // val result : FineTuningJob =
             // apiInstance.createFineTuningJob(createFineTuningJobRequest)
+            // result shouldBe ("TODO")
+        }
+
+        // to test deleteFineTuningCheckpointPermission
+        should("test deleteFineTuningCheckpointPermission") {
+            // uncomment below to test deleteFineTuningCheckpointPermission
+            // val permissionId : kotlin.String = cp_zc4Q7MP6XxulcVzj4MZdwsAB //
+            // kotlin.String | The ID of the fine-tuned model checkpoint
+            // permission to delete.
+            // val result : DeleteFineTuningCheckpointPermissionResponse =
+            // apiInstance.deleteFineTuningCheckpointPermission(permissionId)
+            // result shouldBe ("TODO")
+        }
+
+        // to test listFineTuningCheckpointPermissions
+        should("test listFineTuningCheckpointPermissions") {
+            // uncomment below to test listFineTuningCheckpointPermissions
+            // val permissionId : kotlin.String = ft-AF1WoRqd3aJAHsqc9NY7iL8F //
+            // kotlin.String | The ID of the fine-tuned model checkpoint to get
+            // permissions for.
+            // val projectId : kotlin.String = projectId_example //
+            // kotlin.String | The ID of the project to get permissions for.
+            // val after : kotlin.String = after_example // kotlin.String |
+            // Identifier for the last permission ID from the previous
+            // pagination request.
+            // val limit : kotlin.Int = 56 // kotlin.Int | Number of permissions
+            // to retrieve.
+            // val order : kotlin.String = order_example // kotlin.String | The
+            // order in which to retrieve permissions.
+            // val result : ListFineTuningCheckpointPermissionResponse =
+            // apiInstance.listFineTuningCheckpointPermissions(permissionId,
+            // projectId, after, limit, order)
             // result shouldBe ("TODO")
         }
 
@@ -78,8 +126,13 @@ class FineTuningApiTest : ShouldSpec() {
             // Identifier for the last job from the previous pagination request.
             // val limit : kotlin.Int = 56 // kotlin.Int | Number of fine-tuning
             // jobs to retrieve.
+            // val metadata : kotlin.collections.Map<kotlin.String,
+            // kotlin.String> =  // kotlin.collections.Map<kotlin.String,
+            // kotlin.String> | Optional metadata filter. To filter, use the
+            // syntax `metadata[k]=v`. Alternatively, set `metadata=null` to
+            // indicate no metadata.
             // val result : ListPaginatedFineTuningJobsResponse =
-            // apiInstance.listPaginatedFineTuningJobs(after, limit)
+            // apiInstance.listPaginatedFineTuningJobs(after, limit, metadata)
             // result shouldBe ("TODO")
         }
 

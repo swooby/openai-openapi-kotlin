@@ -27,8 +27,8 @@ import com.squareup.moshi.JsonClass
  *   [Please refer here](/docs/api-reference/files/object#files/object-purpose)
  *   for acceptable values.
  * @param status The status of the Upload.
- * @param expiresAt The Unix timestamp (in seconds) for when the Upload was
- *   created.
+ * @param expiresAt The Unix timestamp (in seconds) for when the Upload will
+ *   expire.
  * @param `object` The object type, which is always \"upload\".
  * @param file
  */
@@ -52,7 +52,7 @@ data class Upload(
     /* The status of the Upload. */
     @Json(name = "status") val status: Upload.Status,
 
-    /* The Unix timestamp (in seconds) for when the Upload was created. */
+    /* The Unix timestamp (in seconds) for when the Upload will expire. */
     @Json(name = "expires_at") val expiresAt: kotlin.Int,
 
     /* The object type, which is always \"upload\". */

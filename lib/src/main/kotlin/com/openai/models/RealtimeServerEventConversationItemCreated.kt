@@ -40,7 +40,9 @@ data class RealtimeServerEventConversationItemCreated(
     val type: RealtimeServerEventConversationItemCreated.Type,
 
     /* The ID of the preceding item in the Conversation context, allows the  client to understand the order of the conversation.  */
+    // openai-openapi-kotlin changes begin
     @Json(name = "previous_item_id") val previousItemId: kotlin.String? = null,
+    // openai-openapi-kotlin changes end
     @Json(name = "item") val item: RealtimeConversationItem,
 ) {
 

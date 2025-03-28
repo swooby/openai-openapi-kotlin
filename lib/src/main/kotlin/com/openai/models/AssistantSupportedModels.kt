@@ -16,7 +16,7 @@ import com.squareup.moshi.JsonClass
 
 /**
  * Values:
- * o3MinusMini,o3MinusMiniMinus2025Minus01Minus31,o1,o1Minus2024Minus12Minus17,gptMinus4o,gptMinus4oMinus2024Minus11Minus20,gptMinus4oMinus2024Minus08Minus06,gptMinus4oMinus2024Minus05Minus13,gptMinus4oMinusMini,gptMinus4oMinusMiniMinus2024Minus07Minus18,gptMinus4MinusTurbo,gptMinus4MinusTurboMinus2024Minus04Minus09,gptMinus4Minus0125MinusPreview,gptMinus4MinusTurboMinusPreview,gptMinus4Minus1106MinusPreview,gptMinus4MinusVisionMinusPreview,gptMinus4,gptMinus4Minus0314,gptMinus4Minus0613,gptMinus4Minus32k,gptMinus4Minus32kMinus0314,gptMinus4Minus32kMinus0613,gptMinus3Period5MinusTurbo,gptMinus3Period5MinusTurboMinus16k,gptMinus3Period5MinusTurboMinus0613,gptMinus3Period5MinusTurboMinus1106,gptMinus3Period5MinusTurboMinus0125,gptMinus3Period5MinusTurboMinus16kMinus0613
+ * o3MinusMini,o3MinusMiniMinus2025Minus01Minus31,o1,o1Minus2024Minus12Minus17,gptMinus4o,gptMinus4oMinus2024Minus11Minus20,gptMinus4oMinus2024Minus08Minus06,gptMinus4oMinus2024Minus05Minus13,gptMinus4oMinusMini,gptMinus4oMinusMiniMinus2024Minus07Minus18,gptMinus4Period5MinusPreview,gptMinus4Period5MinusPreviewMinus2025Minus02Minus27,gptMinus4MinusTurbo,gptMinus4MinusTurboMinus2024Minus04Minus09,gptMinus4Minus0125MinusPreview,gptMinus4MinusTurboMinusPreview,gptMinus4Minus1106MinusPreview,gptMinus4MinusVisionMinusPreview,gptMinus4,gptMinus4Minus0314,gptMinus4Minus0613,gptMinus4Minus32k,gptMinus4Minus32kMinus0314,gptMinus4Minus32kMinus0613,gptMinus3Period5MinusTurbo,gptMinus3Period5MinusTurboMinus16k,gptMinus3Period5MinusTurboMinus0613,gptMinus3Period5MinusTurboMinus1106,gptMinus3Period5MinusTurboMinus0125,gptMinus3Period5MinusTurboMinus16kMinus0613
  */
 @JsonClass(generateAdapter = false)
 enum class AssistantSupportedModels(val value: kotlin.String) {
@@ -36,6 +36,12 @@ enum class AssistantSupportedModels(val value: kotlin.String) {
     @Json(name = "gpt-4o-mini") gptMinus4oMinusMini("gpt-4o-mini"),
     @Json(name = "gpt-4o-mini-2024-07-18")
     gptMinus4oMinusMiniMinus2024Minus07Minus18("gpt-4o-mini-2024-07-18"),
+    @Json(name = "gpt-4.5-preview")
+    gptMinus4Period5MinusPreview("gpt-4.5-preview"),
+    @Json(name = "gpt-4.5-preview-2025-02-27")
+    gptMinus4Period5MinusPreviewMinus2025Minus02Minus27(
+        "gpt-4.5-preview-2025-02-27"
+    ),
     @Json(name = "gpt-4-turbo") gptMinus4MinusTurbo("gpt-4-turbo"),
     @Json(name = "gpt-4-turbo-2024-04-09")
     gptMinus4MinusTurboMinus2024Minus04Minus09("gpt-4-turbo-2024-04-09"),

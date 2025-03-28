@@ -28,7 +28,7 @@
 | **truncationStrategy** | [**CreateRunRequestTruncationStrategy**](CreateRunRequestTruncationStrategy.md) |  |  |
 | **toolChoice** | [**CreateRunRequestToolChoice**](CreateRunRequestToolChoice.md) |  |  |
 | **parallelToolCalls** | **kotlin.Boolean** | Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use. |  |
-| **responseFormat** | [**AssistantObjectResponseFormat**](AssistantObjectResponseFormat.md) |  |  |
+| **responseFormat** | [**AssistantsApiResponseFormatOption**](AssistantsApiResponseFormatOption.md) |  |  |
 | **temperature** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | The sampling temperature used for this run. If not set, defaults to 1. |  [optional] |
 | **topP** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | The nucleus sampling value used for this run. If not set, defaults to 1. |  [optional] |
 

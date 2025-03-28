@@ -24,6 +24,10 @@
 
     * `gptMinus4oMinusMiniMinus2024Minus07Minus18` (value: `"gpt-4o-mini-2024-07-18"`)
 
+    * `gptMinus4Period5MinusPreview` (value: `"gpt-4.5-preview"`)
+
+    * `gptMinus4Period5MinusPreviewMinus2025Minus02Minus27` (value: `"gpt-4.5-preview-2025-02-27"`)
+
     * `gptMinus4MinusTurbo` (value: `"gpt-4-turbo"`)
 
     * `gptMinus4MinusTurboMinus2024Minus04Minus09` (value: `"gpt-4-turbo-2024-04-09"`)

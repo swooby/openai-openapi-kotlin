@@ -19,7 +19,7 @@ class ResponseFormatJsonObjectTest : ShouldSpec() {
         // val modelInstance = ResponseFormatJsonObject()
 
         // to test the property `type` - The type of response format being
-        // defined: `json_object`
+        // defined. Always `json_object`.
         should("test type") {
             // uncomment below to test the property
             // modelInstance.type shouldBe ("TODO")

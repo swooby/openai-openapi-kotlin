@@ -4,6 +4,7 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 import java.math.BigInteger
 
+// openai-openapi-kotlin changes begin
 /**
  * This Adapter was obviously added because...
  *
@@ -37,7 +38,9 @@ import java.math.BigInteger
  *
  * Changing this to return Int causes OpenAI to stop complaining.
  */
+// openai-openapi-kotlin changes end
 class BigIntegerAdapter {
+    // openai-openapi-kotlin changes begin
     /*
     @ToJson
     fun toJson(value: BigInteger): String {
@@ -49,6 +52,8 @@ class BigIntegerAdapter {
     fun toJson(value: BigInteger): Int {
         return value.toInt()
     }
+
+    // openai-openapi-kotlin changes end
 
     @FromJson
     fun fromJson(value: String): BigInteger {

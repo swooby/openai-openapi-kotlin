@@ -27,5 +27,82 @@ class ChatApiTest : ShouldSpec() {
             // apiInstance.createChatCompletion(createChatCompletionRequest)
             // result shouldBe ("TODO")
         }
+
+        // to test deleteChatCompletion
+        should("test deleteChatCompletion") {
+            // uncomment below to test deleteChatCompletion
+            // val completionId : kotlin.String = completionId_example //
+            // kotlin.String | The ID of the chat completion to delete.
+            // val result : ChatCompletionDeleted =
+            // apiInstance.deleteChatCompletion(completionId)
+            // result shouldBe ("TODO")
+        }
+
+        // to test getChatCompletion
+        should("test getChatCompletion") {
+            // uncomment below to test getChatCompletion
+            // val completionId : kotlin.String = completionId_example //
+            // kotlin.String | The ID of the chat completion to retrieve.
+            // val result : CreateChatCompletionResponse =
+            // apiInstance.getChatCompletion(completionId)
+            // result shouldBe ("TODO")
+        }
+
+        // to test getChatCompletionMessages
+        should("test getChatCompletionMessages") {
+            // uncomment below to test getChatCompletionMessages
+            // val completionId : kotlin.String = completionId_example //
+            // kotlin.String | The ID of the chat completion to retrieve
+            // messages from.
+            // val after : kotlin.String = after_example // kotlin.String |
+            // Identifier for the last message from the previous pagination
+            // request.
+            // val limit : kotlin.Int = 56 // kotlin.Int | Number of messages to
+            // retrieve.
+            // val order : kotlin.String = order_example // kotlin.String | Sort
+            // order for messages by timestamp. Use `asc` for ascending order or
+            // `desc` for descending order. Defaults to `asc`.
+            // val result : ChatCompletionMessageList =
+            // apiInstance.getChatCompletionMessages(completionId, after, limit,
+            // order)
+            // result shouldBe ("TODO")
+        }
+
+        // to test listChatCompletions
+        should("test listChatCompletions") {
+            // uncomment below to test listChatCompletions
+            // val model : kotlin.String = model_example // kotlin.String | The
+            // model used to generate the Chat Completions.
+            // val metadata : kotlin.collections.Map<kotlin.String,
+            // kotlin.String> =  // kotlin.collections.Map<kotlin.String,
+            // kotlin.String> | A list of metadata keys to filter the Chat
+            // Completions by. Example:
+            // `metadata[key1]=value1&metadata[key2]=value2`
+            // val after : kotlin.String = after_example // kotlin.String |
+            // Identifier for the last chat completion from the previous
+            // pagination request.
+            // val limit : kotlin.Int = 56 // kotlin.Int | Number of Chat
+            // Completions to retrieve.
+            // val order : kotlin.String = order_example // kotlin.String | Sort
+            // order for Chat Completions by timestamp. Use `asc` for ascending
+            // order or `desc` for descending order. Defaults to `asc`.
+            // val result : ChatCompletionList =
+            // apiInstance.listChatCompletions(model, metadata, after, limit,
+            // order)
+            // result shouldBe ("TODO")
+        }
+
+        // to test updateChatCompletion
+        should("test updateChatCompletion") {
+            // uncomment below to test updateChatCompletion
+            // val completionId : kotlin.String = completionId_example //
+            // kotlin.String | The ID of the chat completion to update.
+            // val updateChatCompletionRequest : UpdateChatCompletionRequest =
+            // // UpdateChatCompletionRequest |
+            // val result : CreateChatCompletionResponse =
+            // apiInstance.updateChatCompletion(completionId,
+            // updateChatCompletionRequest)
+            // result shouldBe ("TODO")
+        }
     }
 }

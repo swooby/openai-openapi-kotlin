@@ -41,7 +41,7 @@ class EmbeddingsApi(
     }
 
     /**
-     * Creates an embedding vector representing the input text.
+     * POST /embeddings Creates an embedding vector representing the input text.
      *
      * @param createEmbeddingRequest
      * @return CreateEmbeddingResponse
@@ -99,7 +99,7 @@ class EmbeddingsApi(
     }
 
     /**
-     * Creates an embedding vector representing the input text.
+     * POST /embeddings Creates an embedding vector representing the input text.
      *
      * @param createEmbeddingRequest
      * @return ApiResponse<CreateEmbeddingResponse?>

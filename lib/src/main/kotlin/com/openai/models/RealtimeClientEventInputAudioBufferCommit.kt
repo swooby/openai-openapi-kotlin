@@ -31,9 +31,11 @@ data class RealtimeClientEventInputAudioBufferCommit(
 
     /* The event type, must be `input_audio_buffer.commit`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventInputAudioBufferCommit.Type =
         RealtimeClientEventInputAudioBufferCommit.Type
             .input_audio_bufferPeriodCommit,
+    // openai-openapi-kotlin changes end
 
     /* Optional client-generated ID used to identify this event. */
     @Json(name = "event_id") val eventId: kotlin.String? = null,

@@ -11,7 +11,7 @@
 | **&#x60;object&#x60;** | [**inline**](#&#x60;Object&#x60;) | The object type, which is always &#x60;chat.completion.chunk&#x60;. |  |
 | **serviceTier** | [**inline**](#ServiceTier) | The service tier used for processing the request. |  [optional] |
 | **systemFingerprint** | **kotlin.String** | This fingerprint represents the backend configuration that the model runs with. Can be used in conjunction with the &#x60;seed&#x60; request parameter to understand when backend changes have been made that might impact determinism.  |  [optional] |
-| **usage** | [**CreateChatCompletionStreamResponseUsage**](CreateChatCompletionStreamResponseUsage.md) |  |  [optional] |
+| **usage** | [**CompletionUsage**](CompletionUsage.md) |  |  [optional] |
 
 
 <a id="`Object`"></a>

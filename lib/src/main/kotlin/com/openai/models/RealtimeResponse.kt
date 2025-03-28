@@ -37,8 +37,7 @@ import com.squareup.moshi.JsonClass
  *   will be `null`. If responses are being triggered by server VAD, the
  *   response will be added to the default conversation, thus the
  *   `conversation_id` will be an id like `conv_1234`.
- * @param voice The voice the model used to respond. Current voice options are
- *   `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`, `shimmer` and `verse`.
+ * @param voice
  * @param modalities The set of modalities the model used to respond. If there
  *   are multiple modalities, the model will pick one, for example if
  *   `modalities` is `[\"text\", \"audio\"]`, the model could be responding in
@@ -73,9 +72,7 @@ data class RealtimeResponse(
 
     /* Which conversation the response is added to, determined by the `conversation` field in the `response.create` event. If `auto`, the response will be added to the default conversation and the value of `conversation_id` will be an id like `conv_1234`. If `none`, the response will not be added to any conversation and the value of `conversation_id` will be `null`. If responses are being triggered by server VAD, the response will be added to the default conversation, thus the `conversation_id` will be an id like `conv_1234`.  */
     @Json(name = "conversation_id") val conversationId: kotlin.String? = null,
-
-    /* The voice the model used to respond. Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`.  */
-    @Json(name = "voice") val voice: RealtimeResponse.Voice? = null,
+    @Json(name = "voice") val voice: VoiceIdsShared? = null,
 
     /* The set of modalities the model used to respond. If there are multiple modalities, the model will pick one, for example if `modalities` is `[\"text\", \"audio\"]`, the model could be responding in either text or audio.  */
     @Json(name = "modalities")
@@ -89,7 +86,7 @@ data class RealtimeResponse(
     /* Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8.  */
     @Json(name = "temperature") val temperature: java.math.BigDecimal? = null,
     @Json(name = "max_output_tokens")
-    val maxOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null,
+    val maxOutputTokens: RealtimeResponseMaxOutputTokens? = null,
 ) {
 
     /**
@@ -114,26 +111,10 @@ data class RealtimeResponse(
         @Json(name = "completed") completed("completed"),
         @Json(name = "cancelled") cancelled("cancelled"),
         @Json(name = "failed") failed("failed"),
+        // openai-openapi-kotlin changes begin
         @Json(name = "in_progress") in_progress("in_progress"),
+        // openai-openapi-kotlin changes end
         @Json(name = "incomplete") incomplete("incomplete"),
-    }
-
-    /**
-     * The voice the model used to respond. Current voice options are `alloy`,
-     * `ash`, `ballad`, `coral`, `echo` `sage`, `shimmer` and `verse`.
-     *
-     * Values: alloy,ash,ballad,coral,echo,sage,shimmer,verse
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Voice(val value: kotlin.String) {
-        @Json(name = "alloy") alloy("alloy"),
-        @Json(name = "ash") ash("ash"),
-        @Json(name = "ballad") ballad("ballad"),
-        @Json(name = "coral") coral("coral"),
-        @Json(name = "echo") echo("echo"),
-        @Json(name = "sage") sage("sage"),
-        @Json(name = "shimmer") shimmer("shimmer"),
-        @Json(name = "verse") verse("verse"),
     }
 
     /**

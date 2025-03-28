@@ -31,6 +31,7 @@ import com.squareup.moshi.JsonClass
  * @param itemId The ID of the user message item containing the audio.
  * @param contentIndex The index of the content part containing the audio.
  * @param transcript The transcribed text.
+ * @param logprobs The log probabilities of the transcription.
  */
 data class RealtimeServerEventConversationItemInputAudioTranscriptionCompleted(
 
@@ -50,6 +51,10 @@ data class RealtimeServerEventConversationItemInputAudioTranscriptionCompleted(
 
     /* The transcribed text. */
     @Json(name = "transcript") val transcript: kotlin.String,
+
+    /* The log probabilities of the transcription. */
+    @Json(name = "logprobs")
+    val logprobs: kotlin.collections.List<LogProbProperties>? = null,
 ) {
 
     /**

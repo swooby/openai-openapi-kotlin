@@ -17,6 +17,9 @@ import com.squareup.moshi.Json
  * @param text The transcribed text.
  * @param language The language of the input audio.
  * @param duration The duration of the input audio.
+ * @param logprobs The log probabilities of the tokens in the transcription.
+ *   Only returned with the models `gpt-4o-transcribe` and
+ *   `gpt-4o-mini-transcribe` if `logprobs` is added to the `include` array.
  * @param words Extracted words and their corresponding timestamps.
  * @param segments Segments of the transcribed text and their corresponding
  *   details.
@@ -31,6 +34,10 @@ data class CreateTranscription200Response(
 
     /* The duration of the input audio. */
     @Json(name = "duration") val duration: java.math.BigDecimal,
+
+    /* The log probabilities of the tokens in the transcription. Only returned with the models `gpt-4o-transcribe` and `gpt-4o-mini-transcribe` if `logprobs` is added to the `include` array.  */
+    @Json(name = "logprobs")
+    val logprobs: kotlin.collections.List<LogProbProperties>? = null,
 
     /* Extracted words and their corresponding timestamps. */
     @Json(name = "words")

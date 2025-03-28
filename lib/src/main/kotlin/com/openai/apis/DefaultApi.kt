@@ -44,8 +44,8 @@ class DefaultApi(
     }
 
     /**
-     * Create an organization admin API key Create a new admin-level API key for
-     * the organization.
+     * POST /organization/admin_api_keys Create an organization admin API key
+     * Create a new admin-level API key for the organization.
      *
      * @param adminApiKeysCreateRequest
      * @return AdminApiKey
@@ -103,8 +103,8 @@ class DefaultApi(
     }
 
     /**
-     * Create an organization admin API key Create a new admin-level API key for
-     * the organization.
+     * POST /organization/admin_api_keys Create an organization admin API key
+     * Create a new admin-level API key for the organization.
      *
      * @param adminApiKeysCreateRequest
      * @return ApiResponse<AdminApiKey?>
@@ -152,7 +152,8 @@ class DefaultApi(
     }
 
     /**
-     * Delete an organization admin API key Delete the specified admin API key.
+     * DELETE /organization/admin_api_keys/{key_id} Delete an organization admin
+     * API key Delete the specified admin API key.
      *
      * @param keyId
      * @return AdminApiKeysDelete200Response
@@ -208,7 +209,8 @@ class DefaultApi(
     }
 
     /**
-     * Delete an organization admin API key Delete the specified admin API key.
+     * DELETE /organization/admin_api_keys/{key_id} Delete an organization admin
+     * API key Delete the specified admin API key.
      *
      * @param keyId
      * @return ApiResponse<AdminApiKeysDelete200Response?>
@@ -255,8 +257,8 @@ class DefaultApi(
     }
 
     /**
-     * Retrieve a single organization API key Get details for a specific
-     * organization API key by its ID.
+     * GET /organization/admin_api_keys/{key_id} Retrieve a single organization
+     * API key Get details for a specific organization API key by its ID.
      *
      * @param keyId
      * @return AdminApiKey
@@ -309,8 +311,8 @@ class DefaultApi(
     }
 
     /**
-     * Retrieve a single organization API key Get details for a specific
-     * organization API key by its ID.
+     * GET /organization/admin_api_keys/{key_id} Retrieve a single organization
+     * API key Get details for a specific organization API key by its ID.
      *
      * @param keyId
      * @return ApiResponse<AdminApiKey?>
@@ -373,8 +375,8 @@ class DefaultApi(
     }
 
     /**
-     * List organization API keys Retrieve a paginated list of organization
-     * admin API keys.
+     * GET /organization/admin_api_keys List organization API keys Retrieve a
+     * paginated list of organization admin API keys.
      *
      * @param after (optional)
      * @param order (optional, default to asc)
@@ -438,8 +440,8 @@ class DefaultApi(
     }
 
     /**
-     * List organization API keys Retrieve a paginated list of organization
-     * admin API keys.
+     * GET /organization/admin_api_keys List organization API keys Retrieve a
+     * paginated list of organization admin API keys.
      *
      * @param after (optional)
      * @param order (optional, default to asc)

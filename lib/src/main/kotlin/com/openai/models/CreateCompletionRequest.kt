@@ -118,7 +118,7 @@ data class CreateCompletionRequest(
 
     /* If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.  Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.  */
     @Json(name = "seed") val seed: kotlin.Long? = null,
-    @Json(name = "stop") val stop: CreateCompletionRequestStop? = null,
+    @Json(name = "stop") val stop: StopConfiguration? = null,
 
     /* Whether to stream back partial progress. If set, tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message. [Example Python code](https://cookbook.openai.com/examples/how_to_stream_completions).  */
     @Json(name = "stream") val stream: kotlin.Boolean? = false,

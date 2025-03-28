@@ -25,9 +25,11 @@ data class RealtimeClientEventInputAudioBufferClear(
 
     /* The event type, must be `input_audio_buffer.clear`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventInputAudioBufferClear.Type =
         RealtimeClientEventInputAudioBufferClear.Type
             .input_audio_bufferPeriodClear,
+    // openai-openapi-kotlin changes end
 
     /* Optional client-generated ID used to identify this event. */
     @Json(name = "event_id") val eventId: kotlin.String? = null,

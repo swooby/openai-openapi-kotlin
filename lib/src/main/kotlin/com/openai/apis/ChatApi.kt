@@ -22,8 +22,14 @@ import com.openai.infrastructure.ResponseType
 import com.openai.infrastructure.ServerError
 import com.openai.infrastructure.ServerException
 import com.openai.infrastructure.Success
+import com.openai.infrastructure.toMultiValue
+import com.openai.models.ChatCompletionDeleted
+import com.openai.models.ChatCompletionList
+import com.openai.models.ChatCompletionMessageList
 import com.openai.models.CreateChatCompletionRequest
 import com.openai.models.CreateChatCompletionResponse
+import com.openai.models.UpdateChatCompletionRequest
+import com.squareup.moshi.Json
 import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
@@ -41,8 +47,12 @@ class ChatApi(
     }
 
     /**
-     * Creates a model response for the given chat conversation. Learn more in
-     * the [text generation](/docs/guides/text-generation),
+     * POST /chat/completions **Starting a new project?** We recommend trying
+     * [Responses](/docs/api-reference/responses) to take advantage of the
+     * latest OpenAI platform features. Compare
+     * [Chat Completions with Responses](/docs/guides/responses-vs-chat-completions?api-mode&#x3D;responses).
+     * --- Creates a model response for the given chat conversation. Learn more
+     * in the [text generation](/docs/guides/text-generation),
      * [vision](/docs/guides/vision), and [audio](/docs/guides/audio) guides.
      * Parameter support can differ depending on the model used to generate the
      * response, particularly for newer reasoning models. Parameters that are
@@ -107,8 +117,12 @@ class ChatApi(
     }
 
     /**
-     * Creates a model response for the given chat conversation. Learn more in
-     * the [text generation](/docs/guides/text-generation),
+     * POST /chat/completions **Starting a new project?** We recommend trying
+     * [Responses](/docs/api-reference/responses) to take advantage of the
+     * latest OpenAI platform features. Compare
+     * [Chat Completions with Responses](/docs/guides/responses-vs-chat-completions?api-mode&#x3D;responses).
+     * --- Creates a model response for the given chat conversation. Learn more
+     * in the [text generation](/docs/guides/text-generation),
      * [vision](/docs/guides/vision), and [audio](/docs/guides/audio) guides.
      * Parameter support can differ depending on the model used to generate the
      * response, particularly for newer reasoning models. Parameters that are
@@ -157,6 +171,730 @@ class ChatApi(
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/chat/completions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * DELETE /chat/completions/{completion_id} Delete a stored chat completion.
+     * Only Chat Completions that have been created with the &#x60;store&#x60;
+     * parameter set to &#x60;true&#x60; can be deleted.
+     *
+     * @param completionId The ID of the chat completion to delete.
+     * @return ChatCompletionDeleted
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun deleteChatCompletion(
+        completionId: kotlin.String
+    ): ChatCompletionDeleted {
+        val localVarResponse =
+            deleteChatCompletionWithHttpInfo(completionId = completionId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data as ChatCompletionDeleted
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * DELETE /chat/completions/{completion_id} Delete a stored chat completion.
+     * Only Chat Completions that have been created with the &#x60;store&#x60;
+     * parameter set to &#x60;true&#x60; can be deleted.
+     *
+     * @param completionId The ID of the chat completion to delete.
+     * @return ApiResponse<ChatCompletionDeleted?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteChatCompletionWithHttpInfo(
+        completionId: kotlin.String
+    ): ApiResponse<ChatCompletionDeleted?> {
+        val localVariableConfig =
+            deleteChatCompletionRequestConfig(completionId = completionId)
+
+        return request<Unit, ChatCompletionDeleted>(localVariableConfig)
+    }
+
+    /**
+     * To obtain the request config of the operation deleteChatCompletion
+     *
+     * @param completionId The ID of the chat completion to delete.
+     * @return RequestConfig
+     */
+    fun deleteChatCompletionRequestConfig(
+        completionId: kotlin.String
+    ): RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path =
+                "/chat/completions/{completion_id}"
+                    .replace(
+                        "{" + "completion_id" + "}",
+                        encodeURIComponent(completionId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * GET /chat/completions/{completion_id} Get a stored chat completion. Only
+     * Chat Completions that have been created with the &#x60;store&#x60;
+     * parameter set to &#x60;true&#x60; will be returned.
+     *
+     * @param completionId The ID of the chat completion to retrieve.
+     * @return CreateChatCompletionResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun getChatCompletion(
+        completionId: kotlin.String
+    ): CreateChatCompletionResponse {
+        val localVarResponse =
+            getChatCompletionWithHttpInfo(completionId = completionId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as CreateChatCompletionResponse
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * GET /chat/completions/{completion_id} Get a stored chat completion. Only
+     * Chat Completions that have been created with the &#x60;store&#x60;
+     * parameter set to &#x60;true&#x60; will be returned.
+     *
+     * @param completionId The ID of the chat completion to retrieve.
+     * @return ApiResponse<CreateChatCompletionResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getChatCompletionWithHttpInfo(
+        completionId: kotlin.String
+    ): ApiResponse<CreateChatCompletionResponse?> {
+        val localVariableConfig =
+            getChatCompletionRequestConfig(completionId = completionId)
+
+        return request<Unit, CreateChatCompletionResponse>(localVariableConfig)
+    }
+
+    /**
+     * To obtain the request config of the operation getChatCompletion
+     *
+     * @param completionId The ID of the chat completion to retrieve.
+     * @return RequestConfig
+     */
+    fun getChatCompletionRequestConfig(
+        completionId: kotlin.String
+    ): RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path =
+                "/chat/completions/{completion_id}"
+                    .replace(
+                        "{" + "completion_id" + "}",
+                        encodeURIComponent(completionId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /** enum for parameter order */
+    enum class OrderGetChatCompletionMessages(val value: kotlin.String) {
+        @Json(name = "asc") asc("asc"),
+        @Json(name = "desc") desc("desc");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the
+         * value, and instead use the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are
+         * different, and ensures that the client sends the correct enum values
+         * to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+    }
+
+    /**
+     * GET /chat/completions/{completion_id}/messages Get the messages in a
+     * stored chat completion. Only Chat Completions that have been created with
+     * the &#x60;store&#x60; parameter set to &#x60;true&#x60; will be returned.
+     *
+     * @param completionId The ID of the chat completion to retrieve messages
+     *   from.
+     * @param after Identifier for the last message from the previous pagination
+     *   request. (optional)
+     * @param limit Number of messages to retrieve. (optional, default to 20)
+     * @param order Sort order for messages by timestamp. Use &#x60;asc&#x60;
+     *   for ascending order or &#x60;desc&#x60; for descending order. Defaults
+     *   to &#x60;asc&#x60;. (optional, default to asc)
+     * @return ChatCompletionMessageList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun getChatCompletionMessages(
+        completionId: kotlin.String,
+        after: kotlin.String? = null,
+        limit: kotlin.Int? = 20,
+        order: OrderGetChatCompletionMessages? =
+            OrderGetChatCompletionMessages.asc,
+    ): ChatCompletionMessageList {
+        val localVarResponse =
+            getChatCompletionMessagesWithHttpInfo(
+                completionId = completionId,
+                after = after,
+                limit = limit,
+                order = order,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as ChatCompletionMessageList
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * GET /chat/completions/{completion_id}/messages Get the messages in a
+     * stored chat completion. Only Chat Completions that have been created with
+     * the &#x60;store&#x60; parameter set to &#x60;true&#x60; will be returned.
+     *
+     * @param completionId The ID of the chat completion to retrieve messages
+     *   from.
+     * @param after Identifier for the last message from the previous pagination
+     *   request. (optional)
+     * @param limit Number of messages to retrieve. (optional, default to 20)
+     * @param order Sort order for messages by timestamp. Use &#x60;asc&#x60;
+     *   for ascending order or &#x60;desc&#x60; for descending order. Defaults
+     *   to &#x60;asc&#x60;. (optional, default to asc)
+     * @return ApiResponse<ChatCompletionMessageList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getChatCompletionMessagesWithHttpInfo(
+        completionId: kotlin.String,
+        after: kotlin.String?,
+        limit: kotlin.Int?,
+        order: OrderGetChatCompletionMessages?,
+    ): ApiResponse<ChatCompletionMessageList?> {
+        val localVariableConfig =
+            getChatCompletionMessagesRequestConfig(
+                completionId = completionId,
+                after = after,
+                limit = limit,
+                order = order,
+            )
+
+        return request<Unit, ChatCompletionMessageList>(localVariableConfig)
+    }
+
+    /**
+     * To obtain the request config of the operation getChatCompletionMessages
+     *
+     * @param completionId The ID of the chat completion to retrieve messages
+     *   from.
+     * @param after Identifier for the last message from the previous pagination
+     *   request. (optional)
+     * @param limit Number of messages to retrieve. (optional, default to 20)
+     * @param order Sort order for messages by timestamp. Use &#x60;asc&#x60;
+     *   for ascending order or &#x60;desc&#x60; for descending order. Defaults
+     *   to &#x60;asc&#x60;. (optional, default to asc)
+     * @return RequestConfig
+     */
+    fun getChatCompletionMessagesRequestConfig(
+        completionId: kotlin.String,
+        after: kotlin.String?,
+        limit: kotlin.Int?,
+        order: OrderGetChatCompletionMessages?,
+    ): RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap =
+            mutableMapOf<
+                    kotlin.String,
+                    kotlin.collections.List<kotlin.String>,
+                >()
+                .apply {
+                    if (after != null) {
+                        put("after", listOf(after.toString()))
+                    }
+                    if (limit != null) {
+                        put("limit", listOf(limit.toString()))
+                    }
+                    if (order != null) {
+                        put("order", listOf(order.value))
+                    }
+                }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path =
+                "/chat/completions/{completion_id}/messages"
+                    .replace(
+                        "{" + "completion_id" + "}",
+                        encodeURIComponent(completionId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /** enum for parameter order */
+    enum class OrderListChatCompletions(val value: kotlin.String) {
+        @Json(name = "asc") asc("asc"),
+        @Json(name = "desc") desc("desc");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the
+         * value, and instead use the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are
+         * different, and ensures that the client sends the correct enum values
+         * to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+    }
+
+    /**
+     * GET /chat/completions List stored Chat Completions. Only Chat Completions
+     * that have been stored with the &#x60;store&#x60; parameter set to
+     * &#x60;true&#x60; will be returned.
+     *
+     * @param model The model used to generate the Chat Completions. (optional)
+     * @param metadata A list of metadata keys to filter the Chat Completions
+     *   by. Example:
+     *   &#x60;metadata[key1]&#x3D;value1&amp;metadata[key2]&#x3D;value2&#x60;
+     *   (optional)
+     * @param after Identifier for the last chat completion from the previous
+     *   pagination request. (optional)
+     * @param limit Number of Chat Completions to retrieve. (optional, default
+     *   to 20)
+     * @param order Sort order for Chat Completions by timestamp. Use
+     *   &#x60;asc&#x60; for ascending order or &#x60;desc&#x60; for descending
+     *   order. Defaults to &#x60;asc&#x60;. (optional, default to asc)
+     * @return ChatCompletionList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun listChatCompletions(
+        model: kotlin.String? = null,
+        metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
+        after: kotlin.String? = null,
+        limit: kotlin.Int? = 20,
+        order: OrderListChatCompletions? = OrderListChatCompletions.asc,
+    ): ChatCompletionList {
+        val localVarResponse =
+            listChatCompletionsWithHttpInfo(
+                model = model,
+                metadata = metadata,
+                after = after,
+                limit = limit,
+                order = order,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data as ChatCompletionList
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * GET /chat/completions List stored Chat Completions. Only Chat Completions
+     * that have been stored with the &#x60;store&#x60; parameter set to
+     * &#x60;true&#x60; will be returned.
+     *
+     * @param model The model used to generate the Chat Completions. (optional)
+     * @param metadata A list of metadata keys to filter the Chat Completions
+     *   by. Example:
+     *   &#x60;metadata[key1]&#x3D;value1&amp;metadata[key2]&#x3D;value2&#x60;
+     *   (optional)
+     * @param after Identifier for the last chat completion from the previous
+     *   pagination request. (optional)
+     * @param limit Number of Chat Completions to retrieve. (optional, default
+     *   to 20)
+     * @param order Sort order for Chat Completions by timestamp. Use
+     *   &#x60;asc&#x60; for ascending order or &#x60;desc&#x60; for descending
+     *   order. Defaults to &#x60;asc&#x60;. (optional, default to asc)
+     * @return ApiResponse<ChatCompletionList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listChatCompletionsWithHttpInfo(
+        model: kotlin.String?,
+        metadata: kotlin.collections.Map<kotlin.String, kotlin.String>?,
+        after: kotlin.String?,
+        limit: kotlin.Int?,
+        order: OrderListChatCompletions?,
+    ): ApiResponse<ChatCompletionList?> {
+        val localVariableConfig =
+            listChatCompletionsRequestConfig(
+                model = model,
+                metadata = metadata,
+                after = after,
+                limit = limit,
+                order = order,
+            )
+
+        return request<Unit, ChatCompletionList>(localVariableConfig)
+    }
+
+    /**
+     * To obtain the request config of the operation listChatCompletions
+     *
+     * @param model The model used to generate the Chat Completions. (optional)
+     * @param metadata A list of metadata keys to filter the Chat Completions
+     *   by. Example:
+     *   &#x60;metadata[key1]&#x3D;value1&amp;metadata[key2]&#x3D;value2&#x60;
+     *   (optional)
+     * @param after Identifier for the last chat completion from the previous
+     *   pagination request. (optional)
+     * @param limit Number of Chat Completions to retrieve. (optional, default
+     *   to 20)
+     * @param order Sort order for Chat Completions by timestamp. Use
+     *   &#x60;asc&#x60; for ascending order or &#x60;desc&#x60; for descending
+     *   order. Defaults to &#x60;asc&#x60;. (optional, default to asc)
+     * @return RequestConfig
+     */
+    fun listChatCompletionsRequestConfig(
+        model: kotlin.String?,
+        metadata: kotlin.collections.Map<kotlin.String, kotlin.String>?,
+        after: kotlin.String?,
+        limit: kotlin.Int?,
+        order: OrderListChatCompletions?,
+    ): RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap =
+            mutableMapOf<
+                    kotlin.String,
+                    kotlin.collections.List<kotlin.String>,
+                >()
+                .apply {
+                    if (model != null) {
+                        put("model", listOf(model.toString()))
+                    }
+                    if (metadata != null) {
+                        put("metadata", toMultiValue(metadata.toList(), ""))
+                    }
+                    if (after != null) {
+                        put("after", listOf(after.toString()))
+                    }
+                    if (limit != null) {
+                        put("limit", listOf(limit.toString()))
+                    }
+                    if (order != null) {
+                        put("order", listOf(order.value))
+                    }
+                }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/chat/completions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * POST /chat/completions/{completion_id} Modify a stored chat completion.
+     * Only Chat Completions that have been created with the &#x60;store&#x60;
+     * parameter set to &#x60;true&#x60; can be modified. Currently, the only
+     * supported modification is to update the &#x60;metadata&#x60; field.
+     *
+     * @param completionId The ID of the chat completion to update.
+     * @param updateChatCompletionRequest
+     * @return CreateChatCompletionResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun updateChatCompletion(
+        completionId: kotlin.String,
+        updateChatCompletionRequest: UpdateChatCompletionRequest,
+    ): CreateChatCompletionResponse {
+        val localVarResponse =
+            updateChatCompletionWithHttpInfo(
+                completionId = completionId,
+                updateChatCompletionRequest = updateChatCompletionRequest,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as CreateChatCompletionResponse
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * POST /chat/completions/{completion_id} Modify a stored chat completion.
+     * Only Chat Completions that have been created with the &#x60;store&#x60;
+     * parameter set to &#x60;true&#x60; can be modified. Currently, the only
+     * supported modification is to update the &#x60;metadata&#x60; field.
+     *
+     * @param completionId The ID of the chat completion to update.
+     * @param updateChatCompletionRequest
+     * @return ApiResponse<CreateChatCompletionResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun updateChatCompletionWithHttpInfo(
+        completionId: kotlin.String,
+        updateChatCompletionRequest: UpdateChatCompletionRequest,
+    ): ApiResponse<CreateChatCompletionResponse?> {
+        val localVariableConfig =
+            updateChatCompletionRequestConfig(
+                completionId = completionId,
+                updateChatCompletionRequest = updateChatCompletionRequest,
+            )
+
+        return request<
+            UpdateChatCompletionRequest,
+            CreateChatCompletionResponse,
+        >(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation updateChatCompletion
+     *
+     * @param completionId The ID of the chat completion to update.
+     * @param updateChatCompletionRequest
+     * @return RequestConfig
+     */
+    fun updateChatCompletionRequestConfig(
+        completionId: kotlin.String,
+        updateChatCompletionRequest: UpdateChatCompletionRequest,
+    ): RequestConfig<UpdateChatCompletionRequest> {
+        val localVariableBody = updateChatCompletionRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path =
+                "/chat/completions/{completion_id}"
+                    .replace(
+                        "{" + "completion_id" + "}",
+                        encodeURIComponent(completionId.toString()),
+                    ),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

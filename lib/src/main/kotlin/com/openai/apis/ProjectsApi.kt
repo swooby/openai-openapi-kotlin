@@ -59,8 +59,8 @@ class ProjectsApi(
     }
 
     /**
-     * Archives a project in the organization. Archived projects cannot be used
-     * or updated.
+     * POST /organization/projects/{project_id}/archive Archives a project in
+     * the organization. Archived projects cannot be used or updated.
      *
      * @param projectId The ID of the project.
      * @return Project
@@ -113,8 +113,8 @@ class ProjectsApi(
     }
 
     /**
-     * Archives a project in the organization. Archived projects cannot be used
-     * or updated.
+     * POST /organization/projects/{project_id}/archive Archives a project in
+     * the organization. Archived projects cannot be used or updated.
      *
      * @param projectId The ID of the project.
      * @return ApiResponse<Project?>
@@ -162,8 +162,8 @@ class ProjectsApi(
     }
 
     /**
-     * Create a new project in the organization. Projects can be created and
-     * archived, but cannot be deleted.
+     * POST /organization/projects Create a new project in the organization.
+     * Projects can be created and archived, but cannot be deleted.
      *
      * @param projectCreateRequest The project create request payload.
      * @return Project
@@ -219,8 +219,8 @@ class ProjectsApi(
     }
 
     /**
-     * Create a new project in the organization. Projects can be created and
-     * archived, but cannot be deleted.
+     * POST /organization/projects Create a new project in the organization.
+     * Projects can be created and archived, but cannot be deleted.
      *
      * @param projectCreateRequest The project create request payload.
      * @return ApiResponse<Project?>
@@ -266,8 +266,9 @@ class ProjectsApi(
     }
 
     /**
-     * Creates a new service account in the project. This also returns an
-     * unredacted API key for the service account.
+     * POST /organization/projects/{project_id}/service_accounts Creates a new
+     * service account in the project. This also returns an unredacted API key
+     * for the service account.
      *
      * @param projectId The ID of the project.
      * @param projectServiceAccountCreateRequest The project service account
@@ -331,8 +332,9 @@ class ProjectsApi(
     }
 
     /**
-     * Creates a new service account in the project. This also returns an
-     * unredacted API key for the service account.
+     * POST /organization/projects/{project_id}/service_accounts Creates a new
+     * service account in the project. This also returns an unredacted API key
+     * for the service account.
      *
      * @param projectId The ID of the project.
      * @param projectServiceAccountCreateRequest The project service account
@@ -396,8 +398,9 @@ class ProjectsApi(
     }
 
     /**
-     * Adds a user to the project. Users must already be members of the
-     * organization to be added to a project.
+     * POST /organization/projects/{project_id}/users Adds a user to the
+     * project. Users must already be members of the organization to be added to
+     * a project.
      *
      * @param projectId The ID of the project.
      * @param projectUserCreateRequest The project user create request payload.
@@ -458,8 +461,9 @@ class ProjectsApi(
     }
 
     /**
-     * Adds a user to the project. Users must already be members of the
-     * organization to be added to a project.
+     * POST /organization/projects/{project_id}/users Adds a user to the
+     * project. Users must already be members of the organization to be added to
+     * a project.
      *
      * @param projectId The ID of the project.
      * @param projectUserCreateRequest The project user create request payload.
@@ -517,7 +521,8 @@ class ProjectsApi(
     }
 
     /**
-     * Deletes an API key from the project.
+     * DELETE /organization/projects/{project_id}/api_keys/{key_id} Deletes an
+     * API key from the project.
      *
      * @param projectId The ID of the project.
      * @param keyId The ID of the API key.
@@ -579,7 +584,8 @@ class ProjectsApi(
     }
 
     /**
-     * Deletes an API key from the project.
+     * DELETE /organization/projects/{project_id}/api_keys/{key_id} Deletes an
+     * API key from the project.
      *
      * @param projectId The ID of the project.
      * @param keyId The ID of the API key.
@@ -638,6 +644,8 @@ class ProjectsApi(
     }
 
     /**
+     * DELETE
+     * /organization/projects/{project_id}/service_accounts/{service_account_id}
      * Deletes a service account from the project.
      *
      * @param projectId The ID of the project.
@@ -700,6 +708,8 @@ class ProjectsApi(
     }
 
     /**
+     * DELETE
+     * /organization/projects/{project_id}/service_accounts/{service_account_id}
      * Deletes a service account from the project.
      *
      * @param projectId The ID of the project.
@@ -761,7 +771,8 @@ class ProjectsApi(
     }
 
     /**
-     * Deletes a user from the project.
+     * DELETE /organization/projects/{project_id}/users/{user_id} Deletes a user
+     * from the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
@@ -823,7 +834,8 @@ class ProjectsApi(
     }
 
     /**
-     * Deletes a user from the project.
+     * DELETE /organization/projects/{project_id}/users/{user_id} Deletes a user
+     * from the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
@@ -882,7 +894,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of API keys in the project.
+     * GET /organization/projects/{project_id}/api_keys Returns a list of API
+     * keys in the project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -953,7 +966,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of API keys in the project.
+     * GET /organization/projects/{project_id}/api_keys Returns a list of API
+     * keys in the project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -1037,7 +1051,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns the rate limits per model for a project.
+     * GET /organization/projects/{project_id}/rate_limits Returns the rate
+     * limits per model for a project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. The default
@@ -1114,7 +1129,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns the rate limits per model for a project.
+     * GET /organization/projects/{project_id}/rate_limits Returns the rate
+     * limits per model for a project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. The default
@@ -1212,7 +1228,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of service accounts in the project.
+     * GET /organization/projects/{project_id}/service_accounts Returns a list
+     * of service accounts in the project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -1283,7 +1300,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of service accounts in the project.
+     * GET /organization/projects/{project_id}/service_accounts Returns a list
+     * of service accounts in the project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -1369,7 +1387,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of users in the project.
+     * GET /organization/projects/{project_id}/users Returns a list of users in
+     * the project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -1439,7 +1458,8 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of users in the project.
+     * GET /organization/projects/{project_id}/users Returns a list of users in
+     * the project.
      *
      * @param projectId The ID of the project.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -1523,7 +1543,7 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of projects.
+     * GET /organization/projects Returns a list of projects.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -1595,7 +1615,7 @@ class ProjectsApi(
     }
 
     /**
-     * Returns a list of projects.
+     * GET /organization/projects Returns a list of projects.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -1684,7 +1704,8 @@ class ProjectsApi(
     }
 
     /**
-     * Modifies a project in the organization.
+     * POST /organization/projects/{project_id} Modifies a project in the
+     * organization.
      *
      * @param projectId The ID of the project.
      * @param projectUpdateRequest The project update request payload.
@@ -1745,7 +1766,8 @@ class ProjectsApi(
     }
 
     /**
-     * Modifies a project in the organization.
+     * POST /organization/projects/{project_id} Modifies a project in the
+     * organization.
      *
      * @param projectId The ID of the project.
      * @param projectUpdateRequest The project update request payload.
@@ -1801,7 +1823,8 @@ class ProjectsApi(
     }
 
     /**
-     * Modifies a user&#39;s role in the project.
+     * POST /organization/projects/{project_id}/users/{user_id} Modifies a
+     * user&#39;s role in the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
@@ -1865,7 +1888,8 @@ class ProjectsApi(
     }
 
     /**
-     * Modifies a user&#39;s role in the project.
+     * POST /organization/projects/{project_id}/users/{user_id} Modifies a
+     * user&#39;s role in the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
@@ -1932,7 +1956,7 @@ class ProjectsApi(
     }
 
     /**
-     * Retrieves a project.
+     * GET /organization/projects/{project_id} Retrieves a project.
      *
      * @param projectId The ID of the project.
      * @return Project
@@ -1986,7 +2010,7 @@ class ProjectsApi(
     }
 
     /**
-     * Retrieves a project.
+     * GET /organization/projects/{project_id} Retrieves a project.
      *
      * @param projectId The ID of the project.
      * @return ApiResponse<Project?>
@@ -2034,7 +2058,8 @@ class ProjectsApi(
     }
 
     /**
-     * Retrieves an API key in the project.
+     * GET /organization/projects/{project_id}/api_keys/{key_id} Retrieves an
+     * API key in the project.
      *
      * @param projectId The ID of the project.
      * @param keyId The ID of the API key.
@@ -2095,7 +2120,8 @@ class ProjectsApi(
     }
 
     /**
-     * Retrieves an API key in the project.
+     * GET /organization/projects/{project_id}/api_keys/{key_id} Retrieves an
+     * API key in the project.
      *
      * @param projectId The ID of the project.
      * @param keyId The ID of the API key.
@@ -2154,6 +2180,8 @@ class ProjectsApi(
     }
 
     /**
+     * GET
+     * /organization/projects/{project_id}/service_accounts/{service_account_id}
      * Retrieves a service account in the project.
      *
      * @param projectId The ID of the project.
@@ -2215,6 +2243,8 @@ class ProjectsApi(
     }
 
     /**
+     * GET
+     * /organization/projects/{project_id}/service_accounts/{service_account_id}
      * Retrieves a service account in the project.
      *
      * @param projectId The ID of the project.
@@ -2275,7 +2305,8 @@ class ProjectsApi(
     }
 
     /**
-     * Retrieves a user in the project.
+     * GET /organization/projects/{project_id}/users/{user_id} Retrieves a user
+     * in the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
@@ -2336,7 +2367,8 @@ class ProjectsApi(
     }
 
     /**
-     * Retrieves a user in the project.
+     * GET /organization/projects/{project_id}/users/{user_id} Retrieves a user
+     * in the project.
      *
      * @param projectId The ID of the project.
      * @param userId The ID of the user.
@@ -2395,6 +2427,7 @@ class ProjectsApi(
     }
 
     /**
+     * POST /organization/projects/{project_id}/rate_limits/{rate_limit_id}
      * Updates a project rate limit.
      *
      * @param projectId The ID of the project.
@@ -2460,6 +2493,7 @@ class ProjectsApi(
     }
 
     /**
+     * POST /organization/projects/{project_id}/rate_limits/{rate_limit_id}
      * Updates a project rate limit.
      *
      * @param projectId The ID of the project.

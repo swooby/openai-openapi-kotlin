@@ -12,4 +12,6 @@
 package com.openai.models
 
 /**  */
+// openai-openapi-kotlin change begin
 class CreateAssistantRequestToolResourcesFileSearch() {}
+// openai-openapi-kotlin change end

@@ -63,7 +63,8 @@ class AssistantsApi(
     }
 
     /**
-     * Cancels a run that is &#x60;in_progress&#x60;.
+     * POST /threads/{thread_id}/runs/{run_id}/cancel Cancels a run that is
+     * &#x60;in_progress&#x60;.
      *
      * @param threadId The ID of the thread to which this run belongs.
      * @param runId The ID of the run to cancel.
@@ -118,7 +119,8 @@ class AssistantsApi(
     }
 
     /**
-     * Cancels a run that is &#x60;in_progress&#x60;.
+     * POST /threads/{thread_id}/runs/{run_id}/cancel Cancels a run that is
+     * &#x60;in_progress&#x60;.
      *
      * @param threadId The ID of the thread to which this run belongs.
      * @param runId The ID of the run to cancel.
@@ -174,7 +176,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create an assistant with a model and instructions.
+     * POST /assistants Create an assistant with a model and instructions.
      *
      * @param createAssistantRequest
      * @return AssistantObject
@@ -232,7 +234,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create an assistant with a model and instructions.
+     * POST /assistants Create an assistant with a model and instructions.
      *
      * @param createAssistantRequest
      * @return ApiResponse<AssistantObject?>
@@ -280,7 +282,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a message.
+     * POST /threads/{thread_id}/messages Create a message.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) to
      *   create a message for.
@@ -342,7 +344,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a message.
+     * POST /threads/{thread_id}/messages Create a message.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) to
      *   create a message for.
@@ -420,7 +422,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a run.
+     * POST /threads/{thread_id}/runs Create a run.
      *
      * @param threadId The ID of the thread to run.
      * @param createRunRequest
@@ -489,7 +491,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a run.
+     * POST /threads/{thread_id}/runs Create a run.
      *
      * @param threadId The ID of the thread to run.
      * @param createRunRequest
@@ -572,7 +574,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a thread.
+     * POST /threads Create a thread.
      *
      * @param createThreadRequest (optional)
      * @return ThreadObject
@@ -628,7 +630,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a thread.
+     * POST /threads Create a thread.
      *
      * @param createThreadRequest (optional)
      * @return ApiResponse<ThreadObject?>
@@ -672,7 +674,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a thread and run it in one request.
+     * POST /threads/runs Create a thread and run it in one request.
      *
      * @param createThreadAndRunRequest
      * @return RunObject
@@ -730,7 +732,7 @@ class AssistantsApi(
     }
 
     /**
-     * Create a thread and run it in one request.
+     * POST /threads/runs Create a thread and run it in one request.
      *
      * @param createThreadAndRunRequest
      * @return ApiResponse<RunObject?>
@@ -778,7 +780,7 @@ class AssistantsApi(
     }
 
     /**
-     * Delete an assistant.
+     * DELETE /assistants/{assistant_id} Delete an assistant.
      *
      * @param assistantId The ID of the assistant to delete.
      * @return DeleteAssistantResponse
@@ -832,7 +834,7 @@ class AssistantsApi(
     }
 
     /**
-     * Delete an assistant.
+     * DELETE /assistants/{assistant_id} Delete an assistant.
      *
      * @param assistantId The ID of the assistant to delete.
      * @return ApiResponse<DeleteAssistantResponse?>
@@ -880,7 +882,7 @@ class AssistantsApi(
     }
 
     /**
-     * Deletes a message.
+     * DELETE /threads/{thread_id}/messages/{message_id} Deletes a message.
      *
      * @param threadId The ID of the thread to which this message belongs.
      * @param messageId The ID of the message to delete.
@@ -941,7 +943,7 @@ class AssistantsApi(
     }
 
     /**
-     * Deletes a message.
+     * DELETE /threads/{thread_id}/messages/{message_id} Deletes a message.
      *
      * @param threadId The ID of the thread to which this message belongs.
      * @param messageId The ID of the message to delete.
@@ -1000,7 +1002,7 @@ class AssistantsApi(
     }
 
     /**
-     * Delete a thread.
+     * DELETE /threads/{thread_id} Delete a thread.
      *
      * @param threadId The ID of the thread to delete.
      * @return DeleteThreadResponse
@@ -1053,7 +1055,7 @@ class AssistantsApi(
     }
 
     /**
-     * Delete a thread.
+     * DELETE /threads/{thread_id} Delete a thread.
      *
      * @param threadId The ID of the thread to delete.
      * @return ApiResponse<DeleteThreadResponse?>
@@ -1100,7 +1102,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves an assistant.
+     * GET /assistants/{assistant_id} Retrieves an assistant.
      *
      * @param assistantId The ID of the assistant to retrieve.
      * @return AssistantObject
@@ -1154,7 +1156,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves an assistant.
+     * GET /assistants/{assistant_id} Retrieves an assistant.
      *
      * @param assistantId The ID of the assistant to retrieve.
      * @return ApiResponse<AssistantObject?>
@@ -1202,7 +1204,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieve a message.
+     * GET /threads/{thread_id}/messages/{message_id} Retrieve a message.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) to
      *   which this message belongs.
@@ -1261,7 +1263,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieve a message.
+     * GET /threads/{thread_id}/messages/{message_id} Retrieve a message.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) to
      *   which this message belongs.
@@ -1319,7 +1321,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves a run.
+     * GET /threads/{thread_id}/runs/{run_id} Retrieves a run.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) that
      *   was run.
@@ -1375,7 +1377,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves a run.
+     * GET /threads/{thread_id}/runs/{run_id} Retrieves a run.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) that
      *   was run.
@@ -1453,7 +1455,8 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves a run step.
+     * GET /threads/{thread_id}/runs/{run_id}/steps/{step_id} Retrieves a run
+     * step.
      *
      * @param threadId The ID of the thread to which the run and run step
      *   belongs.
@@ -1526,7 +1529,8 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves a run step.
+     * GET /threads/{thread_id}/runs/{run_id}/steps/{step_id} Retrieves a run
+     * step.
      *
      * @param threadId The ID of the thread to which the run and run step
      *   belongs.
@@ -1623,7 +1627,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves a thread.
+     * GET /threads/{thread_id} Retrieves a thread.
      *
      * @param threadId The ID of the thread to retrieve.
      * @return ThreadObject
@@ -1676,7 +1680,7 @@ class AssistantsApi(
     }
 
     /**
-     * Retrieves a thread.
+     * GET /threads/{thread_id} Retrieves a thread.
      *
      * @param threadId The ID of the thread to retrieve.
      * @return ApiResponse<ThreadObject?>
@@ -1737,7 +1741,7 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of assistants.
+     * GET /assistants Returns a list of assistants.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -1816,7 +1820,7 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of assistants.
+     * GET /assistants Returns a list of assistants.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -1934,7 +1938,8 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of messages for a given thread.
+     * GET /threads/{thread_id}/messages Returns a list of messages for a given
+     * thread.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) the
      *   messages belong to.
@@ -2021,7 +2026,8 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of messages for a given thread.
+     * GET /threads/{thread_id}/messages Returns a list of messages for a given
+     * thread.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) the
      *   messages belong to.
@@ -2181,7 +2187,8 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of run steps belonging to a run.
+     * GET /threads/{thread_id}/runs/{run_id}/steps Returns a list of run steps
+     * belonging to a run.
      *
      * @param threadId The ID of the thread the run and run steps belong to.
      * @param runId The ID of the run the run steps belong to.
@@ -2274,7 +2281,8 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of run steps belonging to a run.
+     * GET /threads/{thread_id}/runs/{run_id}/steps Returns a list of run steps
+     * belonging to a run.
      *
      * @param threadId The ID of the thread the run and run steps belong to.
      * @param runId The ID of the run the run steps belong to.
@@ -2432,7 +2440,8 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of runs belonging to a thread.
+     * GET /threads/{thread_id}/runs Returns a list of runs belonging to a
+     * thread.
      *
      * @param threadId The ID of the thread the run belongs to.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -2514,7 +2523,8 @@ class AssistantsApi(
     }
 
     /**
-     * Returns a list of runs belonging to a thread.
+     * GET /threads/{thread_id}/runs Returns a list of runs belonging to a
+     * thread.
      *
      * @param threadId The ID of the thread the run belongs to.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -2626,7 +2636,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies an assistant.
+     * POST /assistants/{assistant_id} Modifies an assistant.
      *
      * @param assistantId The ID of the assistant to modify.
      * @param modifyAssistantRequest
@@ -2687,7 +2697,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies an assistant.
+     * POST /assistants/{assistant_id} Modifies an assistant.
      *
      * @param assistantId The ID of the assistant to modify.
      * @param modifyAssistantRequest
@@ -2745,7 +2755,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies a message.
+     * POST /threads/{thread_id}/messages/{message_id} Modifies a message.
      *
      * @param threadId The ID of the thread to which this message belongs.
      * @param messageId The ID of the message to modify.
@@ -2809,7 +2819,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies a message.
+     * POST /threads/{thread_id}/messages/{message_id} Modifies a message.
      *
      * @param threadId The ID of the thread to which this message belongs.
      * @param messageId The ID of the message to modify.
@@ -2874,7 +2884,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies a run.
+     * POST /threads/{thread_id}/runs/{run_id} Modifies a run.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) that
      *   was run.
@@ -2939,7 +2949,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies a run.
+     * POST /threads/{thread_id}/runs/{run_id} Modifies a run.
      *
      * @param threadId The ID of the [thread](/docs/api-reference/threads) that
      *   was run.
@@ -3006,7 +3016,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies a thread.
+     * POST /threads/{thread_id} Modifies a thread.
      *
      * @param threadId The ID of the thread to modify. Only the
      *   &#x60;metadata&#x60; can be modified.
@@ -3068,7 +3078,7 @@ class AssistantsApi(
     }
 
     /**
-     * Modifies a thread.
+     * POST /threads/{thread_id} Modifies a thread.
      *
      * @param threadId The ID of the thread to modify. Only the
      *   &#x60;metadata&#x60; can be modified.
@@ -3126,7 +3136,8 @@ class AssistantsApi(
     }
 
     /**
-     * When a run has the &#x60;status: \&quot;requires_action\&quot;&#x60; and
+     * POST /threads/{thread_id}/runs/{run_id}/submit_tool_outputs When a run
+     * has the &#x60;status: \&quot;requires_action\&quot;&#x60; and
      * &#x60;required_action.type&#x60; is &#x60;submit_tool_outputs&#x60;, this
      * endpoint can be used to submit the outputs from the tool calls once
      * they&#39;re all completed. All outputs must be submitted in a single
@@ -3195,7 +3206,8 @@ class AssistantsApi(
     }
 
     /**
-     * When a run has the &#x60;status: \&quot;requires_action\&quot;&#x60; and
+     * POST /threads/{thread_id}/runs/{run_id}/submit_tool_outputs When a run
+     * has the &#x60;status: \&quot;requires_action\&quot;&#x60; and
      * &#x60;required_action.type&#x60; is &#x60;submit_tool_outputs&#x60;, this
      * endpoint can be used to submit the outputs from the tool calls once
      * they&#39;re all completed. All outputs must be submitted in a single

@@ -11,6 +11,7 @@ import com.squareup.moshi.adapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.Type
 
+// openai-openapi-kotlin changes begin
 //
 // region SerializeNull https://stackoverflow.com/a/71877976/252308
 //
@@ -66,25 +67,31 @@ annotation class SerializeNull {
 //
 // endregion
 //
+// openai-openapi-kotlin changes end
 
 object Serializer {
     @JvmStatic
     val moshiBuilder: Moshi.Builder =
         Moshi.Builder()
+            // openai-openapi-kotlin changes begin
             .add(SerializeNull.Companion.Factory())
+            // openai-openapi-kotlin changes end
             .add(OffsetDateTimeAdapter())
             .add(LocalDateTimeAdapter())
             .add(LocalDateAdapter())
             .add(UUIDAdapter())
             .add(ByteArrayAdapter())
             .add(URIAdapter())
+            // openai-openapi-kotlin changes begin
             .add(RealtimeSessionMaxResponseOutputTokensAdapter())
+            // openai-openapi-kotlin changes end
             .add(KotlinJsonAdapterFactory())
             .add(BigDecimalAdapter())
             .add(BigIntegerAdapter())
 
     @JvmStatic val moshi: Moshi by lazy { moshiBuilder.build() }
 
+    // openai-openapi-kotlin changes begin
     @OptIn(ExperimentalStdlibApi::class)
     inline fun <reified T> deserialize(json: String?): T? {
         return if (json.isNullOrBlank()) null
@@ -95,4 +102,5 @@ object Serializer {
     inline fun <reified T> serialize(obj: T): String {
         return moshi.adapter<T>().toJson(obj)
     }
+    // openai-openapi-kotlin changes end
 }

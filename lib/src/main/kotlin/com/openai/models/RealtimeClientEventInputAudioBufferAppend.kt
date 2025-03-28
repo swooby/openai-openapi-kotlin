@@ -33,9 +33,11 @@ data class RealtimeClientEventInputAudioBufferAppend(
 
     /* The event type, must be `input_audio_buffer.append`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventInputAudioBufferAppend.Type =
         RealtimeClientEventInputAudioBufferAppend.Type
             .input_audio_bufferPeriodAppend,
+    // openai-openapi-kotlin changes end
 
     /* Base64-encoded audio bytes. This must be in the format specified by the  `input_audio_format` field in the session configuration.  */
     @Json(name = "audio") val audio: kotlin.String,

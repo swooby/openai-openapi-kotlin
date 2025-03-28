@@ -36,7 +36,9 @@ data class RealtimeServerEventInputAudioBufferCommitted(
     val type: RealtimeServerEventInputAudioBufferCommitted.Type,
 
     /* The ID of the preceding item after which the new item will be inserted.  */
+    // openai-openapi-kotlin changes begin
     @Json(name = "previous_item_id") val previousItemId: kotlin.String? = null,
+    // openai-openapi-kotlin changes end
 
     /* The ID of the user message item that will be created. */
     @Json(name = "item_id") val itemId: kotlin.String,

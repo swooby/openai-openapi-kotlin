@@ -16,7 +16,8 @@ import com.squareup.moshi.JsonClass
 
 /**
  * The format of the output, in one of these options: `json`, `text`, `srt`,
- * `verbose_json`, or `vtt`.
+ * `verbose_json`, or `vtt`. For `gpt-4o-transcribe` and
+ * `gpt-4o-mini-transcribe`, the only supported format is `json`.
  *
  * Values: json,text,srt,verbose_json,vtt
  */

@@ -18,7 +18,8 @@ class RealtimeSessionTest : ShouldSpec() {
         // uncomment below to create an instance of RealtimeSession
         // val modelInstance = RealtimeSession()
 
-        // to test the property `id` - Unique identifier for the session object.
+        // to test the property `id` - Unique identifier for the session that
+        // looks like `sess_1234567890abcdef`.
         should("test id") {
             // uncomment below to test the property
             // modelInstance.id shouldBe ("TODO")
@@ -31,7 +32,8 @@ class RealtimeSessionTest : ShouldSpec() {
             // modelInstance.modalities shouldBe ("TODO")
         }
 
-        // to test the property `model`
+        // to test the property `model` - The Realtime model used for this
+        // session.
         should("test model") {
             // uncomment below to test the property
             // modelInstance.model shouldBe ("TODO")
@@ -45,7 +47,7 @@ class RealtimeSessionTest : ShouldSpec() {
         // responses\") and on audio behavior (e.g. \"talk quickly\", \"inject
         // emotion  into your voice\", \"laugh frequently\"). The instructions
         // are not guaranteed  to be followed by the model, but they provide
-        // guidance to the model on the  desired behavior.  Note that the server
+        // guidance to the model on the desired behavior.  Note that the server
         // sets default instructions which will be used if this  field is not
         // set and are visible in the `session.created` event at the  start of
         // the session.
@@ -54,11 +56,7 @@ class RealtimeSessionTest : ShouldSpec() {
             // modelInstance.instructions shouldBe ("TODO")
         }
 
-        // to test the property `voice` - The voice the model uses to respond.
-        // Voice cannot be changed during the  session once the model has
-        // responded with audio at least once. Current  voice options are
-        // `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and
-        // `verse`.
+        // to test the property `voice`
         should("test voice") {
             // uncomment below to test the property
             // modelInstance.voice shouldBe ("TODO")
@@ -93,6 +91,12 @@ class RealtimeSessionTest : ShouldSpec() {
             // modelInstance.turnDetection shouldBe ("TODO")
         }
 
+        // to test the property `inputAudioNoiseReduction`
+        should("test inputAudioNoiseReduction") {
+            // uncomment below to test the property
+            // modelInstance.inputAudioNoiseReduction shouldBe ("TODO")
+        }
+
         // to test the property `tools` - Tools (functions) available to the
         // model.
         should("test tools") {
@@ -108,7 +112,8 @@ class RealtimeSessionTest : ShouldSpec() {
         }
 
         // to test the property `temperature` - Sampling temperature for the
-        // model, limited to [0.6, 1.2]. Defaults to 0.8.
+        // model, limited to [0.6, 1.2]. For audio models a temperature of 0.8
+        // is highly recommended for best performance.
         should("test temperature") {
             // uncomment below to test the property
             // modelInstance.temperature shouldBe ("TODO")

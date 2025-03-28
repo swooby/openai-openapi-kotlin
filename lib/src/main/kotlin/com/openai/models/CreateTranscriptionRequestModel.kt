@@ -12,7 +12,8 @@
 package com.openai.models
 
 /**
- * ID of the model to use. Only `whisper-1` (which is powered by our open source
- * Whisper V2 model) is currently available.
+ * ID of the model to use. The options are `gpt-4o-transcribe`,
+ * `gpt-4o-mini-transcribe`, and `whisper-1` (which is powered by our open
+ * source Whisper V2 model).
  */
 class CreateTranscriptionRequestModel() {}

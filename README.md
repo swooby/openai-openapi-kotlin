@@ -8,7 +8,9 @@ NOTES:
 * There is https://github.com/openai/openai-java, which OpenAI describes as
   "The official Java library for the OpenAI API", but:
   1. That "official" library lags behind https://github.com/openai/openai-openapi/blob/master/openapi.yaml  
-     For example, as of 2025/02/12 is is **STILL** lacking OpenAI's Realtime API (https://platform.openai.com/docs/api-reference/realtime), which is my main use case.
+     For example: OpenAI's Realtime API (https://platform.openai.com/docs/api-reference/realtime),
+     which is my main use case, is in https://github.com/openai/openai-openapi/blob/master/openapi.yaml,
+     but as of 2025/03/28 it is **STILL** not in https://github.com/openai/openai-java. :/  
   2. `openai-java` is actually a nearly fully modernized Kotlin library, so the name
      `openai-java` is legacy;  
      it really should be named `openai-kotlin`.
@@ -60,6 +62,13 @@ All of my changes can be seen at:
 https://github.com/swooby/openai-openapi-kotlin/pull/1/files
 
 ## Updates
+Very similar to original generation.
+
+It usually takes me 1-2 hours to do this.  
+More if there are more changes.  
+Less is there are less changes.  
+Keep in mind that some of this time is verifying/updating the below documentation of any changes.
+
 When a new spec comes out:
 1. Make sure to start from a fresh/stashed checkout.
 2. `rm -r ./lib/src`

@@ -12,6 +12,7 @@
 package com.openai.models
 
 /**
- * One of the available [TTS models](/docs/models#tts): `tts-1` or `tts-1-hd`
+ * One of the available [TTS models](/docs/models#tts): `tts-1`, `tts-1-hd` or
+ * `gpt-4o-mini-tts`.
  */
 class CreateSpeechRequestModel() {}
