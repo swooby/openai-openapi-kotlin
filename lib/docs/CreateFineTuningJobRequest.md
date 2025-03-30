@@ -12,6 +12,7 @@
 | **integrations** | [**kotlin.collections.List&lt;CreateFineTuningJobRequestIntegrationsInner&gt;**](CreateFineTuningJobRequestIntegrationsInner.md) | A list of integrations to enable for your fine-tuning job. |  [optional] |
 | **seed** | **kotlin.Int** | The seed controls the reproducibility of the job. Passing in the same seed and job parameters should produce the same results, but may differ in rare cases. If a seed is not specified, one will be generated for you.  |  [optional] |
 | **method** | [**FineTuneMethod**](FineTuneMethod.md) |  |  [optional] |
+| **metadata** | **kotlin.collections.Map&lt;kotlin.String, kotlin.String&gt;** | Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  |  [optional] |
 
 
 

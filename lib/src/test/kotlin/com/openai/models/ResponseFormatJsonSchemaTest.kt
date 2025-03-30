@@ -19,7 +19,7 @@ class ResponseFormatJsonSchemaTest : ShouldSpec() {
         // val modelInstance = ResponseFormatJsonSchema()
 
         // to test the property `type` - The type of response format being
-        // defined: `json_schema`
+        // defined. Always `json_schema`.
         should("test type") {
             // uncomment below to test the property
             // modelInstance.type shouldBe ("TODO")

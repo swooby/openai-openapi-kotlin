@@ -22,9 +22,10 @@ import com.squareup.moshi.JsonClass
  *   with the purpose `batch`. The file can contain up to 50,000 requests, and
  *   can be up to 200 MB in size.
  * @param endpoint The endpoint to be used for all requests in the batch.
- *   Currently `/v1/chat/completions`, `/v1/embeddings`, and `/v1/completions`
- *   are supported. Note that `/v1/embeddings` batches are also restricted to a
- *   maximum of 50,000 embedding inputs across all requests in the batch.
+ *   Currently `/v1/responses`, `/v1/chat/completions`, `/v1/embeddings`, and
+ *   `/v1/completions` are supported. Note that `/v1/embeddings` batches are
+ *   also restricted to a maximum of 50,000 embedding inputs across all requests
+ *   in the batch.
  * @param completionWindow The time frame within which the batch should be
  *   processed. Currently only `24h` is supported.
  * @param metadata Set of 16 key-value pairs that can be attached to an object.
@@ -38,7 +39,7 @@ data class CreateBatchRequest(
     /* The ID of an uploaded file that contains requests for the new batch.  See [upload file](/docs/api-reference/files/create) for how to upload a file.  Your input file must be formatted as a [JSONL file](/docs/api-reference/batch/request-input), and must be uploaded with the purpose `batch`. The file can contain up to 50,000 requests, and can be up to 200 MB in size.  */
     @Json(name = "input_file_id") val inputFileId: kotlin.String,
 
-    /* The endpoint to be used for all requests in the batch. Currently `/v1/chat/completions`, `/v1/embeddings`, and `/v1/completions` are supported. Note that `/v1/embeddings` batches are also restricted to a maximum of 50,000 embedding inputs across all requests in the batch. */
+    /* The endpoint to be used for all requests in the batch. Currently `/v1/responses`, `/v1/chat/completions`, `/v1/embeddings`, and `/v1/completions` are supported. Note that `/v1/embeddings` batches are also restricted to a maximum of 50,000 embedding inputs across all requests in the batch. */
     @Json(name = "endpoint") val endpoint: CreateBatchRequest.Endpoint,
 
     /* The time frame within which the batch should be processed. Currently only `24h` is supported. */
@@ -52,18 +53,22 @@ data class CreateBatchRequest(
 
     /**
      * The endpoint to be used for all requests in the batch. Currently
-     * `/v1/chat/completions`, `/v1/embeddings`, and `/v1/completions` are
-     * supported. Note that `/v1/embeddings` batches are also restricted to a
-     * maximum of 50,000 embedding inputs across all requests in the batch.
+     * `/v1/responses`, `/v1/chat/completions`, `/v1/embeddings`, and
+     * `/v1/completions` are supported. Note that `/v1/embeddings` batches are
+     * also restricted to a maximum of 50,000 embedding inputs across all
+     * requests in the batch.
      *
-     * Values: chatSlashCompletions,embeddings,completions
+     * Values:
+     * SlashV1SlashResponses,SlashV1SlashChatSlashCompletions,SlashV1SlashEmbeddings,SlashV1SlashCompletions
      */
     @JsonClass(generateAdapter = false)
     enum class Endpoint(val value: kotlin.String) {
+        @Json(name = "/v1/responses") SlashV1SlashResponses("/v1/responses"),
         @Json(name = "/v1/chat/completions")
-        chatSlashCompletions("/v1/chat/completions"),
-        @Json(name = "/v1/embeddings") embeddings("/v1/embeddings"),
-        @Json(name = "/v1/completions") completions("/v1/completions"),
+        SlashV1SlashChatSlashCompletions("/v1/chat/completions"),
+        @Json(name = "/v1/embeddings") SlashV1SlashEmbeddings("/v1/embeddings"),
+        @Json(name = "/v1/completions")
+        SlashV1SlashCompletions("/v1/completions"),
     }
 
     /**

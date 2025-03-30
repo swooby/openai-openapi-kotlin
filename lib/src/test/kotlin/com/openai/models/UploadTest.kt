@@ -62,7 +62,7 @@ class UploadTest : ShouldSpec() {
         }
 
         // to test the property `expiresAt` - The Unix timestamp (in seconds)
-        // for when the Upload was created.
+        // for when the Upload will expire.
         should("test expiresAt") {
             // uncomment below to test the property
             // modelInstance.expiresAt shouldBe ("TODO")

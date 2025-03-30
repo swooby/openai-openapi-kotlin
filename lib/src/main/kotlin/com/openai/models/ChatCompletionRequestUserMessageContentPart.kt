@@ -19,6 +19,7 @@ import com.squareup.moshi.JsonClass
  * @param text The text content.
  * @param imageUrl
  * @param inputAudio
+ * @param file
  */
 data class ChatCompletionRequestUserMessageContentPart(
 
@@ -32,17 +33,20 @@ data class ChatCompletionRequestUserMessageContentPart(
     val imageUrl: ChatCompletionRequestMessageContentPartImageImageUrl,
     @Json(name = "input_audio")
     val inputAudio: ChatCompletionRequestMessageContentPartAudioInputAudio,
+    @Json(name = "file")
+    val file: ChatCompletionRequestMessageContentPartFileFile,
 ) {
 
     /**
      * The type of the content part.
      *
-     * Values: text,image_url,input_audio
+     * Values: text,image_url,input_audio,file
      */
     @JsonClass(generateAdapter = false)
     enum class Type(val value: kotlin.String) {
         @Json(name = "text") text("text"),
         @Json(name = "image_url") image_url("image_url"),
         @Json(name = "input_audio") input_audio("input_audio"),
+        @Json(name = "file") file("file"),
     }
 }

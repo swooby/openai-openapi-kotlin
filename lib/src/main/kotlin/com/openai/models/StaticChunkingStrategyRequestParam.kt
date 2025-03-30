@@ -15,6 +15,8 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
+ * Customize your own chunking strategy by setting chunk size and chunk overlap.
+ *
  * @param type Always `static`.
  * @param static
  */

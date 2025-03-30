@@ -22,6 +22,7 @@
 | **integrations** | [**kotlin.collections.List&lt;FineTuningJobIntegrationsInner&gt;**](FineTuningJobIntegrationsInner.md) | A list of integrations to enable for this fine-tuning job. |  [optional] |
 | **estimatedFinish** | **kotlin.Int** | The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running. |  [optional] |
 | **method** | [**FineTuneMethod**](FineTuneMethod.md) |  |  [optional] |
+| **metadata** | **kotlin.collections.Map&lt;kotlin.String, kotlin.String&gt;** | Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  |  [optional] |
 
 
 <a id="`Object`"></a>

@@ -43,8 +43,8 @@ class InvitesApi(
     }
 
     /**
-     * Delete an invite. If the invite has already been accepted, it cannot be
-     * deleted.
+     * DELETE /organization/invites/{invite_id} Delete an invite. If the invite
+     * has already been accepted, it cannot be deleted.
      *
      * @param inviteId The ID of the invite to delete.
      * @return InviteDeleteResponse
@@ -97,8 +97,8 @@ class InvitesApi(
     }
 
     /**
-     * Delete an invite. If the invite has already been accepted, it cannot be
-     * deleted.
+     * DELETE /organization/invites/{invite_id} Delete an invite. If the invite
+     * has already been accepted, it cannot be deleted.
      *
      * @param inviteId The ID of the invite to delete.
      * @return ApiResponse<InviteDeleteResponse?>
@@ -145,8 +145,9 @@ class InvitesApi(
     }
 
     /**
-     * Create an invite for a user to the organization. The invite must be
-     * accepted by the user before they have access to the organization.
+     * POST /organization/invites Create an invite for a user to the
+     * organization. The invite must be accepted by the user before they have
+     * access to the organization.
      *
      * @param inviteRequest The invite request payload.
      * @return Invite
@@ -200,8 +201,9 @@ class InvitesApi(
     }
 
     /**
-     * Create an invite for a user to the organization. The invite must be
-     * accepted by the user before they have access to the organization.
+     * POST /organization/invites Create an invite for a user to the
+     * organization. The invite must be accepted by the user before they have
+     * access to the organization.
      *
      * @param inviteRequest The invite request payload.
      * @return ApiResponse<Invite?>
@@ -245,7 +247,7 @@ class InvitesApi(
     }
 
     /**
-     * Returns a list of invites in the organization.
+     * GET /organization/invites Returns a list of invites in the organization.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -309,7 +311,7 @@ class InvitesApi(
     }
 
     /**
-     * Returns a list of invites in the organization.
+     * GET /organization/invites Returns a list of invites in the organization.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -380,7 +382,7 @@ class InvitesApi(
     }
 
     /**
-     * Retrieves an invite.
+     * GET /organization/invites/{invite_id} Retrieves an invite.
      *
      * @param inviteId The ID of the invite to retrieve.
      * @return Invite
@@ -433,7 +435,7 @@ class InvitesApi(
     }
 
     /**
-     * Retrieves an invite.
+     * GET /organization/invites/{invite_id} Retrieves an invite.
      *
      * @param inviteId The ID of the invite to retrieve.
      * @return ApiResponse<Invite?>

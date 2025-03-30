@@ -19,7 +19,7 @@
 | **truncationStrategy** | [**CreateRunRequestTruncationStrategy**](CreateRunRequestTruncationStrategy.md) |  |  [optional] |
 | **toolChoice** | [**CreateRunRequestToolChoice**](CreateRunRequestToolChoice.md) |  |  [optional] |
 | **parallelToolCalls** | **kotlin.Boolean** | Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use. |  [optional] |
-| **responseFormat** | [**AssistantObjectResponseFormat**](AssistantObjectResponseFormat.md) |  |  [optional] |
+| **responseFormat** | [**AssistantsApiResponseFormatOption**](AssistantsApiResponseFormatOption.md) |  |  [optional] |
 
 
 

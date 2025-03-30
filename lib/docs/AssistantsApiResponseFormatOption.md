@@ -4,8 +4,8 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **type** | [**inline**](#Type) | The type of response format being defined: &#x60;text&#x60; |  |
-| **jsonSchema** | [**ResponseFormatJsonSchemaJsonSchema**](ResponseFormatJsonSchemaJsonSchema.md) |  |  |
+| **type** | [**inline**](#Type) | The type of response format being defined. Always &#x60;text&#x60;. |  |
+| **jsonSchema** | [**JSONSchema**](JSONSchema.md) |  |  |
 
 
 <a id="Type"></a>

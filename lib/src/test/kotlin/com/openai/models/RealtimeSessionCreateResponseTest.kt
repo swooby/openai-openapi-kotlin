@@ -49,11 +49,7 @@ class RealtimeSessionCreateResponseTest : ShouldSpec() {
             // modelInstance.instructions shouldBe ("TODO")
         }
 
-        // to test the property `voice` - The voice the model uses to respond.
-        // Voice cannot be changed during the  session once the model has
-        // responded with audio at least once. Current  voice options are
-        // `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and
-        // `verse`.
+        // to test the property `voice`
         should("test voice") {
             // uncomment below to test the property
             // modelInstance.voice shouldBe ("TODO")

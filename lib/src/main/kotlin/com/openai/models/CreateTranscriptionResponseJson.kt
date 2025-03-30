@@ -18,9 +18,16 @@ import com.squareup.moshi.Json
  * input.
  *
  * @param text The transcribed text.
+ * @param logprobs The log probabilities of the tokens in the transcription.
+ *   Only returned with the models `gpt-4o-transcribe` and
+ *   `gpt-4o-mini-transcribe` if `logprobs` is added to the `include` array.
  */
 data class CreateTranscriptionResponseJson(
 
     /* The transcribed text. */
-    @Json(name = "text") val text: kotlin.String
+    @Json(name = "text") val text: kotlin.String,
+
+    /* The log probabilities of the tokens in the transcription. Only returned with the models `gpt-4o-transcribe` and `gpt-4o-mini-transcribe` if `logprobs` is added to the `include` array.  */
+    @Json(name = "logprobs")
+    val logprobs: kotlin.collections.List<LogProbProperties>? = null,
 ) {}

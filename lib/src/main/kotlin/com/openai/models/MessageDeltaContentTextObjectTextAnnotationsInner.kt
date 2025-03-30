@@ -48,11 +48,11 @@ data class MessageDeltaContentTextObjectTextAnnotationsInner(
     /**
      * Always `file_citation`.
      *
-     * Values: citation,path
+     * Values: file_citation,file_path
      */
     @JsonClass(generateAdapter = false)
     enum class Type(val value: kotlin.String) {
-        @Json(name = "file_citation") citation("file_citation"),
-        @Json(name = "file_path") path("file_path"),
+        @Json(name = "file_citation") file_citation("file_citation"),
+        @Json(name = "file_path") file_path("file_path"),
     }
 }

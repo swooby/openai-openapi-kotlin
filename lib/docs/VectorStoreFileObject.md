@@ -12,6 +12,7 @@
 | **status** | [**inline**](#Status) | The status of the vector store file, which can be either &#x60;in_progress&#x60;, &#x60;completed&#x60;, &#x60;cancelled&#x60;, or &#x60;failed&#x60;. The status &#x60;completed&#x60; indicates that the vector store file is ready for use. |  |
 | **lastError** | [**VectorStoreFileObjectLastError**](VectorStoreFileObjectLastError.md) |  |  |
 | **chunkingStrategy** | [**VectorStoreFileObjectChunkingStrategy**](VectorStoreFileObjectChunkingStrategy.md) |  |  [optional] |
+| **attributes** | [**kotlin.collections.Map&lt;kotlin.String, VectorStoreFileAttributesValue&gt;**](VectorStoreFileAttributesValue.md) | Set of 16 key-value pairs that can be attached to an object. This can be  useful for storing additional information about the object in a structured  format, and querying for objects via API or the dashboard. Keys are strings  with a maximum length of 64 characters. Values are strings with a maximum  length of 512 characters, booleans, or numbers.  |  [optional] |
 
 
 <a id="`Object`"></a>

@@ -44,7 +44,8 @@ class UsersApi(
     }
 
     /**
-     * Deletes a user from the organization.
+     * DELETE /organization/users/{user_id} Deletes a user from the
+     * organization.
      *
      * @param userId The ID of the user.
      * @return UserDeleteResponse
@@ -97,7 +98,8 @@ class UsersApi(
     }
 
     /**
-     * Deletes a user from the organization.
+     * DELETE /organization/users/{user_id} Deletes a user from the
+     * organization.
      *
      * @param userId The ID of the user.
      * @return ApiResponse<UserDeleteResponse?>
@@ -142,7 +144,7 @@ class UsersApi(
     }
 
     /**
-     * Lists all of the users in the organization.
+     * GET /organization/users Lists all of the users in the organization.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -208,7 +210,7 @@ class UsersApi(
     }
 
     /**
-     * Lists all of the users in the organization.
+     * GET /organization/users Lists all of the users in the organization.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -290,7 +292,8 @@ class UsersApi(
     }
 
     /**
-     * Modifies a user&#39;s role in the organization.
+     * POST /organization/users/{user_id} Modifies a user&#39;s role in the
+     * organization.
      *
      * @param userId The ID of the user.
      * @param userRoleUpdateRequest The new user role to modify. This must be
@@ -352,7 +355,8 @@ class UsersApi(
     }
 
     /**
-     * Modifies a user&#39;s role in the organization.
+     * POST /organization/users/{user_id} Modifies a user&#39;s role in the
+     * organization.
      *
      * @param userId The ID of the user.
      * @param userRoleUpdateRequest The new user role to modify. This must be
@@ -410,7 +414,7 @@ class UsersApi(
     }
 
     /**
-     * Retrieves a user by their identifier.
+     * GET /organization/users/{user_id} Retrieves a user by their identifier.
      *
      * @param userId The ID of the user.
      * @return User
@@ -463,7 +467,7 @@ class UsersApi(
     }
 
     /**
-     * Retrieves a user by their identifier.
+     * GET /organization/users/{user_id} Retrieves a user by their identifier.
      *
      * @param userId The ID of the user.
      * @return ApiResponse<User?>

@@ -20,7 +20,9 @@ import com.squareup.moshi.Json
  * Set this to `none` to create an out-of-band response which will not add items
  * to default conversation.
  */
+// openai-openapi-kotlin changes begin
 enum class RealtimeResponseCreateParamsConversation(val value: kotlin.String) {
     @Json(name = "auto") auto("auto"),
     @Json(name = "none") none("none"),
 }
+// openai-openapi-kotlin changes end

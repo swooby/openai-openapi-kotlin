@@ -115,7 +115,9 @@ data class RealtimeConversationItem(
     @JsonClass(generateAdapter = false)
     enum class Status(val value: kotlin.String) {
         @Json(name = "completed") completed("completed"),
+        // openai-openapi-kotlin changes begin
         @Json(name = "in_progress") in_progress("in_progress"),
+        // openai-openapi-kotlin changes end
         @Json(name = "incomplete") incomplete("incomplete"),
     }
 

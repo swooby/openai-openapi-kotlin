@@ -42,8 +42,8 @@ class ModelsApi(
     }
 
     /**
-     * Delete a fine-tuned model. You must have the Owner role in your
-     * organization to delete a model.
+     * DELETE /models/{model} Delete a fine-tuned model. You must have the Owner
+     * role in your organization to delete a model.
      *
      * @param model The model to delete
      * @return DeleteModelResponse
@@ -96,8 +96,8 @@ class ModelsApi(
     }
 
     /**
-     * Delete a fine-tuned model. You must have the Owner role in your
-     * organization to delete a model.
+     * DELETE /models/{model} Delete a fine-tuned model. You must have the Owner
+     * role in your organization to delete a model.
      *
      * @param model The model to delete
      * @return ApiResponse<DeleteModelResponse?>
@@ -142,8 +142,8 @@ class ModelsApi(
     }
 
     /**
-     * Lists the currently available models, and provides basic information
-     * about each one such as the owner and availability.
+     * GET /models Lists the currently available models, and provides basic
+     * information about each one such as the owner and availability.
      *
      * @return ListModelsResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -195,8 +195,8 @@ class ModelsApi(
     }
 
     /**
-     * Lists the currently available models, and provides basic information
-     * about each one such as the owner and availability.
+     * GET /models Lists the currently available models, and provides basic
+     * information about each one such as the owner and availability.
      *
      * @return ApiResponse<ListModelsResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -232,8 +232,8 @@ class ModelsApi(
     }
 
     /**
-     * Retrieves a model instance, providing basic information about the model
-     * such as the owner and permissioning.
+     * GET /models/{model} Retrieves a model instance, providing basic
+     * information about the model such as the owner and permissioning.
      *
      * @param model The ID of the model to use for this request
      * @return Model
@@ -286,8 +286,8 @@ class ModelsApi(
     }
 
     /**
-     * Retrieves a model instance, providing basic information about the model
-     * such as the owner and permissioning.
+     * GET /models/{model} Retrieves a model instance, providing basic
+     * information about the model such as the owner and permissioning.
      *
      * @param model The ID of the model to use for this request
      * @return ApiResponse<Model?>

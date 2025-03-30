@@ -12,19 +12,60 @@
 package com.openai.models
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * Configuration for input audio transcription, defaults to off and can be set
  * to `null` to turn off once on. Input audio transcription is not native to the
  * model, since the model consumes audio directly. Transcription runs
- * asynchronously through Whisper and should be treated as rough guidance rather
- * than the representation understood by the model.
+ * asynchronously through
+ * [the /audio/transcriptions endpoint](https://platform.openai.com/docs/api-reference/audio/createTranscription)
+ * and should be treated as guidance of input audio content rather than
+ * precisely what the model heard. The client can optionally set the language
+ * and prompt for transcription, these offer additional guidance to the
+ * transcription service.
  *
- * @param model The model to use for transcription, `whisper-1` is the only
- *   currently supported model.
+ * @param model The model to use for transcription, current options are
+ *   `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and `whisper-1`.
+ * @param language The language of the input audio. Supplying the input language
+ *   in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g.
+ *   `en`) format will improve accuracy and latency.
+ * @param prompt An optional text to guide the model's style or continue a
+ *   previous audio segment. For `whisper-1`, the
+ *   [prompt is a list of keywords](/docs/guides/speech-to-text#prompting). For
+ *   `gpt-4o-transcribe` models, the prompt is a free text string, for example
+ *   \"expect words related to technology\".
  */
 data class RealtimeSessionInputAudioTranscription(
 
-    /* The model to use for transcription, `whisper-1` is the only currently  supported model.  */
-    @Json(name = "model") val model: kotlin.String? = null
-) {}
+    /* The model to use for transcription, current options are `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and `whisper-1`.  */
+    @Json(name = "model")
+    // openai-openapi-kotlin changes begin
+    val model: RealtimeSessionInputAudioTranscription.Model? = null,
+    // openai-openapi-kotlin changes end
+
+    /* The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format will improve accuracy and latency.  */
+    @Json(name = "language") val language: kotlin.String? = null,
+
+    /* An optional text to guide the model's style or continue a previous audio segment. For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting). For `gpt-4o-transcribe` models, the prompt is a free text string, for example \"expect words related to technology\".  */
+    @Json(name = "prompt") val prompt: kotlin.String? = null,
+) {
+    // openai-openapi-kotlin changes begin
+    /**
+     * The model to use for transcription, current options are
+     * `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and `whisper-1`. The model
+     * to use for transcription, current options are `gpt-4o-transcribe`,
+     * `gpt-4o-mini-transcribe`, and `whisper-1`.
+     *
+     * Values: gpt_4o_transcribe,gpt_4o_mini_transcribe,whisper_1
+     */
+    @JsonClass(generateAdapter = false)
+    enum class Model(val value: kotlin.String) {
+        @Json(name = "gpt-4o-transcribe")
+        gptDash4oDashTranscribe("gpt-4o-transcribe"),
+        @Json(name = "gpt-4o-mini-transcribe")
+        gptDash4oDashMiniDashTranscribe("gpt-4o-mini-transcribe"),
+        @Json(name = "whisper-1") whisperDash1("whisper-1"),
+    }
+    // openai-openapi-kotlin changes end
+}

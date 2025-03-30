@@ -22,11 +22,16 @@ import com.openai.infrastructure.ResponseType
 import com.openai.infrastructure.ServerError
 import com.openai.infrastructure.ServerException
 import com.openai.infrastructure.Success
+import com.openai.infrastructure.toMultiValue
+import com.openai.models.CreateFineTuningCheckpointPermissionRequest
 import com.openai.models.CreateFineTuningJobRequest
+import com.openai.models.DeleteFineTuningCheckpointPermissionResponse
 import com.openai.models.FineTuningJob
+import com.openai.models.ListFineTuningCheckpointPermissionResponse
 import com.openai.models.ListFineTuningJobCheckpointsResponse
 import com.openai.models.ListFineTuningJobEventsResponse
 import com.openai.models.ListPaginatedFineTuningJobsResponse
+import com.squareup.moshi.Json
 import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
@@ -44,7 +49,8 @@ class FineTuningApi(
     }
 
     /**
-     * Immediately cancel a fine-tune job.
+     * POST /fine_tuning/jobs/{fine_tuning_job_id}/cancel Immediately cancel a
+     * fine-tune job.
      *
      * @param fineTuningJobId The ID of the fine-tuning job to cancel.
      * @return FineTuningJob
@@ -98,7 +104,8 @@ class FineTuningApi(
     }
 
     /**
-     * Immediately cancel a fine-tune job.
+     * POST /fine_tuning/jobs/{fine_tuning_job_id}/cancel Immediately cancel a
+     * fine-tune job.
      *
      * @param fineTuningJobId The ID of the fine-tuning job to cancel.
      * @return ApiResponse<FineTuningJob?>
@@ -146,9 +153,148 @@ class FineTuningApi(
     }
 
     /**
-     * Creates a fine-tuning job which begins the process of creating a new
-     * model from a given dataset. Response includes details of the enqueued job
-     * including job status and the name of the fine-tuned models once complete.
+     * POST /fine_tuning/checkpoints/{permission_id}/permissions **NOTE:**
+     * Calling this endpoint requires an [admin API key](../admin-api-keys).
+     * This enables organization owners to share fine-tuned models with other
+     * projects in their organization.
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint to create a
+     *   permission for.
+     * @param createFineTuningCheckpointPermissionRequest
+     * @return ListFineTuningCheckpointPermissionResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun createFineTuningCheckpointPermission(
+        permissionId: kotlin.String,
+        createFineTuningCheckpointPermissionRequest:
+            CreateFineTuningCheckpointPermissionRequest,
+    ): ListFineTuningCheckpointPermissionResponse {
+        val localVarResponse =
+            createFineTuningCheckpointPermissionWithHttpInfo(
+                permissionId = permissionId,
+                createFineTuningCheckpointPermissionRequest =
+                    createFineTuningCheckpointPermissionRequest,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as ListFineTuningCheckpointPermissionResponse
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * POST /fine_tuning/checkpoints/{permission_id}/permissions **NOTE:**
+     * Calling this endpoint requires an [admin API key](../admin-api-keys).
+     * This enables organization owners to share fine-tuned models with other
+     * projects in their organization.
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint to create a
+     *   permission for.
+     * @param createFineTuningCheckpointPermissionRequest
+     * @return ApiResponse<ListFineTuningCheckpointPermissionResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun createFineTuningCheckpointPermissionWithHttpInfo(
+        permissionId: kotlin.String,
+        createFineTuningCheckpointPermissionRequest:
+            CreateFineTuningCheckpointPermissionRequest,
+    ): ApiResponse<ListFineTuningCheckpointPermissionResponse?> {
+        val localVariableConfig =
+            createFineTuningCheckpointPermissionRequestConfig(
+                permissionId = permissionId,
+                createFineTuningCheckpointPermissionRequest =
+                    createFineTuningCheckpointPermissionRequest,
+            )
+
+        return request<
+            CreateFineTuningCheckpointPermissionRequest,
+            ListFineTuningCheckpointPermissionResponse,
+        >(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation
+     * createFineTuningCheckpointPermission
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint to create a
+     *   permission for.
+     * @param createFineTuningCheckpointPermissionRequest
+     * @return RequestConfig
+     */
+    fun createFineTuningCheckpointPermissionRequestConfig(
+        permissionId: kotlin.String,
+        createFineTuningCheckpointPermissionRequest:
+            CreateFineTuningCheckpointPermissionRequest,
+    ): RequestConfig<CreateFineTuningCheckpointPermissionRequest> {
+        val localVariableBody = createFineTuningCheckpointPermissionRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path =
+                "/fine_tuning/checkpoints/{permission_id}/permissions"
+                    .replace(
+                        "{" + "permission_id" + "}",
+                        encodeURIComponent(permissionId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * POST /fine_tuning/jobs Creates a fine-tuning job which begins the process
+     * of creating a new model from a given dataset. Response includes details
+     * of the enqueued job including job status and the name of the fine-tuned
+     * models once complete.
      * [Learn more about fine-tuning](/docs/guides/fine-tuning)
      *
      * @param createFineTuningJobRequest
@@ -207,9 +353,10 @@ class FineTuningApi(
     }
 
     /**
-     * Creates a fine-tuning job which begins the process of creating a new
-     * model from a given dataset. Response includes details of the enqueued job
-     * including job status and the name of the fine-tuned models once complete.
+     * POST /fine_tuning/jobs Creates a fine-tuning job which begins the process
+     * of creating a new model from a given dataset. Response includes details
+     * of the enqueued job including job status and the name of the fine-tuned
+     * models once complete.
      * [Learn more about fine-tuning](/docs/guides/fine-tuning)
      *
      * @param createFineTuningJobRequest
@@ -258,7 +405,325 @@ class FineTuningApi(
     }
 
     /**
-     * Get status updates for a fine-tuning job.
+     * DELETE /fine_tuning/checkpoints/{permission_id}/permissions **NOTE:**
+     * This endpoint requires an [admin API key](../admin-api-keys).
+     * Organization owners can use this endpoint to delete a permission for a
+     * fine-tuned model checkpoint.
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint permission
+     *   to delete.
+     * @return DeleteFineTuningCheckpointPermissionResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun deleteFineTuningCheckpointPermission(
+        permissionId: kotlin.String
+    ): DeleteFineTuningCheckpointPermissionResponse {
+        val localVarResponse =
+            deleteFineTuningCheckpointPermissionWithHttpInfo(
+                permissionId = permissionId
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as DeleteFineTuningCheckpointPermissionResponse
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * DELETE /fine_tuning/checkpoints/{permission_id}/permissions **NOTE:**
+     * This endpoint requires an [admin API key](../admin-api-keys).
+     * Organization owners can use this endpoint to delete a permission for a
+     * fine-tuned model checkpoint.
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint permission
+     *   to delete.
+     * @return ApiResponse<DeleteFineTuningCheckpointPermissionResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteFineTuningCheckpointPermissionWithHttpInfo(
+        permissionId: kotlin.String
+    ): ApiResponse<DeleteFineTuningCheckpointPermissionResponse?> {
+        val localVariableConfig =
+            deleteFineTuningCheckpointPermissionRequestConfig(
+                permissionId = permissionId
+            )
+
+        return request<Unit, DeleteFineTuningCheckpointPermissionResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation
+     * deleteFineTuningCheckpointPermission
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint permission
+     *   to delete.
+     * @return RequestConfig
+     */
+    fun deleteFineTuningCheckpointPermissionRequestConfig(
+        permissionId: kotlin.String
+    ): RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path =
+                "/fine_tuning/checkpoints/{permission_id}/permissions"
+                    .replace(
+                        "{" + "permission_id" + "}",
+                        encodeURIComponent(permissionId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /** enum for parameter order */
+    enum class OrderListFineTuningCheckpointPermissions(
+        val value: kotlin.String
+    ) {
+        @Json(name = "ascending") ascending("ascending"),
+        @Json(name = "descending") descending("descending");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the
+         * value, and instead use the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are
+         * different, and ensures that the client sends the correct enum values
+         * to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+    }
+
+    /**
+     * GET /fine_tuning/checkpoints/{permission_id}/permissions **NOTE:** This
+     * endpoint requires an [admin API key](../admin-api-keys). Organization
+     * owners can use this endpoint to view all permissions for a fine-tuned
+     * model checkpoint.
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint to get
+     *   permissions for.
+     * @param projectId The ID of the project to get permissions for. (optional)
+     * @param after Identifier for the last permission ID from the previous
+     *   pagination request. (optional)
+     * @param limit Number of permissions to retrieve. (optional, default to 10)
+     * @param order The order in which to retrieve permissions. (optional,
+     *   default to descending)
+     * @return ListFineTuningCheckpointPermissionResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun listFineTuningCheckpointPermissions(
+        permissionId: kotlin.String,
+        projectId: kotlin.String? = null,
+        after: kotlin.String? = null,
+        limit: kotlin.Int? = 10,
+        order: OrderListFineTuningCheckpointPermissions? =
+            OrderListFineTuningCheckpointPermissions.descending,
+    ): ListFineTuningCheckpointPermissionResponse {
+        val localVarResponse =
+            listFineTuningCheckpointPermissionsWithHttpInfo(
+                permissionId = permissionId,
+                projectId = projectId,
+                after = after,
+                limit = limit,
+                order = order,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as ListFineTuningCheckpointPermissionResponse
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * GET /fine_tuning/checkpoints/{permission_id}/permissions **NOTE:** This
+     * endpoint requires an [admin API key](../admin-api-keys). Organization
+     * owners can use this endpoint to view all permissions for a fine-tuned
+     * model checkpoint.
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint to get
+     *   permissions for.
+     * @param projectId The ID of the project to get permissions for. (optional)
+     * @param after Identifier for the last permission ID from the previous
+     *   pagination request. (optional)
+     * @param limit Number of permissions to retrieve. (optional, default to 10)
+     * @param order The order in which to retrieve permissions. (optional,
+     *   default to descending)
+     * @return ApiResponse<ListFineTuningCheckpointPermissionResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listFineTuningCheckpointPermissionsWithHttpInfo(
+        permissionId: kotlin.String,
+        projectId: kotlin.String?,
+        after: kotlin.String?,
+        limit: kotlin.Int?,
+        order: OrderListFineTuningCheckpointPermissions?,
+    ): ApiResponse<ListFineTuningCheckpointPermissionResponse?> {
+        val localVariableConfig =
+            listFineTuningCheckpointPermissionsRequestConfig(
+                permissionId = permissionId,
+                projectId = projectId,
+                after = after,
+                limit = limit,
+                order = order,
+            )
+
+        return request<Unit, ListFineTuningCheckpointPermissionResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation
+     * listFineTuningCheckpointPermissions
+     *
+     * @param permissionId The ID of the fine-tuned model checkpoint to get
+     *   permissions for.
+     * @param projectId The ID of the project to get permissions for. (optional)
+     * @param after Identifier for the last permission ID from the previous
+     *   pagination request. (optional)
+     * @param limit Number of permissions to retrieve. (optional, default to 10)
+     * @param order The order in which to retrieve permissions. (optional,
+     *   default to descending)
+     * @return RequestConfig
+     */
+    fun listFineTuningCheckpointPermissionsRequestConfig(
+        permissionId: kotlin.String,
+        projectId: kotlin.String?,
+        after: kotlin.String?,
+        limit: kotlin.Int?,
+        order: OrderListFineTuningCheckpointPermissions?,
+    ): RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap =
+            mutableMapOf<
+                    kotlin.String,
+                    kotlin.collections.List<kotlin.String>,
+                >()
+                .apply {
+                    if (projectId != null) {
+                        put("project_id", listOf(projectId.toString()))
+                    }
+                    if (after != null) {
+                        put("after", listOf(after.toString()))
+                    }
+                    if (limit != null) {
+                        put("limit", listOf(limit.toString()))
+                    }
+                    if (order != null) {
+                        put("order", listOf(order.value))
+                    }
+                }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path =
+                "/fine_tuning/checkpoints/{permission_id}/permissions"
+                    .replace(
+                        "{" + "permission_id" + "}",
+                        encodeURIComponent(permissionId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * GET /fine_tuning/jobs/{fine_tuning_job_id}/events Get status updates for
+     * a fine-tuning job.
      *
      * @param fineTuningJobId The ID of the fine-tuning job to get events for.
      * @param after Identifier for the last event from the previous pagination
@@ -324,7 +789,8 @@ class FineTuningApi(
     }
 
     /**
-     * Get status updates for a fine-tuning job.
+     * GET /fine_tuning/jobs/{fine_tuning_job_id}/events Get status updates for
+     * a fine-tuning job.
      *
      * @param fineTuningJobId The ID of the fine-tuning job to get events for.
      * @param after Identifier for the last event from the previous pagination
@@ -400,7 +866,8 @@ class FineTuningApi(
     }
 
     /**
-     * List checkpoints for a fine-tuning job.
+     * GET /fine_tuning/jobs/{fine_tuning_job_id}/checkpoints List checkpoints
+     * for a fine-tuning job.
      *
      * @param fineTuningJobId The ID of the fine-tuning job to get checkpoints
      *   for.
@@ -467,7 +934,8 @@ class FineTuningApi(
     }
 
     /**
-     * List checkpoints for a fine-tuning job.
+     * GET /fine_tuning/jobs/{fine_tuning_job_id}/checkpoints List checkpoints
+     * for a fine-tuning job.
      *
      * @param fineTuningJobId The ID of the fine-tuning job to get checkpoints
      *   for.
@@ -546,12 +1014,15 @@ class FineTuningApi(
     }
 
     /**
-     * List your organization&#39;s fine-tuning jobs
+     * GET /fine_tuning/jobs List your organization&#39;s fine-tuning jobs
      *
      * @param after Identifier for the last job from the previous pagination
      *   request. (optional)
      * @param limit Number of fine-tuning jobs to retrieve. (optional, default
      *   to 20)
+     * @param metadata Optional metadata filter. To filter, use the syntax
+     *   &#x60;metadata[k]&#x3D;v&#x60;. Alternatively, set
+     *   &#x60;metadata&#x3D;null&#x60; to indicate no metadata. (optional)
      * @return ListPaginatedFineTuningJobsResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -571,11 +1042,13 @@ class FineTuningApi(
     fun listPaginatedFineTuningJobs(
         after: kotlin.String? = null,
         limit: kotlin.Int? = 20,
+        metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
     ): ListPaginatedFineTuningJobsResponse {
         val localVarResponse =
             listPaginatedFineTuningJobsWithHttpInfo(
                 after = after,
                 limit = limit,
+                metadata = metadata,
             )
 
         return when (localVarResponse.responseType) {
@@ -610,12 +1083,15 @@ class FineTuningApi(
     }
 
     /**
-     * List your organization&#39;s fine-tuning jobs
+     * GET /fine_tuning/jobs List your organization&#39;s fine-tuning jobs
      *
      * @param after Identifier for the last job from the previous pagination
      *   request. (optional)
      * @param limit Number of fine-tuning jobs to retrieve. (optional, default
      *   to 20)
+     * @param metadata Optional metadata filter. To filter, use the syntax
+     *   &#x60;metadata[k]&#x3D;v&#x60;. Alternatively, set
+     *   &#x60;metadata&#x3D;null&#x60; to indicate no metadata. (optional)
      * @return ApiResponse<ListPaginatedFineTuningJobsResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -625,11 +1101,13 @@ class FineTuningApi(
     fun listPaginatedFineTuningJobsWithHttpInfo(
         after: kotlin.String?,
         limit: kotlin.Int?,
+        metadata: kotlin.collections.Map<kotlin.String, kotlin.String>?,
     ): ApiResponse<ListPaginatedFineTuningJobsResponse?> {
         val localVariableConfig =
             listPaginatedFineTuningJobsRequestConfig(
                 after = after,
                 limit = limit,
+                metadata = metadata,
             )
 
         return request<Unit, ListPaginatedFineTuningJobsResponse>(
@@ -644,11 +1122,15 @@ class FineTuningApi(
      *   request. (optional)
      * @param limit Number of fine-tuning jobs to retrieve. (optional, default
      *   to 20)
+     * @param metadata Optional metadata filter. To filter, use the syntax
+     *   &#x60;metadata[k]&#x3D;v&#x60;. Alternatively, set
+     *   &#x60;metadata&#x3D;null&#x60; to indicate no metadata. (optional)
      * @return RequestConfig
      */
     fun listPaginatedFineTuningJobsRequestConfig(
         after: kotlin.String?,
         limit: kotlin.Int?,
+        metadata: kotlin.collections.Map<kotlin.String, kotlin.String>?,
     ): RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap =
@@ -662,6 +1144,9 @@ class FineTuningApi(
                     }
                     if (limit != null) {
                         put("limit", listOf(limit.toString()))
+                    }
+                    if (metadata != null) {
+                        put("metadata", toMultiValue(metadata.toList(), ""))
                     }
                 }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -678,8 +1163,8 @@ class FineTuningApi(
     }
 
     /**
-     * Get info about a fine-tuning job.
-     * [Learn more about fine-tuning](/docs/guides/fine-tuning)
+     * GET /fine_tuning/jobs/{fine_tuning_job_id} Get info about a fine-tuning
+     * job. [Learn more about fine-tuning](/docs/guides/fine-tuning)
      *
      * @param fineTuningJobId The ID of the fine-tuning job.
      * @return FineTuningJob
@@ -733,8 +1218,8 @@ class FineTuningApi(
     }
 
     /**
-     * Get info about a fine-tuning job.
-     * [Learn more about fine-tuning](/docs/guides/fine-tuning)
+     * GET /fine_tuning/jobs/{fine_tuning_job_id} Get info about a fine-tuning
+     * job. [Learn more about fine-tuning](/docs/guides/fine-tuning)
      *
      * @param fineTuningJobId The ID of the fine-tuning job.
      * @return ApiResponse<FineTuningJob?>

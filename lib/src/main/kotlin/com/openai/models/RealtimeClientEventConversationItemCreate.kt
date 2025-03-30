@@ -36,9 +36,11 @@ data class RealtimeClientEventConversationItemCreate(
 
     /* The event type, must be `conversation.item.create`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventConversationItemCreate.Type =
         RealtimeClientEventConversationItemCreate.Type
             .conversationPeriodItemPeriodCreate,
+    // openai-openapi-kotlin changes end
     @Json(name = "item") val item: RealtimeConversationItem,
 
     /* Optional client-generated ID used to identify this event. */

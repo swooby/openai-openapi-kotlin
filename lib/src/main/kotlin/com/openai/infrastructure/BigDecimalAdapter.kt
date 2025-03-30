@@ -4,6 +4,7 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 import java.math.BigDecimal
 
+// openai-openapi-kotlin changes begin
 /**
  * This Adapter was obviously added because...
  *
@@ -37,7 +38,9 @@ import java.math.BigDecimal
  *
  * Changing this to return Double causes OpenAI to stop complaining.
  */
+// openai-openapi-kotlin changes end
 class BigDecimalAdapter {
+    // openai-openapi-kotlin changes begin
     /*
     @ToJson
     fun toJson(value: BigDecimal): String {
@@ -49,6 +52,8 @@ class BigDecimalAdapter {
     fun toJson(value: BigDecimal): Double {
         return value.toDouble()
     }
+
+    // openai-openapi-kotlin changes end
 
     @FromJson
     fun fromJson(value: String): BigDecimal {

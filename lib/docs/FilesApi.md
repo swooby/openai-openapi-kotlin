@@ -25,7 +25,7 @@ Upload a file that can be used across various endpoints. Individual files can be
 
 val apiInstance = FilesApi()
 val file : java.io.File = BINARY_DATA_HERE // java.io.File | The File object (not file name) to be uploaded. 
-val purpose : kotlin.String = purpose_example // kotlin.String | The intended purpose of the uploaded file.  Use \\\"assistants\\\" for [Assistants](/docs/api-reference/assistants) and [Message](/docs/api-reference/messages) files, \\\"vision\\\" for Assistants image file inputs, \\\"batch\\\" for [Batch API](/docs/guides/batch), and \\\"fine-tune\\\" for [Fine-tuning](/docs/api-reference/fine-tuning). 
+val purpose : kotlin.String = purpose_example // kotlin.String | The intended purpose of the uploaded file. One of: - `assistants`: Used in the Assistants API - `batch`: Used in the Batch API - `fine-tune`: Used for fine-tuning - `vision`: Images used for vision fine-tuning - `user_data`: Flexible file type for any purpose - `evals`: Used for eval data sets 
 try {
     val result : OpenAIFile = apiInstance.createFile(file, purpose)
     println(result)
@@ -42,7 +42,7 @@ try {
 | **file** | **java.io.File**| The File object (not file name) to be uploaded.  | |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **purpose** | **kotlin.String**| The intended purpose of the uploaded file.  Use \\\&quot;assistants\\\&quot; for [Assistants](/docs/api-reference/assistants) and [Message](/docs/api-reference/messages) files, \\\&quot;vision\\\&quot; for Assistants image file inputs, \\\&quot;batch\\\&quot; for [Batch API](/docs/guides/batch), and \\\&quot;fine-tune\\\&quot; for [Fine-tuning](/docs/api-reference/fine-tuning).  | [enum: assistants, batch, fine-tune, vision] |
+| **purpose** | **kotlin.String**| The intended purpose of the uploaded file. One of: - &#x60;assistants&#x60;: Used in the Assistants API - &#x60;batch&#x60;: Used in the Batch API - &#x60;fine-tune&#x60;: Used for fine-tuning - &#x60;vision&#x60;: Images used for vision fine-tuning - &#x60;user_data&#x60;: Flexible file type for any purpose - &#x60;evals&#x60;: Used for eval data sets  | [enum: assistants, batch, fine-tune, vision, user_data, evals] |
 
 ### Return type
 

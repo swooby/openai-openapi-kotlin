@@ -37,9 +37,11 @@ data class RealtimeClientEventConversationItemTruncate(
 
     /* The event type, must be `conversation.item.truncate`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventConversationItemTruncate.Type =
         RealtimeClientEventConversationItemTruncate.Type
             .conversationPeriodItemPeriodTruncate,
+    // openai-openapi-kotlin changes end
 
     /* The ID of the assistant message item to truncate. Only assistant message  items can be truncated.  */
     @Json(name = "item_id") val itemId: kotlin.String,

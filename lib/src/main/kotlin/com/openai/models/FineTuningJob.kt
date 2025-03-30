@@ -54,6 +54,11 @@ import com.squareup.moshi.JsonClass
  *   fine-tuning job is estimated to finish. The value will be null if the
  *   fine-tuning job is not running.
  * @param method
+ * @param metadata Set of 16 key-value pairs that can be attached to an object.
+ *   This can be useful for storing additional information about the object in a
+ *   structured format, and querying for objects via API or the dashboard. Keys
+ *   are strings with a maximum length of 64 characters. Values are strings with
+ *   a maximum length of 512 characters.
  */
 data class FineTuningJob(
 
@@ -108,6 +113,10 @@ data class FineTuningJob(
     /* The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running. */
     @Json(name = "estimated_finish") val estimatedFinish: kotlin.Int? = null,
     @Json(name = "method") val method: FineTuneMethod? = null,
+
+    /* Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.   Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.  */
+    @Json(name = "metadata")
+    val metadata: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
 ) {
 
     /**

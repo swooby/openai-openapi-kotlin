@@ -104,5 +104,5 @@ data class CreateThreadAndRunRequest(
     @Json(name = "parallel_tool_calls")
     val parallelToolCalls: kotlin.Boolean? = true,
     @Json(name = "response_format")
-    val responseFormat: AssistantObjectResponseFormat? = null,
+    val responseFormat: AssistantsApiResponseFormatOption? = null,
 ) {}

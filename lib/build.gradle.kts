@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
-    id("com.diffplug.spotless") version "7.0.2"
     // id("maven-publish")
+    alias(libs.plugins.spotless)
 }
 
 group = "com.openai"
@@ -32,6 +32,9 @@ dependencies {
     testImplementation(libs.kotlintest.runner.junit5)
 }
 
+// Use spotless plugin to automatically format code, remove unused import, etc
+// To apply changes directly to the file, run `gradlew spotlessApply`
+// Ref: https://github.com/diffplug/spotless/tree/main/plugin-gradle
 spotless {
     kotlin {
         ktfmt("0.54").googleStyle().configure {

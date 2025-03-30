@@ -28,6 +28,8 @@ import com.openai.models.CreateSpeechRequest
 import com.openai.models.CreateTranscription200Response
 import com.openai.models.CreateTranscriptionRequestModel
 import com.openai.models.CreateTranslation200Response
+import com.openai.models.CreateTranslationRequestModel
+import com.openai.models.TranscriptionInclude
 import com.squareup.moshi.Json
 import java.io.IOException
 import okhttp3.Call
@@ -46,7 +48,7 @@ class AudioApi(
     }
 
     /**
-     * Generates audio from the input text.
+     * POST /audio/speech Generates audio from the input text.
      *
      * @param createSpeechRequest
      * @return java.io.File
@@ -100,7 +102,7 @@ class AudioApi(
     }
 
     /**
-     * Generates audio from the input text.
+     * POST /audio/speech Generates audio from the input text.
      *
      * @param createSpeechRequest
      * @return ApiResponse<java.io.File?>
@@ -162,7 +164,7 @@ class AudioApi(
     }
 
     /**
-     * Transcribes audio into the input language.
+     * POST /audio/transcriptions Transcribes audio into the input language.
      *
      * @param file The audio file object (not file name) to transcribe, in one
      *   of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -184,6 +186,13 @@ class AudioApi(
      *   [log probability](https://en.wikipedia.org/wiki/Log_probability) to
      *   automatically increase the temperature until certain thresholds are
      *   hit. (optional, default to 0)
+     * @param include Additional information to include in the transcription
+     *   response. &#x60;logprobs&#x60; will return the log probabilities of the
+     *   tokens in the response to understand the model&#39;s confidence in the
+     *   transcription. &#x60;logprobs&#x60; only works with response_format set
+     *   to &#x60;json&#x60; and only with the models
+     *   &#x60;gpt-4o-transcribe&#x60; and &#x60;gpt-4o-mini-transcribe&#x60;.
+     *   (optional)
      * @param timestampGranularities The timestamp granularities to populate for
      *   this transcription. &#x60;response_format&#x60; must be set
      *   &#x60;verbose_json&#x60; to use timestamp granularities. Either or both
@@ -191,6 +200,14 @@ class AudioApi(
      *   &#x60;segment&#x60;. Note: There is no additional latency for segment
      *   timestamps, but generating word timestamps incurs additional latency.
      *   (optional)
+     * @param stream If set to true, the model response data will be streamed to
+     *   the client as it is generated using
+     *   [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
+     *   See the
+     *   [Streaming section of the Speech-to-Text guide](/docs/guides/speech-to-text?lang&#x3D;curl#streaming-transcriptions)
+     *   for more information. Note: Streaming is not supported for the
+     *   &#x60;whisper-1&#x60; model and will be ignored. (optional, default to
+     *   false)
      * @return CreateTranscription200Response
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -212,13 +229,17 @@ class AudioApi(
         model: CreateTranscriptionRequestModel,
         language: kotlin.String? = null,
         prompt: kotlin.String? = null,
+        // openai-openapi-kotlin change begin
         responseFormat: AudioResponseFormat? = AudioResponseFormat.json,
+        // openai-openapi-kotlin change end
         temperature: java.math.BigDecimal? = java.math.BigDecimal("0"),
+        include: kotlin.collections.List<TranscriptionInclude>? = null,
         timestampGranularities:
             kotlin.collections.List<
                 TimestampGranularitiesCreateTranscription
             >? =
             null,
+        stream: kotlin.Boolean? = false,
     ): CreateTranscription200Response {
         val localVarResponse =
             createTranscriptionWithHttpInfo(
@@ -228,7 +249,9 @@ class AudioApi(
                 prompt = prompt,
                 responseFormat = responseFormat,
                 temperature = temperature,
+                include = include,
                 timestampGranularities = timestampGranularities,
+                stream = stream,
             )
 
         return when (localVarResponse.responseType) {
@@ -263,7 +286,7 @@ class AudioApi(
     }
 
     /**
-     * Transcribes audio into the input language.
+     * POST /audio/transcriptions Transcribes audio into the input language.
      *
      * @param file The audio file object (not file name) to transcribe, in one
      *   of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -285,6 +308,13 @@ class AudioApi(
      *   [log probability](https://en.wikipedia.org/wiki/Log_probability) to
      *   automatically increase the temperature until certain thresholds are
      *   hit. (optional, default to 0)
+     * @param include Additional information to include in the transcription
+     *   response. &#x60;logprobs&#x60; will return the log probabilities of the
+     *   tokens in the response to understand the model&#39;s confidence in the
+     *   transcription. &#x60;logprobs&#x60; only works with response_format set
+     *   to &#x60;json&#x60; and only with the models
+     *   &#x60;gpt-4o-transcribe&#x60; and &#x60;gpt-4o-mini-transcribe&#x60;.
+     *   (optional)
      * @param timestampGranularities The timestamp granularities to populate for
      *   this transcription. &#x60;response_format&#x60; must be set
      *   &#x60;verbose_json&#x60; to use timestamp granularities. Either or both
@@ -292,6 +322,14 @@ class AudioApi(
      *   &#x60;segment&#x60;. Note: There is no additional latency for segment
      *   timestamps, but generating word timestamps incurs additional latency.
      *   (optional)
+     * @param stream If set to true, the model response data will be streamed to
+     *   the client as it is generated using
+     *   [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
+     *   See the
+     *   [Streaming section of the Speech-to-Text guide](/docs/guides/speech-to-text?lang&#x3D;curl#streaming-transcriptions)
+     *   for more information. Note: Streaming is not supported for the
+     *   &#x60;whisper-1&#x60; model and will be ignored. (optional, default to
+     *   false)
      * @return ApiResponse<CreateTranscription200Response?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -305,8 +343,10 @@ class AudioApi(
         prompt: kotlin.String?,
         responseFormat: AudioResponseFormat?,
         temperature: java.math.BigDecimal?,
+        include: kotlin.collections.List<TranscriptionInclude>?,
         timestampGranularities:
             kotlin.collections.List<TimestampGranularitiesCreateTranscription>?,
+        stream: kotlin.Boolean?,
     ): ApiResponse<CreateTranscription200Response?> {
         val localVariableConfig =
             createTranscriptionRequestConfig(
@@ -316,7 +356,9 @@ class AudioApi(
                 prompt = prompt,
                 responseFormat = responseFormat,
                 temperature = temperature,
+                include = include,
                 timestampGranularities = timestampGranularities,
+                stream = stream,
             )
 
         return request<
@@ -350,6 +392,13 @@ class AudioApi(
      *   [log probability](https://en.wikipedia.org/wiki/Log_probability) to
      *   automatically increase the temperature until certain thresholds are
      *   hit. (optional, default to 0)
+     * @param include Additional information to include in the transcription
+     *   response. &#x60;logprobs&#x60; will return the log probabilities of the
+     *   tokens in the response to understand the model&#39;s confidence in the
+     *   transcription. &#x60;logprobs&#x60; only works with response_format set
+     *   to &#x60;json&#x60; and only with the models
+     *   &#x60;gpt-4o-transcribe&#x60; and &#x60;gpt-4o-mini-transcribe&#x60;.
+     *   (optional)
      * @param timestampGranularities The timestamp granularities to populate for
      *   this transcription. &#x60;response_format&#x60; must be set
      *   &#x60;verbose_json&#x60; to use timestamp granularities. Either or both
@@ -357,6 +406,14 @@ class AudioApi(
      *   &#x60;segment&#x60;. Note: There is no additional latency for segment
      *   timestamps, but generating word timestamps incurs additional latency.
      *   (optional)
+     * @param stream If set to true, the model response data will be streamed to
+     *   the client as it is generated using
+     *   [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
+     *   See the
+     *   [Streaming section of the Speech-to-Text guide](/docs/guides/speech-to-text?lang&#x3D;curl#streaming-transcriptions)
+     *   for more information. Note: Streaming is not supported for the
+     *   &#x60;whisper-1&#x60; model and will be ignored. (optional, default to
+     *   false)
      * @return RequestConfig
      */
     fun createTranscriptionRequestConfig(
@@ -366,8 +423,10 @@ class AudioApi(
         prompt: kotlin.String?,
         responseFormat: AudioResponseFormat?,
         temperature: java.math.BigDecimal?,
+        include: kotlin.collections.List<TranscriptionInclude>?,
         timestampGranularities:
             kotlin.collections.List<TimestampGranularitiesCreateTranscription>?,
+        stream: kotlin.Boolean?,
     ): RequestConfig<Map<String, PartConfig<*>>> {
         val localVariableBody =
             mapOf(
@@ -380,11 +439,16 @@ class AudioApi(
                     PartConfig(body = responseFormat, headers = mutableMapOf()),
                 "temperature" to
                     PartConfig(body = temperature, headers = mutableMapOf()),
+                "include[]" to
+                    PartConfig(body = include, headers = mutableMapOf()),
                 "timestamp_granularities[]" to
                     PartConfig(
+                        // openai-openapi-kotlin change begin
                         body = timestampGranularities,
+                        // openai-openapi-kotlin change end
                         headers = mutableMapOf(),
                     ),
+                "stream" to PartConfig(body = stream, headers = mutableMapOf()),
             )
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> =
@@ -401,8 +465,27 @@ class AudioApi(
         )
     }
 
+    /** enum for parameter responseFormat */
+    enum class ResponseFormatCreateTranslation(val value: kotlin.String) {
+        @Json(name = "json") json("json"),
+        @Json(name = "text") text("text"),
+        @Json(name = "srt") srt("srt"),
+        @Json(name = "verbose_json") verbose_json("verbose_json"),
+        @Json(name = "vtt") vtt("vtt");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the
+         * value, and instead use the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are
+         * different, and ensures that the client sends the correct enum values
+         * to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+    }
+
     /**
-     * Translates audio into English.
+     * POST /audio/translations Translates audio into English.
      *
      * @param file The audio file object (not file name) translate, in one of
      *   these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -411,7 +494,10 @@ class AudioApi(
      *   a previous audio segment. The
      *   [prompt](/docs/guides/speech-to-text#prompting) should be in English.
      *   (optional)
-     * @param responseFormat (optional, default to json)
+     * @param responseFormat The format of the output, in one of these options:
+     *   &#x60;json&#x60;, &#x60;text&#x60;, &#x60;srt&#x60;,
+     *   &#x60;verbose_json&#x60;, or &#x60;vtt&#x60;. (optional, default to
+     *   json)
      * @param temperature The sampling temperature, between 0 and 1. Higher
      *   values like 0.8 will make the output more random, while lower values
      *   like 0.2 will make it more focused and deterministic. If set to 0, the
@@ -437,9 +523,10 @@ class AudioApi(
     )
     fun createTranslation(
         file: java.io.File,
-        model: CreateTranscriptionRequestModel,
+        model: CreateTranslationRequestModel,
         prompt: kotlin.String? = null,
-        responseFormat: AudioResponseFormat? = AudioResponseFormat.json,
+        responseFormat: ResponseFormatCreateTranslation? =
+            ResponseFormatCreateTranslation.json,
         temperature: java.math.BigDecimal? = java.math.BigDecimal("0"),
     ): CreateTranslation200Response {
         val localVarResponse =
@@ -483,7 +570,7 @@ class AudioApi(
     }
 
     /**
-     * Translates audio into English.
+     * POST /audio/translations Translates audio into English.
      *
      * @param file The audio file object (not file name) translate, in one of
      *   these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -492,7 +579,10 @@ class AudioApi(
      *   a previous audio segment. The
      *   [prompt](/docs/guides/speech-to-text#prompting) should be in English.
      *   (optional)
-     * @param responseFormat (optional, default to json)
+     * @param responseFormat The format of the output, in one of these options:
+     *   &#x60;json&#x60;, &#x60;text&#x60;, &#x60;srt&#x60;,
+     *   &#x60;verbose_json&#x60;, or &#x60;vtt&#x60;. (optional, default to
+     *   json)
      * @param temperature The sampling temperature, between 0 and 1. Higher
      *   values like 0.8 will make the output more random, while lower values
      *   like 0.2 will make it more focused and deterministic. If set to 0, the
@@ -508,9 +598,9 @@ class AudioApi(
     @Throws(IllegalStateException::class, IOException::class)
     fun createTranslationWithHttpInfo(
         file: java.io.File,
-        model: CreateTranscriptionRequestModel,
+        model: CreateTranslationRequestModel,
         prompt: kotlin.String?,
-        responseFormat: AudioResponseFormat?,
+        responseFormat: ResponseFormatCreateTranslation?,
         temperature: java.math.BigDecimal?,
     ): ApiResponse<CreateTranslation200Response?> {
         val localVariableConfig =
@@ -540,7 +630,10 @@ class AudioApi(
      *   a previous audio segment. The
      *   [prompt](/docs/guides/speech-to-text#prompting) should be in English.
      *   (optional)
-     * @param responseFormat (optional, default to json)
+     * @param responseFormat The format of the output, in one of these options:
+     *   &#x60;json&#x60;, &#x60;text&#x60;, &#x60;srt&#x60;,
+     *   &#x60;verbose_json&#x60;, or &#x60;vtt&#x60;. (optional, default to
+     *   json)
      * @param temperature The sampling temperature, between 0 and 1. Higher
      *   values like 0.8 will make the output more random, while lower values
      *   like 0.2 will make it more focused and deterministic. If set to 0, the
@@ -552,9 +645,9 @@ class AudioApi(
      */
     fun createTranslationRequestConfig(
         file: java.io.File,
-        model: CreateTranscriptionRequestModel,
+        model: CreateTranslationRequestModel,
         prompt: kotlin.String?,
-        responseFormat: AudioResponseFormat?,
+        responseFormat: ResponseFormatCreateTranslation?,
         temperature: java.math.BigDecimal?,
     ): RequestConfig<Map<String, PartConfig<*>>> {
         val localVariableBody =
@@ -563,7 +656,10 @@ class AudioApi(
                 "model" to PartConfig(body = model, headers = mutableMapOf()),
                 "prompt" to PartConfig(body = prompt, headers = mutableMapOf()),
                 "response_format" to
-                    PartConfig(body = responseFormat, headers = mutableMapOf()),
+                    PartConfig(
+                        body = responseFormat?.value,
+                        headers = mutableMapOf(),
+                    ),
                 "temperature" to
                     PartConfig(body = temperature, headers = mutableMapOf()),
             )

@@ -48,7 +48,9 @@ class FilesApi(
         @Json(name = "assistants") assistants("assistants"),
         @Json(name = "batch") batch("batch"),
         @Json(name = "fine-tune") fineMinusTune("fine-tune"),
-        @Json(name = "vision") vision("vision");
+        @Json(name = "vision") vision("vision"),
+        @Json(name = "user_data") user_data("user_data"),
+        @Json(name = "evals") evals("evals");
 
         /**
          * Override [toString()] to avoid using the enum variable name as the
@@ -62,10 +64,10 @@ class FilesApi(
     }
 
     /**
-     * Upload a file that can be used across various endpoints. Individual files
-     * can be up to 512 MB, and the size of all files uploaded by one
-     * organization can be up to 100 GB. The Assistants API supports files up to
-     * 2 million tokens and of specific file types. See the
+     * POST /files Upload a file that can be used across various endpoints.
+     * Individual files can be up to 512 MB, and the size of all files uploaded
+     * by one organization can be up to 100 GB. The Assistants API supports
+     * files up to 2 million tokens and of specific file types. See the
      * [Assistants Tools guide](/docs/assistants/tools) for details. The
      * Fine-tuning API only supports &#x60;.jsonl&#x60; files. The input also
      * has certain required formats for fine-tuning
@@ -78,13 +80,12 @@ class FilesApi(
      * storage limits.
      *
      * @param file The File object (not file name) to be uploaded.
-     * @param purpose The intended purpose of the uploaded file. Use
-     *   \\\&quot;assistants\\\&quot; for
-     *   [Assistants](/docs/api-reference/assistants) and
-     *   [Message](/docs/api-reference/messages) files, \\\&quot;vision\\\&quot;
-     *   for Assistants image file inputs, \\\&quot;batch\\\&quot; for
-     *   [Batch API](/docs/guides/batch), and \\\&quot;fine-tune\\\&quot; for
-     *   [Fine-tuning](/docs/api-reference/fine-tuning).
+     * @param purpose The intended purpose of the uploaded file. One of: -
+     *   &#x60;assistants&#x60;: Used in the Assistants API - &#x60;batch&#x60;:
+     *   Used in the Batch API - &#x60;fine-tune&#x60;: Used for fine-tuning -
+     *   &#x60;vision&#x60;: Images used for vision fine-tuning -
+     *   &#x60;user_data&#x60;: Flexible file type for any purpose -
+     *   &#x60;evals&#x60;: Used for eval data sets
      * @return OpenAIFile
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -136,10 +137,10 @@ class FilesApi(
     }
 
     /**
-     * Upload a file that can be used across various endpoints. Individual files
-     * can be up to 512 MB, and the size of all files uploaded by one
-     * organization can be up to 100 GB. The Assistants API supports files up to
-     * 2 million tokens and of specific file types. See the
+     * POST /files Upload a file that can be used across various endpoints.
+     * Individual files can be up to 512 MB, and the size of all files uploaded
+     * by one organization can be up to 100 GB. The Assistants API supports
+     * files up to 2 million tokens and of specific file types. See the
      * [Assistants Tools guide](/docs/assistants/tools) for details. The
      * Fine-tuning API only supports &#x60;.jsonl&#x60; files. The input also
      * has certain required formats for fine-tuning
@@ -152,13 +153,12 @@ class FilesApi(
      * storage limits.
      *
      * @param file The File object (not file name) to be uploaded.
-     * @param purpose The intended purpose of the uploaded file. Use
-     *   \\\&quot;assistants\\\&quot; for
-     *   [Assistants](/docs/api-reference/assistants) and
-     *   [Message](/docs/api-reference/messages) files, \\\&quot;vision\\\&quot;
-     *   for Assistants image file inputs, \\\&quot;batch\\\&quot; for
-     *   [Batch API](/docs/guides/batch), and \\\&quot;fine-tune\\\&quot; for
-     *   [Fine-tuning](/docs/api-reference/fine-tuning).
+     * @param purpose The intended purpose of the uploaded file. One of: -
+     *   &#x60;assistants&#x60;: Used in the Assistants API - &#x60;batch&#x60;:
+     *   Used in the Batch API - &#x60;fine-tune&#x60;: Used for fine-tuning -
+     *   &#x60;vision&#x60;: Images used for vision fine-tuning -
+     *   &#x60;user_data&#x60;: Flexible file type for any purpose -
+     *   &#x60;evals&#x60;: Used for eval data sets
      * @return ApiResponse<OpenAIFile?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -181,13 +181,12 @@ class FilesApi(
      * To obtain the request config of the operation createFile
      *
      * @param file The File object (not file name) to be uploaded.
-     * @param purpose The intended purpose of the uploaded file. Use
-     *   \\\&quot;assistants\\\&quot; for
-     *   [Assistants](/docs/api-reference/assistants) and
-     *   [Message](/docs/api-reference/messages) files, \\\&quot;vision\\\&quot;
-     *   for Assistants image file inputs, \\\&quot;batch\\\&quot; for
-     *   [Batch API](/docs/guides/batch), and \\\&quot;fine-tune\\\&quot; for
-     *   [Fine-tuning](/docs/api-reference/fine-tuning).
+     * @param purpose The intended purpose of the uploaded file. One of: -
+     *   &#x60;assistants&#x60;: Used in the Assistants API - &#x60;batch&#x60;:
+     *   Used in the Batch API - &#x60;fine-tune&#x60;: Used for fine-tuning -
+     *   &#x60;vision&#x60;: Images used for vision fine-tuning -
+     *   &#x60;user_data&#x60;: Flexible file type for any purpose -
+     *   &#x60;evals&#x60;: Used for eval data sets
      * @return RequestConfig
      */
     fun createFileRequestConfig(
@@ -216,7 +215,7 @@ class FilesApi(
     }
 
     /**
-     * Delete a file.
+     * DELETE /files/{file_id} Delete a file.
      *
      * @param fileId The ID of the file to use for this request.
      * @return DeleteFileResponse
@@ -269,7 +268,7 @@ class FilesApi(
     }
 
     /**
-     * Delete a file.
+     * DELETE /files/{file_id} Delete a file.
      *
      * @param fileId The ID of the file to use for this request.
      * @return ApiResponse<DeleteFileResponse?>
@@ -314,7 +313,7 @@ class FilesApi(
     }
 
     /**
-     * Returns the contents of the specified file.
+     * GET /files/{file_id}/content Returns the contents of the specified file.
      *
      * @param fileId The ID of the file to use for this request.
      * @return kotlin.String
@@ -367,7 +366,7 @@ class FilesApi(
     }
 
     /**
-     * Returns the contents of the specified file.
+     * GET /files/{file_id}/content Returns the contents of the specified file.
      *
      * @param fileId The ID of the file to use for this request.
      * @return ApiResponse<kotlin.String?>
@@ -428,7 +427,7 @@ class FilesApi(
     }
 
     /**
-     * Returns a list of files.
+     * GET /files Returns a list of files.
      *
      * @param purpose Only return files with the given purpose. (optional)
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -503,7 +502,7 @@ class FilesApi(
     }
 
     /**
-     * Returns a list of files.
+     * GET /files Returns a list of files.
      *
      * @param purpose Only return files with the given purpose. (optional)
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -597,7 +596,7 @@ class FilesApi(
     }
 
     /**
-     * Returns information about a specific file.
+     * GET /files/{file_id} Returns information about a specific file.
      *
      * @param fileId The ID of the file to use for this request.
      * @return OpenAIFile
@@ -650,7 +649,7 @@ class FilesApi(
     }
 
     /**
-     * Returns information about a specific file.
+     * GET /files/{file_id} Returns information about a specific file.
      *
      * @param fileId The ID of the file to use for this request.
      * @return ApiResponse<OpenAIFile?>

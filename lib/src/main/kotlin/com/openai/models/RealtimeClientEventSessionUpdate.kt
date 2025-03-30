@@ -16,11 +16,12 @@ import com.squareup.moshi.JsonClass
 
 /**
  * Send this event to update the session’s default configuration. The client may
- * send this event at any time to update the session configuration, and any
- * field may be updated at any time, except for \"voice\". The server will
- * respond with a `session.updated` event that shows the full effective
- * configuration. Only fields that are present are updated, thus the correct way
- * to clear a field like \"instructions\" is to pass an empty string.
+ * send this event at any time to update any field, except for `voice`. However,
+ * note that once a session has been initialized with a particular `model`, it
+ * can’t be changed to another model using `session.update`. When the server
+ * receives a `session.update`, it will respond with a `session.updated` event
+ * showing the full, effective configuration. Only the fields that are present
+ * are updated. To clear a field like `instructions`, pass an empty string.
  *
  * @param type The event type, must be `session.update`.
  * @param session
@@ -30,8 +31,10 @@ data class RealtimeClientEventSessionUpdate(
 
     /* The event type, must be `session.update`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventSessionUpdate.Type =
         RealtimeClientEventSessionUpdate.Type.sessionPeriodUpdate,
+    // openai-openapi-kotlin changes end
     @Json(name = "session") val session: RealtimeSessionCreateRequest,
 
     /* Optional client-generated ID used to identify this event. */

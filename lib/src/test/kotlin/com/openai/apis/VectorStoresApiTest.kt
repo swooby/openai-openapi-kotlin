@@ -231,5 +231,46 @@ class VectorStoresApiTest : ShouldSpec() {
             // updateVectorStoreRequest)
             // result shouldBe ("TODO")
         }
+
+        // to test retrieveVectorStoreFileContent
+        should("test retrieveVectorStoreFileContent") {
+            // uncomment below to test retrieveVectorStoreFileContent
+            // val vectorStoreId : kotlin.String = vs_abc123 // kotlin.String |
+            // The ID of the vector store.
+            // val fileId : kotlin.String = file-abc123 // kotlin.String | The
+            // ID of the file within the vector store.
+            // val result : VectorStoreFileContentResponse =
+            // apiInstance.retrieveVectorStoreFileContent(vectorStoreId, fileId)
+            // result shouldBe ("TODO")
+        }
+
+        // to test searchVectorStore
+        should("test searchVectorStore") {
+            // uncomment below to test searchVectorStore
+            // val vectorStoreId : kotlin.String = vs_abc123 // kotlin.String |
+            // The ID of the vector store to search.
+            // val vectorStoreSearchRequest : VectorStoreSearchRequest =  //
+            // VectorStoreSearchRequest |
+            // val result : VectorStoreSearchResultsPage =
+            // apiInstance.searchVectorStore(vectorStoreId,
+            // vectorStoreSearchRequest)
+            // result shouldBe ("TODO")
+        }
+
+        // to test updateVectorStoreFileAttributes
+        should("test updateVectorStoreFileAttributes") {
+            // uncomment below to test updateVectorStoreFileAttributes
+            // val vectorStoreId : kotlin.String = vs_abc123 // kotlin.String |
+            // The ID of the vector store the file belongs to.
+            // val fileId : kotlin.String = file-abc123 // kotlin.String | The
+            // ID of the file to update attributes.
+            // val updateVectorStoreFileAttributesRequest :
+            // UpdateVectorStoreFileAttributesRequest =  //
+            // UpdateVectorStoreFileAttributesRequest |
+            // val result : VectorStoreFileObject =
+            // apiInstance.updateVectorStoreFileAttributes(vectorStoreId,
+            // fileId, updateVectorStoreFileAttributesRequest)
+            // result shouldBe ("TODO")
+        }
     }
 }

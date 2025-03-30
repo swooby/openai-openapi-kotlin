@@ -28,8 +28,10 @@ data class RealtimeClientEventResponseCancel(
 
     /* The event type, must be `response.cancel`. */
     @Json(name = "type")
+    // openai-openapi-kotlin changes begin
     val type: RealtimeClientEventResponseCancel.Type =
         RealtimeClientEventResponseCancel.Type.responsePeriodCancel,
+    // openai-openapi-kotlin changes end
 
     /* Optional client-generated ID used to identify this event. */
     @Json(name = "event_id") val eventId: kotlin.String? = null,

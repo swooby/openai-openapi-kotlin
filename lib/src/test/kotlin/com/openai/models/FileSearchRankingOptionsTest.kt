@@ -26,8 +26,7 @@ class FileSearchRankingOptionsTest : ShouldSpec() {
             // modelInstance.scoreThreshold shouldBe ("TODO")
         }
 
-        // to test the property `ranker` - The ranker to use for the file
-        // search. If not specified will use the `auto` ranker.
+        // to test the property `ranker`
         should("test ranker") {
             // uncomment below to test the property
             // modelInstance.ranker shouldBe ("TODO")

@@ -20,7 +20,7 @@ class AssistantsApiResponseFormatOptionTest : ShouldSpec() {
         // val modelInstance = AssistantsApiResponseFormatOption()
 
         // to test the property `type` - The type of response format being
-        // defined: `text`
+        // defined. Always `text`.
         should("test type") {
             // uncomment below to test the property
             // modelInstance.type shouldBe ("TODO")

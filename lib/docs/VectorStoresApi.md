@@ -17,6 +17,9 @@ All URIs are relative to *https://api.openai.com/v1*
 | [**listVectorStoreFiles**](VectorStoresApi.md#listVectorStoreFiles) | **GET** /vector_stores/{vector_store_id}/files | Returns a list of vector store files. |
 | [**listVectorStores**](VectorStoresApi.md#listVectorStores) | **GET** /vector_stores | Returns a list of vector stores. |
 | [**modifyVectorStore**](VectorStoresApi.md#modifyVectorStore) | **POST** /vector_stores/{vector_store_id} | Modifies a vector store. |
+| [**retrieveVectorStoreFileContent**](VectorStoresApi.md#retrieveVectorStoreFileContent) | **GET** /vector_stores/{vector_store_id}/files/{file_id}/content | Retrieve the parsed contents of a vector store file. |
+| [**searchVectorStore**](VectorStoresApi.md#searchVectorStore) | **POST** /vector_stores/{vector_store_id}/search | Search a vector store for relevant chunks based on a query and file attributes filter. |
+| [**updateVectorStoreFileAttributes**](VectorStoresApi.md#updateVectorStoreFileAttributes) | **POST** /vector_stores/{vector_store_id}/files/{file_id} | Update attributes on a vector store file. |
 
 
 <a id="cancelVectorStoreFileBatch"></a>
@@ -647,6 +650,152 @@ try {
 ### Return type
 
 [**VectorStoreObject**](VectorStoreObject.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.accessToken = ""
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a id="retrieveVectorStoreFileContent"></a>
+# **retrieveVectorStoreFileContent**
+> VectorStoreFileContentResponse retrieveVectorStoreFileContent(vectorStoreId, fileId)
+
+Retrieve the parsed contents of a vector store file.
+
+### Example
+```kotlin
+// Import classes:
+//import com.openai.infrastructure.*
+//import com.openai.models.*
+
+val apiInstance = VectorStoresApi()
+val vectorStoreId : kotlin.String = vs_abc123 // kotlin.String | The ID of the vector store.
+val fileId : kotlin.String = file-abc123 // kotlin.String | The ID of the file within the vector store.
+try {
+    val result : VectorStoreFileContentResponse = apiInstance.retrieveVectorStoreFileContent(vectorStoreId, fileId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling VectorStoresApi#retrieveVectorStoreFileContent")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VectorStoresApi#retrieveVectorStoreFileContent")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **vectorStoreId** | **kotlin.String**| The ID of the vector store. | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **fileId** | **kotlin.String**| The ID of the file within the vector store. | |
+
+### Return type
+
+[**VectorStoreFileContentResponse**](VectorStoreFileContentResponse.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.accessToken = ""
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a id="searchVectorStore"></a>
+# **searchVectorStore**
+> VectorStoreSearchResultsPage searchVectorStore(vectorStoreId, vectorStoreSearchRequest)
+
+Search a vector store for relevant chunks based on a query and file attributes filter.
+
+### Example
+```kotlin
+// Import classes:
+//import com.openai.infrastructure.*
+//import com.openai.models.*
+
+val apiInstance = VectorStoresApi()
+val vectorStoreId : kotlin.String = vs_abc123 // kotlin.String | The ID of the vector store to search.
+val vectorStoreSearchRequest : VectorStoreSearchRequest =  // VectorStoreSearchRequest | 
+try {
+    val result : VectorStoreSearchResultsPage = apiInstance.searchVectorStore(vectorStoreId, vectorStoreSearchRequest)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling VectorStoresApi#searchVectorStore")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VectorStoresApi#searchVectorStore")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **vectorStoreId** | **kotlin.String**| The ID of the vector store to search. | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **vectorStoreSearchRequest** | [**VectorStoreSearchRequest**](VectorStoreSearchRequest.md)|  | |
+
+### Return type
+
+[**VectorStoreSearchResultsPage**](VectorStoreSearchResultsPage.md)
+
+### Authorization
+
+
+Configure ApiKeyAuth:
+    ApiClient.accessToken = ""
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a id="updateVectorStoreFileAttributes"></a>
+# **updateVectorStoreFileAttributes**
+> VectorStoreFileObject updateVectorStoreFileAttributes(vectorStoreId, fileId, updateVectorStoreFileAttributesRequest)
+
+Update attributes on a vector store file.
+
+### Example
+```kotlin
+// Import classes:
+//import com.openai.infrastructure.*
+//import com.openai.models.*
+
+val apiInstance = VectorStoresApi()
+val vectorStoreId : kotlin.String = vs_abc123 // kotlin.String | The ID of the vector store the file belongs to.
+val fileId : kotlin.String = file-abc123 // kotlin.String | The ID of the file to update attributes.
+val updateVectorStoreFileAttributesRequest : UpdateVectorStoreFileAttributesRequest =  // UpdateVectorStoreFileAttributesRequest | 
+try {
+    val result : VectorStoreFileObject = apiInstance.updateVectorStoreFileAttributes(vectorStoreId, fileId, updateVectorStoreFileAttributesRequest)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling VectorStoresApi#updateVectorStoreFileAttributes")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling VectorStoresApi#updateVectorStoreFileAttributes")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **vectorStoreId** | **kotlin.String**| The ID of the vector store the file belongs to. | |
+| **fileId** | **kotlin.String**| The ID of the file to update attributes. | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **updateVectorStoreFileAttributesRequest** | [**UpdateVectorStoreFileAttributesRequest**](UpdateVectorStoreFileAttributesRequest.md)|  | |
+
+### Return type
+
+[**VectorStoreFileObject**](VectorStoreFileObject.md)
 
 ### Authorization
 

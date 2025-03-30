@@ -8,13 +8,14 @@
 | **text** | **kotlin.String** | The text content. |  |
 | **imageUrl** | [**ChatCompletionRequestMessageContentPartImageImageUrl**](ChatCompletionRequestMessageContentPartImageImageUrl.md) |  |  |
 | **inputAudio** | [**ChatCompletionRequestMessageContentPartAudioInputAudio**](ChatCompletionRequestMessageContentPartAudioInputAudio.md) |  |  |
+| **file** | [**ChatCompletionRequestMessageContentPartFileFile**](ChatCompletionRequestMessageContentPartFileFile.md) |  |  |
 
 
 <a id="Type"></a>
 ## Enum: type
 | Name | Value |
 | ---- | ----- |
-| type | text, image_url, input_audio |
+| type | text, image_url, input_audio, file |
 
 
 

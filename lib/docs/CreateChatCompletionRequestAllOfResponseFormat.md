@@ -1,0 +1,18 @@
+
+# CreateChatCompletionRequestAllOfResponseFormat
+
+## Properties
+| Name | Type | Description | Notes |
+| ------------ | ------------- | ------------- | ------------- |
+| **type** | [**inline**](#Type) | The type of response format being defined. Always &#x60;text&#x60;. |  |
+| **jsonSchema** | [**JSONSchema**](JSONSchema.md) |  |  |
+
+
+<a id="Type"></a>
+## Enum: type
+| Name | Value |
+| ---- | ----- |
+| type | text, json_schema, json_object |
+
+
+

@@ -24,5 +24,14 @@ class CreateTranscriptionResponseJsonTest : ShouldSpec() {
             // uncomment below to test the property
             // modelInstance.text shouldBe ("TODO")
         }
+
+        // to test the property `logprobs` - The log probabilities of the tokens
+        // in the transcription. Only returned with the models
+        // `gpt-4o-transcribe` and `gpt-4o-mini-transcribe` if `logprobs` is
+        // added to the `include` array.
+        should("test logprobs") {
+            // uncomment below to test the property
+            // modelInstance.logprobs shouldBe ("TODO")
+        }
     }
 }

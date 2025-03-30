@@ -29,10 +29,14 @@ import com.openai.models.DeleteVectorStoreFileResponse
 import com.openai.models.DeleteVectorStoreResponse
 import com.openai.models.ListVectorStoreFilesResponse
 import com.openai.models.ListVectorStoresResponse
+import com.openai.models.UpdateVectorStoreFileAttributesRequest
 import com.openai.models.UpdateVectorStoreRequest
 import com.openai.models.VectorStoreFileBatchObject
+import com.openai.models.VectorStoreFileContentResponse
 import com.openai.models.VectorStoreFileObject
 import com.openai.models.VectorStoreObject
+import com.openai.models.VectorStoreSearchRequest
+import com.openai.models.VectorStoreSearchResultsPage
 import com.squareup.moshi.Json
 import java.io.IOException
 import okhttp3.Call
@@ -51,6 +55,7 @@ class VectorStoresApi(
     }
 
     /**
+     * POST /vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel
      * Cancel a vector store file batch. This attempts to cancel the processing
      * of files in this batch as soon as possible.
      *
@@ -115,6 +120,7 @@ class VectorStoresApi(
     }
 
     /**
+     * POST /vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel
      * Cancel a vector store file batch. This attempts to cancel the processing
      * of files in this batch as soon as possible.
      *
@@ -177,7 +183,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Create a vector store.
+     * POST /vector_stores Create a vector store.
      *
      * @param createVectorStoreRequest
      * @return VectorStoreObject
@@ -235,7 +241,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Create a vector store.
+     * POST /vector_stores Create a vector store.
      *
      * @param createVectorStoreRequest
      * @return ApiResponse<VectorStoreObject?>
@@ -283,8 +289,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Create a vector store file by attaching a
-     * [File](/docs/api-reference/files) to a
+     * POST /vector_stores/{vector_store_id}/files Create a vector store file by
+     * attaching a [File](/docs/api-reference/files) to a
      * [vector store](/docs/api-reference/vector-stores/object).
      *
      * @param vectorStoreId The ID of the vector store for which to create a
@@ -347,8 +353,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Create a vector store file by attaching a
-     * [File](/docs/api-reference/files) to a
+     * POST /vector_stores/{vector_store_id}/files Create a vector store file by
+     * attaching a [File](/docs/api-reference/files) to a
      * [vector store](/docs/api-reference/vector-stores/object).
      *
      * @param vectorStoreId The ID of the vector store for which to create a
@@ -409,7 +415,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Create a vector store file batch.
+     * POST /vector_stores/{vector_store_id}/file_batches Create a vector store
+     * file batch.
      *
      * @param vectorStoreId The ID of the vector store for which to create a
      *   File Batch.
@@ -473,7 +480,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Create a vector store file batch.
+     * POST /vector_stores/{vector_store_id}/file_batches Create a vector store
+     * file batch.
      *
      * @param vectorStoreId The ID of the vector store for which to create a
      *   File Batch.
@@ -537,7 +545,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Delete a vector store.
+     * DELETE /vector_stores/{vector_store_id} Delete a vector store.
      *
      * @param vectorStoreId The ID of the vector store to delete.
      * @return DeleteVectorStoreResponse
@@ -594,7 +602,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Delete a vector store.
+     * DELETE /vector_stores/{vector_store_id} Delete a vector store.
      *
      * @param vectorStoreId The ID of the vector store to delete.
      * @return ApiResponse<DeleteVectorStoreResponse?>
@@ -642,9 +650,10 @@ class VectorStoresApi(
     }
 
     /**
-     * Delete a vector store file. This will remove the file from the vector
-     * store but the file itself will not be deleted. To delete the file, use
-     * the [delete file](/docs/api-reference/files/delete) endpoint.
+     * DELETE /vector_stores/{vector_store_id}/files/{file_id} Delete a vector
+     * store file. This will remove the file from the vector store but the file
+     * itself will not be deleted. To delete the file, use the
+     * [delete file](/docs/api-reference/files/delete) endpoint.
      *
      * @param vectorStoreId The ID of the vector store that the file belongs to.
      * @param fileId The ID of the file to delete.
@@ -706,9 +715,10 @@ class VectorStoresApi(
     }
 
     /**
-     * Delete a vector store file. This will remove the file from the vector
-     * store but the file itself will not be deleted. To delete the file, use
-     * the [delete file](/docs/api-reference/files/delete) endpoint.
+     * DELETE /vector_stores/{vector_store_id}/files/{file_id} Delete a vector
+     * store file. This will remove the file from the vector store but the file
+     * itself will not be deleted. To delete the file, use the
+     * [delete file](/docs/api-reference/files/delete) endpoint.
      *
      * @param vectorStoreId The ID of the vector store that the file belongs to.
      * @param fileId The ID of the file to delete.
@@ -767,7 +777,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Retrieves a vector store.
+     * GET /vector_stores/{vector_store_id} Retrieves a vector store.
      *
      * @param vectorStoreId The ID of the vector store to retrieve.
      * @return VectorStoreObject
@@ -821,7 +831,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Retrieves a vector store.
+     * GET /vector_stores/{vector_store_id} Retrieves a vector store.
      *
      * @param vectorStoreId The ID of the vector store to retrieve.
      * @return ApiResponse<VectorStoreObject?>
@@ -869,7 +879,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Retrieves a vector store file.
+     * GET /vector_stores/{vector_store_id}/files/{file_id} Retrieves a vector
+     * store file.
      *
      * @param vectorStoreId The ID of the vector store that the file belongs to.
      * @param fileId The ID of the file being retrieved.
@@ -930,7 +941,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Retrieves a vector store file.
+     * GET /vector_stores/{vector_store_id}/files/{file_id} Retrieves a vector
+     * store file.
      *
      * @param vectorStoreId The ID of the vector store that the file belongs to.
      * @param fileId The ID of the file being retrieved.
@@ -989,7 +1001,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Retrieves a vector store file batch.
+     * GET /vector_stores/{vector_store_id}/file_batches/{batch_id} Retrieves a
+     * vector store file batch.
      *
      * @param vectorStoreId The ID of the vector store that the file batch
      *   belongs to.
@@ -1052,7 +1065,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Retrieves a vector store file batch.
+     * GET /vector_stores/{vector_store_id}/file_batches/{batch_id} Retrieves a
+     * vector store file batch.
      *
      * @param vectorStoreId The ID of the vector store that the file batch
      *   belongs to.
@@ -1147,6 +1161,7 @@ class VectorStoresApi(
     }
 
     /**
+     * GET /vector_stores/{vector_store_id}/file_batches/{batch_id}/files
      * Returns a list of vector store files in a batch.
      *
      * @param vectorStoreId The ID of the vector store that the files belong to.
@@ -1239,6 +1254,7 @@ class VectorStoresApi(
     }
 
     /**
+     * GET /vector_stores/{vector_store_id}/file_batches/{batch_id}/files
      * Returns a list of vector store files in a batch.
      *
      * @param vectorStoreId The ID of the vector store that the files belong to.
@@ -1406,7 +1422,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Returns a list of vector store files.
+     * GET /vector_stores/{vector_store_id}/files Returns a list of vector store
+     * files.
      *
      * @param vectorStoreId The ID of the vector store that the files belong to.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -1494,7 +1511,8 @@ class VectorStoresApi(
     }
 
     /**
-     * Returns a list of vector store files.
+     * GET /vector_stores/{vector_store_id}/files Returns a list of vector store
+     * files.
      *
      * @param vectorStoreId The ID of the vector store that the files belong to.
      * @param limit A limit on the number of objects to be returned. Limit can
@@ -1634,7 +1652,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Returns a list of vector stores.
+     * GET /vector_stores Returns a list of vector stores.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -1714,7 +1732,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Returns a list of vector stores.
+     * GET /vector_stores Returns a list of vector stores.
      *
      * @param limit A limit on the number of objects to be returned. Limit can
      *   range between 1 and 100, and the default is 20. (optional, default
@@ -1816,7 +1834,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Modifies a vector store.
+     * POST /vector_stores/{vector_store_id} Modifies a vector store.
      *
      * @param vectorStoreId The ID of the vector store to modify.
      * @param updateVectorStoreRequest
@@ -1877,7 +1895,7 @@ class VectorStoresApi(
     }
 
     /**
-     * Modifies a vector store.
+     * POST /vector_stores/{vector_store_id} Modifies a vector store.
      *
      * @param vectorStoreId The ID of the vector store to modify.
      * @param updateVectorStoreRequest
@@ -1926,6 +1944,396 @@ class VectorStoresApi(
                     .replace(
                         "{" + "vector_store_id" + "}",
                         encodeURIComponent(vectorStoreId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * GET /vector_stores/{vector_store_id}/files/{file_id}/content Retrieve the
+     * parsed contents of a vector store file.
+     *
+     * @param vectorStoreId The ID of the vector store.
+     * @param fileId The ID of the file within the vector store.
+     * @return VectorStoreFileContentResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun retrieveVectorStoreFileContent(
+        vectorStoreId: kotlin.String,
+        fileId: kotlin.String,
+    ): VectorStoreFileContentResponse {
+        val localVarResponse =
+            retrieveVectorStoreFileContentWithHttpInfo(
+                vectorStoreId = vectorStoreId,
+                fileId = fileId,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as VectorStoreFileContentResponse
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * GET /vector_stores/{vector_store_id}/files/{file_id}/content Retrieve the
+     * parsed contents of a vector store file.
+     *
+     * @param vectorStoreId The ID of the vector store.
+     * @param fileId The ID of the file within the vector store.
+     * @return ApiResponse<VectorStoreFileContentResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun retrieveVectorStoreFileContentWithHttpInfo(
+        vectorStoreId: kotlin.String,
+        fileId: kotlin.String,
+    ): ApiResponse<VectorStoreFileContentResponse?> {
+        val localVariableConfig =
+            retrieveVectorStoreFileContentRequestConfig(
+                vectorStoreId = vectorStoreId,
+                fileId = fileId,
+            )
+
+        return request<Unit, VectorStoreFileContentResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation
+     * retrieveVectorStoreFileContent
+     *
+     * @param vectorStoreId The ID of the vector store.
+     * @param fileId The ID of the file within the vector store.
+     * @return RequestConfig
+     */
+    fun retrieveVectorStoreFileContentRequestConfig(
+        vectorStoreId: kotlin.String,
+        fileId: kotlin.String,
+    ): RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path =
+                "/vector_stores/{vector_store_id}/files/{file_id}/content"
+                    .replace(
+                        "{" + "vector_store_id" + "}",
+                        encodeURIComponent(vectorStoreId.toString()),
+                    )
+                    .replace(
+                        "{" + "file_id" + "}",
+                        encodeURIComponent(fileId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * POST /vector_stores/{vector_store_id}/search Search a vector store for
+     * relevant chunks based on a query and file attributes filter.
+     *
+     * @param vectorStoreId The ID of the vector store to search.
+     * @param vectorStoreSearchRequest
+     * @return VectorStoreSearchResultsPage
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun searchVectorStore(
+        vectorStoreId: kotlin.String,
+        vectorStoreSearchRequest: VectorStoreSearchRequest,
+    ): VectorStoreSearchResultsPage {
+        val localVarResponse =
+            searchVectorStoreWithHttpInfo(
+                vectorStoreId = vectorStoreId,
+                vectorStoreSearchRequest = vectorStoreSearchRequest,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data
+                    as VectorStoreSearchResultsPage
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * POST /vector_stores/{vector_store_id}/search Search a vector store for
+     * relevant chunks based on a query and file attributes filter.
+     *
+     * @param vectorStoreId The ID of the vector store to search.
+     * @param vectorStoreSearchRequest
+     * @return ApiResponse<VectorStoreSearchResultsPage?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun searchVectorStoreWithHttpInfo(
+        vectorStoreId: kotlin.String,
+        vectorStoreSearchRequest: VectorStoreSearchRequest,
+    ): ApiResponse<VectorStoreSearchResultsPage?> {
+        val localVariableConfig =
+            searchVectorStoreRequestConfig(
+                vectorStoreId = vectorStoreId,
+                vectorStoreSearchRequest = vectorStoreSearchRequest,
+            )
+
+        return request<VectorStoreSearchRequest, VectorStoreSearchResultsPage>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation searchVectorStore
+     *
+     * @param vectorStoreId The ID of the vector store to search.
+     * @param vectorStoreSearchRequest
+     * @return RequestConfig
+     */
+    fun searchVectorStoreRequestConfig(
+        vectorStoreId: kotlin.String,
+        vectorStoreSearchRequest: VectorStoreSearchRequest,
+    ): RequestConfig<VectorStoreSearchRequest> {
+        val localVariableBody = vectorStoreSearchRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path =
+                "/vector_stores/{vector_store_id}/search"
+                    .replace(
+                        "{" + "vector_store_id" + "}",
+                        encodeURIComponent(vectorStoreId.toString()),
+                    ),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody,
+        )
+    }
+
+    /**
+     * POST /vector_stores/{vector_store_id}/files/{file_id} Update attributes
+     * on a vector store file.
+     *
+     * @param vectorStoreId The ID of the vector store the file belongs to.
+     * @param fileId The ID of the file to update attributes.
+     * @param updateVectorStoreFileAttributesRequest
+     * @return VectorStoreFileObject
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational
+     *   or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(
+        IllegalStateException::class,
+        IOException::class,
+        UnsupportedOperationException::class,
+        ClientException::class,
+        ServerException::class,
+    )
+    fun updateVectorStoreFileAttributes(
+        vectorStoreId: kotlin.String,
+        fileId: kotlin.String,
+        updateVectorStoreFileAttributesRequest:
+            UpdateVectorStoreFileAttributesRequest,
+    ): VectorStoreFileObject {
+        val localVarResponse =
+            updateVectorStoreFileAttributesWithHttpInfo(
+                vectorStoreId = vectorStoreId,
+                fileId = fileId,
+                updateVectorStoreFileAttributesRequest =
+                    updateVectorStoreFileAttributesRequest,
+            )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success ->
+                (localVarResponse as Success<*>).data as VectorStoreFileObject
+            ResponseType.Informational ->
+                throw UnsupportedOperationException(
+                    "Client does not support Informational responses."
+                )
+            ResponseType.Redirection ->
+                throw UnsupportedOperationException(
+                    "Client does not support Redirection responses."
+                )
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException(
+                    "Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException(
+                    "Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}",
+                    localVarError.statusCode,
+                    localVarResponse,
+                )
+            }
+        }
+    }
+
+    /**
+     * POST /vector_stores/{vector_store_id}/files/{file_id} Update attributes
+     * on a vector store file.
+     *
+     * @param vectorStoreId The ID of the vector store the file belongs to.
+     * @param fileId The ID of the file to update attributes.
+     * @param updateVectorStoreFileAttributesRequest
+     * @return ApiResponse<VectorStoreFileObject?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun updateVectorStoreFileAttributesWithHttpInfo(
+        vectorStoreId: kotlin.String,
+        fileId: kotlin.String,
+        updateVectorStoreFileAttributesRequest:
+            UpdateVectorStoreFileAttributesRequest,
+    ): ApiResponse<VectorStoreFileObject?> {
+        val localVariableConfig =
+            updateVectorStoreFileAttributesRequestConfig(
+                vectorStoreId = vectorStoreId,
+                fileId = fileId,
+                updateVectorStoreFileAttributesRequest =
+                    updateVectorStoreFileAttributesRequest,
+            )
+
+        return request<
+            UpdateVectorStoreFileAttributesRequest,
+            VectorStoreFileObject,
+        >(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation
+     * updateVectorStoreFileAttributes
+     *
+     * @param vectorStoreId The ID of the vector store the file belongs to.
+     * @param fileId The ID of the file to update attributes.
+     * @param updateVectorStoreFileAttributesRequest
+     * @return RequestConfig
+     */
+    fun updateVectorStoreFileAttributesRequestConfig(
+        vectorStoreId: kotlin.String,
+        fileId: kotlin.String,
+        updateVectorStoreFileAttributesRequest:
+            UpdateVectorStoreFileAttributesRequest,
+    ): RequestConfig<UpdateVectorStoreFileAttributesRequest> {
+        val localVariableBody = updateVectorStoreFileAttributesRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path =
+                "/vector_stores/{vector_store_id}/files/{file_id}"
+                    .replace(
+                        "{" + "vector_store_id" + "}",
+                        encodeURIComponent(vectorStoreId.toString()),
+                    )
+                    .replace(
+                        "{" + "file_id" + "}",
+                        encodeURIComponent(fileId.toString()),
                     ),
             query = localVariableQuery,
             headers = localVariableHeaders,

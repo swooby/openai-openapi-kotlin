@@ -15,8 +15,9 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Represents a streamed chunk of a chat completion response returned by model,
- * based on the provided input.
+ * Represents a streamed chunk of a chat completion response returned by the
+ * model, based on the provided input.
+ * [Learn more](/docs/guides/streaming-responses).
  *
  * @param id A unique identifier for the chat completion. Each chunk has the
  *   same ID.
@@ -61,8 +62,7 @@ data class CreateChatCompletionStreamResponse(
     /* This fingerprint represents the backend configuration that the model runs with. Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.  */
     @Json(name = "system_fingerprint")
     val systemFingerprint: kotlin.String? = null,
-    @Json(name = "usage")
-    val usage: CreateChatCompletionStreamResponseUsage? = null,
+    @Json(name = "usage") val usage: CompletionUsage? = null,
 ) {
 
     /**

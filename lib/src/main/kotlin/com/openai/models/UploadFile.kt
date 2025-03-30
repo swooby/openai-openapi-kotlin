@@ -26,6 +26,8 @@ import com.squareup.moshi.JsonClass
  *   `fine-tune-results` and `vision`.
  * @param status Deprecated. The current status of the file, which can be either
  *   `uploaded`, `processed`, or `error`.
+ * @param expiresAt The Unix timestamp (in seconds) for when the file will
+ *   expire.
  * @param statusDetails Deprecated. For details on why a fine-tuning training
  *   file failed validation, see the `error` field on `fine_tuning.job`.
  */
@@ -53,6 +55,9 @@ data class UploadFile(
     @Json(name = "status")
     @Deprecated(message = "This property is deprecated.")
     val status: UploadFile.Status,
+
+    /* The Unix timestamp (in seconds) for when the file will expire. */
+    @Json(name = "expires_at") val expiresAt: kotlin.Int? = null,
 
     /* Deprecated. For details on why a fine-tuning training file failed validation, see the `error` field on `fine_tuning.job`. */
     @Json(name = "status_details")

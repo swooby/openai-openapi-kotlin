@@ -37,6 +37,15 @@ class CreateTranscription200ResponseTest : ShouldSpec() {
             // modelInstance.duration shouldBe ("TODO")
         }
 
+        // to test the property `logprobs` - The log probabilities of the tokens
+        // in the transcription. Only returned with the models
+        // `gpt-4o-transcribe` and `gpt-4o-mini-transcribe` if `logprobs` is
+        // added to the `include` array.
+        should("test logprobs") {
+            // uncomment below to test the property
+            // modelInstance.logprobs shouldBe ("TODO")
+        }
+
         // to test the property `words` - Extracted words and their
         // corresponding timestamps.
         should("test words") {

@@ -17,10 +17,11 @@ import com.squareup.moshi.JsonClass
 /**
  * Realtime session object configuration.
  *
- * @param id Unique identifier for the session object.
+ * @param id Unique identifier for the session that looks like
+ *   `sess_1234567890abcdef`.
  * @param modalities The set of modalities the model can respond with. To
  *   disable audio, set this to [\"text\"].
- * @param model
+ * @param model The Realtime model used for this session.
  * @param instructions The default system instructions (i.e. system message)
  *   prepended to model calls. This field allows the client to guide the model
  *   on desired responses. The model can be instructed on response content and
@@ -31,10 +32,7 @@ import com.squareup.moshi.JsonClass
  *   to the model on the desired behavior. Note that the server sets default
  *   instructions which will be used if this field is not set and are visible in
  *   the `session.created` event at the start of the session.
- * @param voice The voice the model uses to respond. Voice cannot be changed
- *   during the session once the model has responded with audio at least once.
- *   Current voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,
- *   `shimmer` and `verse`.
+ * @param voice
  * @param inputAudioFormat The format of input audio. Options are `pcm16`,
  *   `g711_ulaw`, or `g711_alaw`. For `pcm16`, input audio must be 16-bit PCM at
  *   a 24kHz sample rate, single channel (mono), and little-endian byte order.
@@ -43,16 +41,18 @@ import com.squareup.moshi.JsonClass
  *   of 24kHz.
  * @param inputAudioTranscription
  * @param turnDetection
+ * @param inputAudioNoiseReduction
  * @param tools Tools (functions) available to the model.
  * @param toolChoice How the model chooses tools. Options are `auto`, `none`,
  *   `required`, or specify a function.
  * @param temperature Sampling temperature for the model, limited to [0.6, 1.2].
- *   Defaults to 0.8.
+ *   For audio models a temperature of 0.8 is highly recommended for best
+ *   performance.
  * @param maxResponseOutputTokens
  */
 data class RealtimeSession(
 
-    /* Unique identifier for the session object.  */
+    /* Unique identifier for the session that looks like `sess_1234567890abcdef`.  */
     @Json(name = "id") val id: kotlin.String? = null,
 
     /* The set of modalities the model can respond with. To disable audio, set this to [\"text\"].  */
@@ -60,25 +60,28 @@ data class RealtimeSession(
     val modalities: kotlin.collections.List<RealtimeSession.Modalities>? = null,
 
     /* The Realtime model used for this session.  */
-    @Json(name = "model") val model: kotlin.String? = null,
+    @Json(name = "model") val model: RealtimeSession.Model? = null,
 
-    /* The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the  desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session.  */
+    /* The default system instructions (i.e. system message) prepended to model  calls. This field allows the client to guide the model on desired  responses. The model can be instructed on response content and format,  (e.g. \"be extremely succinct\", \"act friendly\", \"here are examples of good  responses\") and on audio behavior (e.g. \"talk quickly\", \"inject emotion  into your voice\", \"laugh frequently\"). The instructions are not guaranteed  to be followed by the model, but they provide guidance to the model on the desired behavior.  Note that the server sets default instructions which will be used if this  field is not set and are visible in the `session.created` event at the  start of the session.  */
     @Json(name = "instructions") val instructions: kotlin.String? = null,
-
-    /* The voice the model uses to respond. Voice cannot be changed during the  session once the model has responded with audio at least once. Current  voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,  `shimmer` and `verse`.  */
-    @Json(name = "voice") val voice: RealtimeSession.Voice? = null,
+    @Json(name = "voice") val voice: VoiceIdsShared? = null,
 
     /* The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate,  single channel (mono), and little-endian byte order.  */
     @Json(name = "input_audio_format")
-    val inputAudioFormat: RealtimeSession.InputAudioFormat? = null,
+    val inputAudioFormat: RealtimeSession.InputAudioFormat? =
+        InputAudioFormat.pcm16,
 
     /* The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. For `pcm16`, output audio is sampled at a rate of 24kHz.  */
     @Json(name = "output_audio_format")
-    val outputAudioFormat: RealtimeSession.OutputAudioFormat? = null,
+    val outputAudioFormat: RealtimeSession.OutputAudioFormat? =
+        OutputAudioFormat.pcm16,
     @Json(name = "input_audio_transcription")
     val inputAudioTranscription: RealtimeSessionInputAudioTranscription? = null,
     @Json(name = "turn_detection")
     val turnDetection: RealtimeSessionTurnDetection? = null,
+    @Json(name = "input_audio_noise_reduction")
+    val inputAudioNoiseReduction: RealtimeSessionInputAudioNoiseReduction? =
+        null,
 
     /* Tools (functions) available to the model. */
     @Json(name = "tools")
@@ -87,12 +90,15 @@ data class RealtimeSession(
         null,
 
     /* How the model chooses tools. Options are `auto`, `none`, `required`, or  specify a function.  */
-    @Json(name = "tool_choice") val toolChoice: kotlin.String? = null,
+    @Json(name = "tool_choice") val toolChoice: kotlin.String? = "auto",
 
-    /* Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8.  */
-    @Json(name = "temperature") val temperature: java.math.BigDecimal? = null,
+    /* Sampling temperature for the model, limited to [0.6, 1.2]. For audio models a temperature of 0.8 is highly recommended for best performance.  */
+    @Json(name = "temperature")
+    val temperature: java.math.BigDecimal? = java.math.BigDecimal("0.8"),
     @Json(name = "max_response_output_tokens")
-    val maxResponseOutputTokens: RealtimeSessionMaxResponseOutputTokens? = null,
+    val maxResponseOutputTokens:
+        RealtimeResponseCreateParamsMaxResponseOutputTokens? =
+        null,
 ) {
 
     /**
@@ -107,24 +113,22 @@ data class RealtimeSession(
         @Json(name = "audio") audio("audio"),
     }
 
+    // openai-openapi-kotlin changes begin
     /**
-     * The voice the model uses to respond. Voice cannot be changed during the
-     * session once the model has responded with audio at least once. Current
-     * voice options are `alloy`, `ash`, `ballad`, `coral`, `echo` `sage`,
-     * `shimmer` and `verse`.
+     * The Realtime model used for this session.
      *
-     * Values: alloy,ash,ballad,coral,echo,sage,shimmer,verse
+     * Values:
+     * `gpt-4o-realtime-preview`,`gpt-4o-realtime-preview-2024-10-01`,`gpt-4o-realtime-preview-2024-12-17`,
+     * `gpt-4o-mini-realtime-preview`,`gpt-4o-mini-realtime-preview-2024-12-17`
      */
     @JsonClass(generateAdapter = false)
-    enum class Voice(val value: kotlin.String) {
-        @Json(name = "alloy") alloy("alloy"),
-        @Json(name = "ash") ash("ash"),
-        @Json(name = "ballad") ballad("ballad"),
-        @Json(name = "coral") coral("coral"),
-        @Json(name = "echo") echo("echo"),
-        @Json(name = "sage") sage("sage"),
-        @Json(name = "shimmer") shimmer("shimmer"),
-        @Json(name = "verse") verse("verse"),
+    enum class Model {
+        `gpt-4o-realtime-preview`,
+        `gpt-4o-realtime-preview-2024-10-01`,
+        `gpt-4o-realtime-preview-2024-12-17`,
+        `gpt-4o-mini-realtime-preview`,
+        `gpt-4o-mini-realtime-preview-2024-12-17`,
+        // openai-openapi-kotlin changes end
     }
 
     /**

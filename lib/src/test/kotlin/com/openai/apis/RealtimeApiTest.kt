@@ -28,5 +28,17 @@ class RealtimeApiTest : ShouldSpec() {
             // apiInstance.createRealtimeSession(realtimeSessionCreateRequest)
             // result shouldBe ("TODO")
         }
+
+        // to test createRealtimeTranscriptionSession
+        should("test createRealtimeTranscriptionSession") {
+            // uncomment below to test createRealtimeTranscriptionSession
+            // val realtimeTranscriptionSessionCreateRequest :
+            // RealtimeTranscriptionSessionCreateRequest =  //
+            // RealtimeTranscriptionSessionCreateRequest | Create an ephemeral
+            // API key with the given session configuration.
+            // val result : RealtimeTranscriptionSessionCreateResponse =
+            // apiInstance.createRealtimeTranscriptionSession(realtimeTranscriptionSessionCreateRequest)
+            // result shouldBe ("TODO")
+        }
     }
 }

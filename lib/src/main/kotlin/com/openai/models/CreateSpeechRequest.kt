@@ -18,10 +18,9 @@ import com.squareup.moshi.JsonClass
  * @param model
  * @param input The text to generate audio for. The maximum length is 4096
  *   characters.
- * @param voice The voice to use when generating the audio. Supported voices are
- *   `alloy`, `ash`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage` and
- *   `shimmer`. Previews of the voices are available in the
- *   [Text to speech guide](/docs/guides/text-to-speech#voice-options).
+ * @param voice
+ * @param instructions Control the voice of your generated audio with additional
+ *   instructions. Does not work with `tts-1` or `tts-1-hd`.
  * @param responseFormat The format to audio in. Supported formats are `mp3`,
  *   `opus`, `aac`, `flac`, `wav`, and `pcm`.
  * @param speed The speed of the generated audio. Select a value from `0.25` to
@@ -32,9 +31,10 @@ data class CreateSpeechRequest(
 
     /* The text to generate audio for. The maximum length is 4096 characters. */
     @Json(name = "input") val input: kotlin.String,
+    @Json(name = "voice") val voice: VoiceIdsShared,
 
-    /* The voice to use when generating the audio. Supported voices are `alloy`, `ash`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage` and `shimmer`. Previews of the voices are available in the [Text to speech guide](/docs/guides/text-to-speech#voice-options). */
-    @Json(name = "voice") val voice: CreateSpeechRequest.Voice,
+    /* Control the voice of your generated audio with additional instructions. Does not work with `tts-1` or `tts-1-hd`. */
+    @Json(name = "instructions") val instructions: kotlin.String? = null,
 
     /* The format to audio in. Supported formats are `mp3`, `opus`, `aac`, `flac`, `wav`, and `pcm`. */
     @Json(name = "response_format")
@@ -45,27 +45,6 @@ data class CreateSpeechRequest(
     @Json(name = "speed")
     val speed: java.math.BigDecimal? = java.math.BigDecimal("1"),
 ) {
-
-    /**
-     * The voice to use when generating the audio. Supported voices are `alloy`,
-     * `ash`, `coral`, `echo`, `fable`, `onyx`, `nova`, `sage` and `shimmer`.
-     * Previews of the voices are available in the
-     * [Text to speech guide](/docs/guides/text-to-speech#voice-options).
-     *
-     * Values: alloy,ash,coral,echo,fable,onyx,nova,sage,shimmer
-     */
-    @JsonClass(generateAdapter = false)
-    enum class Voice(val value: kotlin.String) {
-        @Json(name = "alloy") alloy("alloy"),
-        @Json(name = "ash") ash("ash"),
-        @Json(name = "coral") coral("coral"),
-        @Json(name = "echo") echo("echo"),
-        @Json(name = "fable") fable("fable"),
-        @Json(name = "onyx") onyx("onyx"),
-        @Json(name = "nova") nova("nova"),
-        @Json(name = "sage") sage("sage"),
-        @Json(name = "shimmer") shimmer("shimmer"),
-    }
 
     /**
      * The format to audio in. Supported formats are `mp3`, `opus`, `aac`,

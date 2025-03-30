@@ -32,19 +32,18 @@ import com.squareup.moshi.JsonClass
  * indicates the generation exceeded `max_tokens` or the conversation exceeded
  * the max context length.
  *
- * @param type The type of response format being defined: `text`
+ * @param type The type of response format being defined. Always `text`.
  * @param jsonSchema
  */
 data class AssistantsApiResponseFormatOption(
 
-    /* The type of response format being defined: `text` */
+    /* The type of response format being defined. Always `text`. */
     @Json(name = "type") val type: AssistantsApiResponseFormatOption.Type,
-    @Json(name = "json_schema")
-    val jsonSchema: ResponseFormatJsonSchemaJsonSchema,
+    @Json(name = "json_schema") val jsonSchema: JSONSchema,
 ) {
 
     /**
-     * The type of response format being defined: `text`
+     * The type of response format being defined. Always `text`.
      *
      * Values: text,json_object,json_schema
      */

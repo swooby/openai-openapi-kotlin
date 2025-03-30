@@ -53,5 +53,12 @@ class RealtimeServerEventConversationItemInputAudioTranscriptionCompletedTest :
             // uncomment below to test the property
             // modelInstance.transcript shouldBe ("TODO")
         }
+
+        // to test the property `logprobs` - The log probabilities of the
+        // transcription.
+        should("test logprobs") {
+            // uncomment below to test the property
+            // modelInstance.logprobs shouldBe ("TODO")
+        }
     }
 }

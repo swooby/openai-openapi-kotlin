@@ -31,12 +31,12 @@ data class RunObjectIncompleteDetails(
      * The reason why the run is incomplete. This will point to which specific
      * token limit was reached over the course of the run.
      *
-     * Values: completion_tokens,prompt_tokens
+     * Values: max_completion_tokens,max_prompt_tokens
      */
     @JsonClass(generateAdapter = false)
     enum class Reason(val value: kotlin.String) {
         @Json(name = "max_completion_tokens")
-        completion_tokens("max_completion_tokens"),
-        @Json(name = "max_prompt_tokens") prompt_tokens("max_prompt_tokens"),
+        max_completion_tokens("max_completion_tokens"),
+        @Json(name = "max_prompt_tokens") max_prompt_tokens("max_prompt_tokens"),
     }
 }

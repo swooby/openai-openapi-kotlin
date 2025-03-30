@@ -43,7 +43,8 @@ class AuditLogsApi(
     }
 
     /**
-     * List user actions and configuration changes within this organization.
+     * GET /organization/audit_logs List user actions and configuration changes
+     * within this organization.
      *
      * @param effectiveAt Return only events whose &#x60;effective_at&#x60;
      *   (Unix seconds) is in this range. (optional)
@@ -142,7 +143,8 @@ class AuditLogsApi(
     }
 
     /**
-     * List user actions and configuration changes within this organization.
+     * GET /organization/audit_logs List user actions and configuration changes
+     * within this organization.
      *
      * @param effectiveAt Return only events whose &#x60;effective_at&#x60;
      *   (Unix seconds) is in this range. (optional)
@@ -253,7 +255,18 @@ class AuditLogsApi(
                 >()
                 .apply {
                     if (effectiveAt != null) {
-                        put("effective_at", listOf(effectiveAt.toString()))
+                        if (effectiveAt.gt != null) {
+                            put("gt", listOf(effectiveAt.gt.toString()))
+                        }
+                        if (effectiveAt.gte != null) {
+                            put("gte", listOf(effectiveAt.gte.toString()))
+                        }
+                        if (effectiveAt.lt != null) {
+                            put("lt", listOf(effectiveAt.lt.toString()))
+                        }
+                        if (effectiveAt.lte != null) {
+                            put("lte", listOf(effectiveAt.lte.toString()))
+                        }
                     }
                     if (projectIds != null) {
                         put(

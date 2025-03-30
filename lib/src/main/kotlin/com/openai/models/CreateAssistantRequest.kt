@@ -73,5 +73,5 @@ data class CreateAssistantRequest(
     @Json(name = "top_p")
     val topP: java.math.BigDecimal? = java.math.BigDecimal("1"),
     @Json(name = "response_format")
-    val responseFormat: AssistantObjectResponseFormat? = null,
+    val responseFormat: AssistantsApiResponseFormatOption? = null,
 ) {}

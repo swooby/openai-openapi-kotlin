@@ -45,6 +45,14 @@ class ChatCompletionResponseMessageTest : ShouldSpec() {
             // modelInstance.toolCalls shouldBe ("TODO")
         }
 
+        // to test the property `annotations` - Annotations for the message,
+        // when applicable, as when using the [web search
+        // tool](/docs/guides/tools-web-search?api-mode=chat).
+        should("test annotations") {
+            // uncomment below to test the property
+            // modelInstance.annotations shouldBe ("TODO")
+        }
+
         // to test the property `functionCall`
         should("test functionCall") {
             // uncomment below to test the property

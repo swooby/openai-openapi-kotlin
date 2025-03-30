@@ -31,14 +31,18 @@ class CreateSpeechRequestTest : ShouldSpec() {
             // modelInstance.input shouldBe ("TODO")
         }
 
-        // to test the property `voice` - The voice to use when generating the
-        // audio. Supported voices are `alloy`, `ash`, `coral`, `echo`, `fable`,
-        // `onyx`, `nova`, `sage` and `shimmer`. Previews of the voices are
-        // available in the [Text to speech
-        // guide](/docs/guides/text-to-speech#voice-options).
+        // to test the property `voice`
         should("test voice") {
             // uncomment below to test the property
             // modelInstance.voice shouldBe ("TODO")
+        }
+
+        // to test the property `instructions` - Control the voice of your
+        // generated audio with additional instructions. Does not work with
+        // `tts-1` or `tts-1-hd`.
+        should("test instructions") {
+            // uncomment below to test the property
+            // modelInstance.instructions shouldBe ("TODO")
         }
 
         // to test the property `responseFormat` - The format to audio in.

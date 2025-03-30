@@ -14,15 +14,19 @@ package com.openai.models
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-/** @param type The type of response format being defined: `text` */
+/**
+ * Default response format. Used to generate text responses.
+ *
+ * @param type The type of response format being defined. Always `text`.
+ */
 data class ResponseFormatText(
 
-    /* The type of response format being defined: `text` */
+    /* The type of response format being defined. Always `text`. */
     @Json(name = "type") val type: ResponseFormatText.Type
 ) {
 
     /**
-     * The type of response format being defined: `text`
+     * The type of response format being defined. Always `text`.
      *
      * Values: text
      */
